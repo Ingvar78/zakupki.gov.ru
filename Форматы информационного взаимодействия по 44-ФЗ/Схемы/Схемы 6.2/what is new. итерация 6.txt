@@ -1,0 +1,32 @@
+Версия 6.2 Хотфикс 6.2.6
+
+
+   IntegrationTypes.xsd
+
+
+1. В тип "Способ определения поставщиков (подрядчиков, исполнителей) для закупок, не размещаемых на ЕИС, в сведениях о контракте с 01.01.2015" 
+   (zfcs_contract2015.notOOSPlacingType) добавлено значение 
+    
+   20000 - закупка у единственного поставщика (подрядчика, исполнителя);
+
+
+
+   fcsExport.xsd 
+
+
+   fcsIntegration.xsd
+
+
+   fcsExtegration.xsd
+
+
+   fcsEisSignIncoming.xsd
+
+
+
+   eisSigningSOAPMessages.xsd
+
+
+
+   docs-ws-api.xsd
+

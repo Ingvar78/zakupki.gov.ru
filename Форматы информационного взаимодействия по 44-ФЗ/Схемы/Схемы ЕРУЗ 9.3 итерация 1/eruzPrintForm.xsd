@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ PRINTFORM TYPES Integration Scheme, version 9.3, create date 08.08.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:eruz="http://zakupki.gov.ru/eruz/types/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/types/1" schemaLocation="eruzIntegrationTypes.xsd"/>
+	<!--ЕРУЗ-->
+	<xs:element name="eruzContractor" type="eruz:contractorType">
+		<xs:annotation>
+			<xs:documentation>Информация и документы об участнике закупки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="eruzContractorExclude" type="eruz:contractorExcludeType">
+		<xs:annotation>
+			<xs:documentation>Информация об исключении участника закупки из ЕРУЗ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="eruzSubContract" type="eruz:subContractInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о субподрядном договоре </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

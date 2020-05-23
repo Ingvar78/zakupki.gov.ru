@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ ESMV PRINT FORM Integration Scheme, version 1.0, create date 04.02.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/esmv/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:esmv="http://zakupki.gov.ru/eruz/esmv/types/1" xmlns:base="http://zakupki.gov.ru/eruz/esmv/types/base/1" targetNamespace="http://zakupki.gov.ru/eruz/esmv/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/esmv/types/base/1" schemaLocation="eruzEsmvBaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/esmv/types/1" schemaLocation="eruzEsmvIntegrationTypes.xsd"/>
+	<!--Лицевые счета-->
+	<xs:element name="requestPA" type="esmv:tRequestPA">
+		<xs:annotation>
+			<xs:documentation>Заявление на резервирование/открытие лицевого счёта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ INTERNAL TYPES Integration Scheme, version 9.0.1.7, create date 16.01.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/internal/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nsi="http://zakupki.gov.ru/eruz/nsi/1" xmlns:eruz="http://zakupki.gov.ru/eruz/types/1" targetNamespace="http://zakupki.gov.ru/eruz/internal/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/types/1" schemaLocation="eruzIntegrationTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/nsi/1" schemaLocation="eruzNSITypes.xsd"/>
+	<!--ЕРУЗ-->
+	<xs:element name="eruzContractor" type="eruz:contractorType">
+		<xs:annotation>
+			<xs:documentation>Информация и документы об участнике закупки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="eruzAccreditationResult" type="eruz:accreditationResultType">
+		<xs:annotation>
+			<xs:documentation>Информация об аккредитации участника закупки на ЭП</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="eruzContractorExclude" type="eruz:contractorExcludeType">
+		<xs:annotation>
+			<xs:documentation>Информация об исключении участника закупки из ЕРУЗ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="eruzConfirmation" type="eruz:confirmationType">
+		<xs:annotation>
+			<xs:documentation>Уведомление о результатах обработки информационного пакета</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="eruzMasterData" type="nsi:masterDataType">
+		<xs:annotation>
+			<xs:documentation>Набор элементов справочников</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

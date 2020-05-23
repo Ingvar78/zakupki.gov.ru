@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 (http://www.altova.com) by Alexander (Lanit) -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
+	<xs:element name="export">
+		<xs:annotation>
+			<xs:documentation>Схема данных подсистемы экспорта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="bankGuarantee" type="oos:zfcs_bankGuaranteeType">
+						<xs:annotation>
+							<xs:documentation>Информация о выданной банковской гарантии</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bankGuaranteeRefusal" type="oos:zfcs_bankGuaranteeRefusalType">
+						<xs:annotation>
+							<xs:documentation>Сведения об отказе заказчика в принятии банковской гарантии</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contract" type="oos:zfcs_contractType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Информация (проект информации) о заключенном контракте</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contractCancel" type="oos:zfcs_contractCancelType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Информация об анулировании контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contractProcedure" type="oos:zfcs_contractProcedureType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Информация об исполнении (расторжении) контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contractProcedureCancel" type="oos:zfcs_contractProcedureCancelType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Информация об отмене исполнения (расторжения) контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsContractSign" type="oos:zfcs_contractSignType">
+						<xs:annotation>
+							<xs:documentation>Информация о подписании государственного/муниципального контракта на ЭП</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationEF" type="oos:zfcs_notificationEFType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЭА (электронный аукцион); 
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationEP" type="oos:zfcs_notificationEPType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении закупки у ЕП (единственного поставщика);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationISM" type="oos:zfcs_notificationISMType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении закупки многолотовым ИС (иной способ); 
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationISO" type="oos:zfcs_notificationISOType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении закупки однолотовым ИС (иной способ);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationOK" type="oos:zfcs_notificationOKType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении OK (открытый конкурс);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationOKD" type="oos:zfcs_notificationOKDType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении OK-Д (двухэтапный конкурс);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationOKOU" type="oos:zfcs_notificationOKOUType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении OK-ОУ (конкурс с ограниченным участием);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationPO" type="oos:zfcs_notificationPOType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ПО (предварительный отбор);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZakA" type="oos:zfcs_notificationZakAType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЗакА (закрытый аукцион);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZakKD" type="oos:zfcs_notificationZakKDType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЗакK-Д (закрытый двухэтапный конкурс); 
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZakKOU" type="oos:zfcs_notificationZakKOUType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЗакK-ОУ (закрытый конкурс с ограниченным участием);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZakK" type="oos:zfcs_notificationZakKType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЗакK (закрытый конкурс);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZKBI" type="oos:zfcs_notificationZKBIType">
+						<xs:annotation>
+							<xs:documentation>Общая информация об объекте закупки и протокол рассмотрения и оценки заявок на участие в ЗК-БИ (запрос котировок без извещения);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZK" type="oos:zfcs_notificationZKType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЗK (запрос котировок);
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationZP" type="oos:zfcs_notificationZPType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЗП (запрос предложений); 
+внесение изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationLotChange" type="oos:zfcs_notificationLotChangeType">
+						<xs:annotation>
+							<xs:documentation>Внесение изменений в части лота в извещение о проведении OK-ОУ (конкурс с ограниченным участием)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationCancel" type="oos:zfcs_notificationCancelType">
+						<xs:annotation>
+							<xs:documentation>Извещение об отмене определения поставщика (подрядчика, исполнителя)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsNotificationLotCancel" type="oos:zfcs_notificationLotCancelType">
+						<xs:annotation>
+							<xs:documentation>Извещение об отмене определения поставщика (подрядчика, исполнителя) в части лота</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsPurchaseDocument" type="oos:zfcs_purchaseDocumentType">
+						<xs:annotation>
+							<xs:documentation>Информация о документе закупки</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsPurchaseDocumentCancel" type="oos:zfcs_purchaseDocumentCancelType">
+						<xs:annotation>
+							<xs:documentation>Информация об отмене документа закупки</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsPurchaseProlongationOK" type="oos:zfcs_purchaseProlongationOKType">
+						<xs:annotation>
+							<xs:documentation>Извещение о продлении срока подачи котировочных заявок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fcsPurchaseProlongationZK" type="oos:zfcs_purchaseProlongationZKType">
+						<xs:annotation>
+							<xs:documentation>Извещение о продлении срока подачи котировочных заявок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sketchPlan" type="oos:zfcs_sketchPlanType">
+						<xs:annotation>
+							<xs:documentation>План закупок в неструктурированной форме</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sketchPlanExecution" type="oos:zfcs_sketchPlanExecutionType">
+						<xs:annotation>
+							<xs:documentation>Сведения об исполнении плана закупок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tenderPlan" type="oos:zfcs_tenderPlanType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>План-график в структурированной форме</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tenderPlanUnstructured" type="oos:zfcs_tenderPlanUnstructuredType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>План-график в неструктурированной форме</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nsiBankGuaranteeRefusalReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник причин отказа в принятии банковской гарантии</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiBankGuaranteeRefusalReason" type="oos:zfcs_nsiBankGuaranteeRefusalReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiBudgetList">
+						<xs:annotation>
+							<xs:documentation>Cправочник бюджетов</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiBudget" type="oos:zfcs_nsiBudgetType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiCalendarDayList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Календарь рабочих дней</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiCalendarDay" type="oos:zfcs_nsiCalendarDaysType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiCommissionList">
+						<xs:annotation>
+							<xs:documentation>Комиссии по размещению заказа (определению поставщика)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiCommission" type="oos:zfcs_nsiCommissionType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiCommissionRoleList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Роли членов комиссий</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiCommissionRole" type="oos:zfcs_nsiCommissionRoleType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiContractPriceChangeReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Обоснования изменения цены контракта</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiContractPriceChangeReason" type="oos:zfcs_nsiContractPriceChangeReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiContractRefusalReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Основания для отказа от заключения контракта</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiContractRefusalReason" type="oos:zfcs_nsiContractRefusalReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiContractSingleCustomerReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Основания заключения контракта с единственным поставщиком</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiContractSingleCustomerReason" type="oos:zfcs_nsiContractSingleCustomerReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiContractTerminationReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Основания расторжения контракта</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiContractTerminationReason" type="oos:zfcs_nsiContractTerminationReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiCurrencyList">
+						<xs:annotation>
+							<xs:documentation>Общероссийский классификатор валют (ОКВ)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiCurrency" type="oos:zfcs_nsiCurrencyType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiEvalCriterionList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Критерии оценки заявки</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsinsiEvalCriterion" type="oos:zfcs_nsiEvalCriterionType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiKBKBudgetList">
+						<xs:annotation>
+							<xs:documentation>Справочник КБК-бюджеты</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiKBKBudget" type="oos:zfcs_nsiKBKBudgetType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiKOSGUList">
+						<xs:annotation>
+							<xs:documentation>Классификатор операций сектора государственного управления (КОСГУ)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiKOSGU" type="oos:zfcs_nsiKOSGUType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOffBudgetList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Виды внебюджетных средств</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOffBudget" type="oos:zfcs_nsiOffBudgetType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOKEIList">
+						<xs:annotation>
+							<xs:documentation>Общероссийский классификатор единиц измерения (ОКЕИ)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOKEI" type="oos:zfcs_nsiOKEIType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOKOPFList">
+						<xs:annotation>
+							<xs:documentation>Общероссийский классификатор организационно-правовых форм (ОКОПФ)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOKOPF" type="oos:zfcs_nsiOKOPFType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOKPDList">
+						<xs:annotation>
+							<xs:documentation>Общероссийский классификатор продукции по видам экономической деятельности (ОКПД)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOKPD" type="oos:zfcs_nsiOKPDType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOKSMList">
+						<xs:annotation>
+							<xs:documentation>Общероссийский классификатор стран мира (ОКСМ)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOKSM" type="oos:zfcs_nsiOKSMType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOKVEDList">
+						<xs:annotation>
+							<xs:documentation>Общероссийский классификатор видов экономической деятельности (ОКВЭД)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOKVED" type="oos:zfcs_nsiOKVEDType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOrganizationList">
+						<xs:annotation>
+							<xs:documentation>Сводный перечень заказчиков (СПЗ)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOrganization" type="oos:zfcs_nsiOrganizationType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOrganizationRightsList">
+						<xs:annotation>
+							<xs:documentation>Права организаций на осуществление закупок от имени других организаций</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOrganizationRights" type="oos:zfcs_nsiOrganizationRightsType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOrganizationTypesList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Типы организаций</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOrganizationType" type="oos:zfcs_nsiOrganizationTypesType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiPlacingWayList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Способы определения поставщика</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiPlacingWay" type="oos:zfcs_nsiPlacingWayType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiPlanPositionChangeReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Обоснования внесения изменений в позицию плана-графика</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiPlanPositionChangeReason" type="oos:zfcs_nsiPlanPositionChangeReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiPurchaseDocumentTypesList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Типы неструктурированных документов</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiPurchaseDocumentTypes" type="oos:zfcs_nsiPurchaseDocumentTypesType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiPurchasePreferenceList">
+						<xs:annotation>
+							<xs:documentation>Преимущества при осуществлении закупок (требования к участникам закупки)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiPurchasePreference" type="oos:zfcs_nsiPurchasePreferencesType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiPurchaseRejectReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник причин отказа в допуске к участию в торгах</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiPurchaseRejectReason" type="oos:zfcs_nsiPurchaseRejectReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiUserList">
+						<xs:annotation>
+							<xs:documentation>Справочник пользователей</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiUser" type="oos:zfcs_nsiUserType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

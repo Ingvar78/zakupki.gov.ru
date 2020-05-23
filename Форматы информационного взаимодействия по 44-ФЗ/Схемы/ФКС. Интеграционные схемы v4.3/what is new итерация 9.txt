@@ -1,0 +1,24 @@
+IntegrationTypes.xsd
+
+1. FCS-14235 В типах
+"Протокол рассмотрения единственной заявки в ОК" (zfcs_protocolOKSingleAppType)
+"Протокол рассмотрения единственной заявки в ОК-ОУ" (zfcs_protocolOKOUSingleAppType)
+последовательность элементов "score", "appRating" и "conditionsScoring" в выборе "Информация о допуске заявки" (protocolLots\protocolLot\applications\application\admittedInfo) заменена на элемент "Заявка допущена" (admitted) булевого типа с одним возможным значением "true".
+
+2. FCSINT-661 В типах
+"Извещение о проведении закупки у ЕП (единственного поставщика); внесение изменений" (zfcs_purchaseNotificationType)  
+"Общая информация об объекте закупки и протокол рассмотрения и оценки заявок на участие в ЗК-БИ (запрос котировок без извещения); внесение изменений" (zfcs_notificationZKBIType)
+"Общая информация об извещении по закупке по иному способу" (zfcs_purchaseNotificationISType)
+"Справочник: Основания признания процедуры несостоявшейся" (zfcs_nsiAbandonedReasonType)
+"Позиция плана-графика" (zfcs_tenderPlanPositionType)
+у элемента "Cпособ определения поставщика" (placingWay) исправлен способ указания на тип zfcs_placingWayType (удален избыточный extension).
+
+3.
+В типах
+"Протокол рассмотрения единственной заявки в ОК" (zfcs_protocolOKSingleAppType)
+"Протокол рассмотрения единственной заявки в ОК-ОУ" (zfcs_protocolOKOUSingleAppType)
+в элемент "Заявка" (protocolLots\protocolLot\applications\applicationдобавлен необязательный элемент "Предложение участника (для печатной формы)" (offer) типа "Длинное текстовое поле" (zfcs_longTextType).
+
+
+
+

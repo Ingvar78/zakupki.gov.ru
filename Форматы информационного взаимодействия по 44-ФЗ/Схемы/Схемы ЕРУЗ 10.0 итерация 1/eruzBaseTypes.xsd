@@ -1,0 +1,962 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ BASE TYPES Integration Scheme, version 10.0, create date 29.10.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/eruz/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Простые типы-->
+	<xs:simpleType name="accessRightsType">
+		<xs:annotation>
+			<xs:documentation>Тип: Права доступа пользователей:SSE - Подписание государственного контракта;SAEP - Подача заявки в электронных процедурах;PRDO - размещение регистрационных данных организации;UR - Регситрация пользователей.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SSE"/>
+			<xs:enumeration value="SAEP"/>
+			<xs:enumeration value="PRDO"/>
+			<xs:enumeration value="UR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="budgetCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код бюджета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="confirmationResultType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат приема пакета </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="success"/>
+			<xs:enumeration value="failure"/>
+			<xs:enumeration value="processing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="countryCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Цифровой код страны</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractDefenseNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер государственного контракта по государственному оборонному заказу</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер государственного или муниципального контракта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractRegNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер реестровой записи государственного или муниципального контракта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="19"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractStageType">
+		<xs:annotation>
+			<xs:documentation>Тип: Состояние контракта
+E 	Исполнение
+ET	Исполнение прекращено
+EC	Исполнение завершено
+IN	Aннулировано
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="ET"/>
+			<xs:enumeration value="EC"/>
+			<xs:enumeration value="IN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractBudgetLevelEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Уровень бюджета для контрактов:
+10 - федеральный бюджет;
+20 - бюджет субъекта Российской Федерации;
+30 - местный бюджет;
+41 - бюджет Пенсионного фонда Российской Федерации;
+42 - бюджет Фонда социального страхования Российской Федерации;
+43 - бюджет Федерального фонда обязательного медицинского страхования;
+50 - бюджет территориального государственного внебюджетного фонда;
+11 - федеральный бюджет (устарело, не применяется);
+12 - бюджет субъекта Российской Федерации (устарело, не применяется);
+13 - местный бюджет (устарело, не применяется);
+14 - бюджет Пенсионного фонда Российской Федерации (устарело, не применяется);
+15 - бюджет Федерального фонда обязательного медицинского страхования (устарело, не применяется);
+16 - бюджет Фонда социального страхования Российской Федерации (устарело, не применяется);
+17 - бюджет территориального государственного внебюджетного фонда (устарело, не применяется).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="consRegistryNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код по Сводному реестру</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="documentKindType">
+		<xs:annotation>
+			<xs:documentation>Тип: Вид документа:
+eruzContractor - Информация и документы об участнике закупки;
+eruzAccreditationResult - Информация об аккредитации участника закупки на ЭП;
+eruzContractorExclude - Информация об исключении участника закупки из ЕРУЗ;
+eruzConfirmation - Уведомление о результатах обработки информационного пакета;
+eruzMasterData - Набор элементов справочников;
+sentPackageListRequest - Запрос списка отправленных пакетов
+sentPackageList - Список отправленных пакетов
+reSendPackage - Запрос на повторную отправку пакетов
+receivPackageListRequest - Запрос списка полученных пакетов
+receivPackageList - Список полученных пакетов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="eruzContractor"/>
+			<xs:enumeration value="eruzAccreditationResult"/>
+			<xs:enumeration value="eruzContractorExclude"/>
+			<xs:enumeration value="eruzConfirmation"/>
+			<xs:enumeration value="eruzMasterData"/>
+			<xs:enumeration value="sentPackageListRequest"/>
+			<xs:enumeration value="sentPackageList"/>
+			<xs:enumeration value="reSendPackage"/>
+			<xs:enumeration value="receivPackageListRequest"/>
+			<xs:enumeration value="receivPackageList"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eMailType">
+		<xs:annotation>
+			<xs:documentation>Тип: Адрес электронной почты</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="etpCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Кодовое наименование электронной площадки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="errorLevelType">
+		<xs:annotation>
+			<xs:documentation>Тип:Уровень ошибки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="WARNING"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eruzRegistryNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер реестровой записи в ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fileSizeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Размер файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fileHashType">
+		<xs:annotation>
+			<xs:documentation>Тип: Hash файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:simpleType name="hexHashSha256Type">
+		<xs:annotation>
+			<xs:documentation>Тип: HEX представление хеша, рассчитанного по алгоритму SHA256</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fileNameType">
+		<xs:annotation>
+			<xs:documentation>Тип: Имя файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FIOType">
+		<xs:annotation>
+			<xs:documentation>Тип: ФИО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="180"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="guidType">
+		<xs:annotation>
+			<xs:documentation>Тип: Глобальный идентификатор</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="hrefType">
+		<xs:annotation>
+			<xs:documentation>Тип: Гиперссылка</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1024"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IGKType">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификатор государственного контракта (ИГК)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ikzCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Индивидуальный код закупки (ИКЗ)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{36}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="indexModeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление режимов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PROD"/>
+			<xs:enumeration value="TEST"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="indexNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Порядковый номер пакета данных в AS2-пакете</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="indexObjectTypeEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление типов объектов:
+ERUZ - Единый реестр участников закупок (ЕРУЗ);
+
+SM - Сервисные сообщения</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ERUZ"/>
+			<xs:enumeration value="SM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="informationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Признак передаваемой информации об участнике закупок:
+
+R - Информации для аккредитации на ЭП;
+P - Информация для аккредитации на новый срок;
+M - Измененная информация</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="M"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="innIndividualType">
+		<xs:annotation>
+			<xs:documentation>Тип: ИНН физического лица</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="innOrganizationType">
+		<xs:annotation>
+			<xs:documentation>Тип: ИНН организации</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="internationalPassportRFNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер заграничного паспорта РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{7}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="KLADRCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код по КЛАДР</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="23"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="kppType">
+		<xs:annotation>
+			<xs:documentation>Тип: КПП</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="messageStatusEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус обработки сообщения:
+processing - В процессе обработки, промежуточный статус;
+error - Ошибка обработки, окончательный статус;
+completed - Обработка завершена, окончательный статус подтверждений;
+wait_confirmation - Ожидает получения подтверждения приема, промежуточный статус бизнес-сообщения;
+confirmation_processing - Получено промежуточное подтверждение приема, промежуточный статус бизнес-сообщения;
+confirmation_ok - Получен положительный результат приема, окончательный статус бизнес-сообщения;
+confirmation_fail - Получен негативный результат приема, окончательный статус бизнес-сообщения;
+resend - Требует переотправки, промежуточный статус сообщения;
+resend_fail - Попытки переотправки не удались, промежуточный статус сообщения, требующий рассмотрения службой сопровождения</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="processing"/>
+			<xs:enumeration value="error"/>
+			<xs:enumeration value="completed"/>
+			<xs:enumeration value="wait_confirmation"/>
+			<xs:enumeration value="confirmation_processing"/>
+			<xs:enumeration value="confirmation_ok"/>
+			<xs:enumeration value="confirmation_fail"/>
+			<xs:enumeration value="resend"/>
+			<xs:enumeration value="resend_fail"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="moneyType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сумма</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="21"/>
+			<xs:pattern value="(-)?\d+(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="monthType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер месяца</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="moneyPositiveType">
+		<xs:annotation>
+			<xs:documentation>Тип: Неотрицательная сумма</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="21"/>
+			<xs:pattern value="\d+(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="moneyMaxLengthToPoint18Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Неотрицательная сумма c максимальной длиной до точки 18 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="21"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,18}(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="moneyMaxLengthToPoint21Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Неотрицательная сумма c максимальной длиной до точки 21 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,21}(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MSPSignType">
+		<xs:annotation>
+			<xs:documentation>Тип: Признак наличия в Едином реестре МСП:
+ M-Поставщик является субъектом малого предпринимательства;
+ S-Поставщик является субъектом среднего предпринимательства.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nameType">
+		<xs:annotation>
+			<xs:documentation>Тип: ФИО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OGRNCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОГРН</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{13}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OGRNIPCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОГРНИП</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{15}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OKEICodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКЕИ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OKPDCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКПД</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OKPOCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКПО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OKVEDCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКВЭД</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="8"/>
+			<xs:pattern value="[0-9]{2}"/>
+			<xs:pattern value="[0-9]{2}\.[0-9]{1}"/>
+			<xs:pattern value="[0-9]{2}\.[0-9]{2}"/>
+			<xs:pattern value="[0-9]{2}\.[0-9]{2}\.[0-9]{1}"/>
+			<xs:pattern value="[0-9]{2}\.[0-9]{2}\.[0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OKOPFCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКОПФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OKTMOCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="passportRFSeriesType">
+		<xs:annotation>
+			<xs:documentation>Тип: Серия паспорта гражданина РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="passportRFNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер паспорта гражданина РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{6}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="passportRFDivCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код подразделения, выдавшего паспорт гражданина РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="7" fixed="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="passportLENumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер паспорта иностранного гражданина</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="percentRestr0100Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Процент с ограничениеми 0..100</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="permamentResidencySeriesType">
+		<xs:annotation>
+			<xs:documentation>Тип: Серия вида на жительство РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="permamentResidencyNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер вида на жительство РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{7}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="personalAccountType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер лицевого счета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="phoneType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер телефона/факса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="printFormFileType">
+		<xs:annotation>
+			<xs:documentation>Тип файла печатной формы</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="pdf"/>
+			<xs:enumeration value="docx"/>
+			<xs:enumeration value="doc"/>
+			<xs:enumeration value="rtf"/>
+			<xs:enumeration value="xls"/>
+			<xs:enumeration value="xlsx"/>
+			<xs:enumeration value="jpeg"/>
+			<xs:enumeration value="jpg"/>
+			<xs:enumeration value="bmp"/>
+			<xs:enumeration value="tif"/>
+			<xs:enumeration value="tiff"/>
+			<xs:enumeration value="txt"/>
+			<xs:enumeration value="zip"/>
+			<xs:enumeration value="rar"/>
+			<xs:enumeration value="gif"/>
+			<xs:enumeration value="csv"/>
+			<xs:enumeration value="odp"/>
+			<xs:enumeration value="odf"/>
+			<xs:enumeration value="ods"/>
+			<xs:enumeration value="odt"/>
+			<xs:enumeration value="sxc"/>
+			<xs:enumeration value="sxw"/>
+			<xs:enumeration value="xml"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="quantity18p11Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Количество с 18 знаками до запятой и 11 знаками после запятой</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="29"/>
+			<xs:pattern value="\d{1,18}(\.\d{1,11})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="regionCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код региона</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="schemeVersionType">
+		<xs:annotation>
+			<xs:documentation>Тип: Версия схемы</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="9.0"/>
+			<xs:enumeration value="9.0.100"/>
+			<xs:enumeration value="9.1"/>
+			<xs:enumeration value="9.2"/>
+			<xs:enumeration value="9.3"/>
+			<xs:enumeration value="10.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="signatureType">
+		<xs:annotation>
+			<xs:documentation>Тип подписи</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CAdES-BES"/>
+			<xs:enumeration value="CAdES-A"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SNILSType">
+		<xs:annotation>
+			<xs:documentation>Тип: СНИЛС</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{11}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="spzNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код по СПЗ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{11}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="subsystemType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление подсистем:
+			ERUZ - единый реестр участников закупок;
+			LKP - личный кабинет поставщика.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ERUZ"/>
+			<xs:enumeration value="LKP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="subContractStageType">
+		<xs:annotation>
+			<xs:documentation>Тип: Состояние субподрядного договора
+E 	Исполнение
+ET	Исполнение прекращено
+EC	Исполнение завершено
+IN	Aннулировано
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="ET"/>
+			<xs:enumeration value="EC"/>
+			<xs:enumeration value="IN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="subContractRegNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Реестровый номер субподрядого договоара</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="taxPayerCode">
+		<xs:annotation>
+			<xs:documentation>Тип: Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tempResPermitRFNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер разрешения на временное проживание в РФ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{1,50}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text10Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 10 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text36Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 36 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text50Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 50 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text200Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 200 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text255Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 255 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text300Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 300 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="300"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text500Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 500 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text510Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 510 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="510"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text1000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 1000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text2000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 2000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text3000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 3000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3000"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text4000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 4000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="timeZoneCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код справочника мировых таймзон</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="positionType">
+		<xs:annotation>
+			<xs:documentation>Тип: Должность сотрудника организации</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="timeZoneNameType">
+		<xs:annotation>
+			<xs:documentation>Тип: Наименование часового пояса</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="timeZoneDifferenceType">
+		<xs:annotation>
+			<xs:documentation>Тип: Разница во времени</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[+\-]?\d{1,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="userAuthorityType">
+		<xs:annotation>
+			<xs:documentation>Тип: Полномочия пользователя:H - руководитель;A - администратор;AS - уполномоченный специалист</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="AS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="userStatusType">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус пользователя:A - активный;B - заблокирован</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="subContractModificationReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код справочника Причины изменения договора</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="subContractModificationReasonDocCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код вида документа, подтверждающего изменения субподрядного договора</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VATRateEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Ставка НДС, процентов. 
+Допустимые значения:
+0 - 0%;
+10 - 10%;18 - 18%;20 - 20%;
+n-без НДС.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="n"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="versionNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер версии</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="violationLevelType">
+		<xs:annotation>
+			<xs:documentation>Тип: Тип нарушения в протоколе приема</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="error"/>
+			<xs:enumeration value="warning"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="yearType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер года</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZIPCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Почтовый индекс</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ NSI TYPES Integration Scheme, version 9.0.1.7, create date 16.01.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/nsi/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/eruz/base/1" xmlns:cmn="http://zakupki.gov.ru/eruz/common/1" targetNamespace="http://zakupki.gov.ru/eruz/nsi/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/base/1" schemaLocation="eruzBaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/common/1" schemaLocation="eruzCommonTypes.xsd"/>
+	<!--Технические документы-->
+	<xs:complexType name="masterDataType">
+		<xs:annotation>
+			<xs:documentation>Тип: Набор элементов справочников</xs:documentation>
+		</xs:annotation>
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="nsiUser" type="nsiUserType">
+				<xs:annotation>
+					<xs:documentation>Справочник пользователей </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Справочники-->
+	<xs:complexType name="nsiUserType">
+		<xs:annotation>
+			<xs:documentation>Тип: Cправочник пользователей</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="userId" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Идентификатор из ЕСИА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonInfo">
+				<xs:annotation>
+					<xs:documentation>Общая информация о записи пользователя</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="regDate" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Дата регистрации пользователя в ЕРУЗ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="modificationDate" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата/время последнего изменения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="status" type="base:userStatusType">
+							<xs:annotation>
+								<xs:documentation>Статус пользователя:
+A - Активный;
+B - Заблокирован.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="userInfo">
+				<xs:annotation>
+					<xs:documentation>Информация о пользователе</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="cmn:personType">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:innIndividualType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ИНН пользователя. 
+Устарело, не используется</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="SNILS" type="base:SNILSType" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Страховой номер индивидуального лицевого счета (СНИЛС)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contactInfo" type="cmn:contactsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Контактная информация.
+Устарело, не используется</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractorsInfo">
+				<xs:annotation>
+					<xs:documentation>Реестровые записи ЕРУЗ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="contractorInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Реестровая запись ЕРУЗ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="cmn:contractorRef">
+										<xs:sequence>
+											<xs:element name="position" type="base:positionType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Должность</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="userAuthoritysInfo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Полномочия пользователя</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="userAuthority" type="base:userAuthorityType" maxOccurs="3">
+															<xs:annotation>
+																<xs:documentation>Полномочие пользователя:
+
+H - руководитель;
+A - администратор;
+AS - уполномоченный специалист. </xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="rightsInfo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Права доступа пользователя</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="rightInfo" type="cmn:contractorUserRightRef" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Право доступа пользователя</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="lockUnlockInfo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Блокировка/разблокировка</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:choice>
+														<xs:element name="lockReasonInfo" type="lockUnlockType">
+															<xs:annotation>
+																<xs:documentation>Заблокирован</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="unlockReasonInfo" type="lockUnlockType">
+															<xs:annotation>
+																<xs:documentation>Разблокирован</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:choice>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="contactInfo" type="cmn:contactsType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Контактная информация</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="isActual" type="xs:boolean">
+												<xs:annotation>
+													<xs:documentation>Актуальность связи пользователя с реестровой записью ЕРУЗ</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Вспомогательные типы-->
+	<xs:complexType name="lockUnlockType">
+		<xs:annotation>
+			<xs:documentation>Тип: Блокировка/разблокировка пользователя организации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reason" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Причина</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DT" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

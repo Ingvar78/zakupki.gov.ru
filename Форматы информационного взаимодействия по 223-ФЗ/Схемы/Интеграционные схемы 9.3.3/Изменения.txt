@@ -1,0 +1,5 @@
+﻿1. purchasePlanUpdatePosition.xsd
+	1.1. В типе purchasePlanUpdatePositionBaseDataType(Позиций проекта плана закупки)
+		1.1.1. Добавлен элемент approveDate(Дата утверждения плана);
+		1.1.2. Добавлен элемент attachments(Прикрепленные к сведениям документы);
+	

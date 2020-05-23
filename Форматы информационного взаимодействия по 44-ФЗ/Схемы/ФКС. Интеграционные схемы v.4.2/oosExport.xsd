@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
+	<xs:element name="export">
+		<xs:annotation>
+			<xs:documentation>Схема данных подсистемы экспорта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element name="notificationOK" type="oos:notificationOKType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Извещение о проведении открытого конкурса;
+Извещение о внесении изменений в извещение о проведении открытого конкурса или конкурсную документацию.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="notificationEF" type="oos:notificationEFType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Извещение о проведении ЭА;
+Извещение о внесении изменений в извещение о проведении ЭА или аукционную документацию.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="notificationZK" type="oos:notificationZKType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Извещение о проведении запроса котировок;
+Извещение о продлении срока подачи котировочных заявок</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="notificationPO" type="oos:notificationPOType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Извещение о проведении предварительного отбора</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="notificationSZ" type="oos:notificationSZType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Сообщение о заинтересованности в проведении конкурса</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="notificationCancel" type="oos:notificationCancelType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Извещение об отказе от проведения</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolOK1" type="oos:protocolOK1Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол вскрытия конвертов с заявками на участие в открытом конкурсе</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolOK2" type="oos:protocolOK2Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол рассмотрения заявок на участие в открытом конкурсе</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolOK3" type="oos:protocolOK3Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол оценки и сопоставления заявок на участие в открытом конкурсе</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolEF1" type="oos:protocolEF1Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол рассмотрения первых частей заявок на участие в открытом аукционе в электронной форме</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolEF2" type="oos:protocolEF2Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол проведения открытого аукциона в электронной форме</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolEF3" type="oos:protocolEF3Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол подведения итогов открытого аукциона в электронной форме</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolZK1" type="oos:protocolZK1Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол рассмотрения котировочных заявок</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolZK5" type="oos:protocolZK5Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол рассмотрения котировочных заявок по главе 5</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolPO1" type="oos:protocolPO1Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол рассмотрения заявок на участие в процедуре предварительного отбора </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolEvasion" type="oos:protocolEvasionType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Протокол отказа от заключения контракта</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="protocolCancel" type="oos:protocolCancelType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Информация об отмене протокола</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="placementResult" type="oos:placementResultType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Результат размещения заказа</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="contractSign" type="oos:contractSignType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Информация о подписании государственного/муниципального контракта на ЭП</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

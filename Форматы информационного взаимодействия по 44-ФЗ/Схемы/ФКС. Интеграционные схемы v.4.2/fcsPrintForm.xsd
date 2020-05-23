@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by ely (lan) -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
+	<xs:simpleType name="zfcs_registryNumType">
+		<xs:annotation>
+			<xs:documentation>Реестровый номер в ДИЗК</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:pattern value="\d{20}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_revisionNumType">
+		<xs:annotation>
+			<xs:documentation>Номер редакции в ДИЗК</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_addInfoTypeEnum">
+		<xs:annotation>
+			<xs:documentation>Тип дополнительной информации:
+O - Решение заказчика об одностороннем отказе от исполнения контракта;
+B - Информация о непредоставлении участником закупки сведений о выгодоприобретателях;
+S - Информация о непредоставлении участником закупки сведений о субподрядчиках, соисполнителях.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="O"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="zfcs_addInfoType">
+		<xs:annotation>
+			<xs:documentation>Дополнительная информация ДИЗК</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="publishDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата публикации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="registryNum" type="zfcs_registryNumType">
+				<xs:annotation>
+					<xs:documentation>Реестровый номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publishOrg" type="zfcs_organizationInfoType">
+				<xs:annotation>
+					<xs:documentation>Организация, разместившая информацию</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachments" type="oos:zfcs_attachmentListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="revisionNumber" type="zfcs_revisionNumType">
+				<xs:annotation>
+					<xs:documentation>Номер редакции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstPublishDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата публикации первой редакции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modificationReason" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Причина редактирования информации</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="infoType" type="zfcs_addInfoTypeEnum">
+				<xs:annotation>
+					<xs:documentation>Тип информации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="contract">
+					<xs:annotation>
+						<xs:documentation>Закупка</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="regNum" type="oos:zfcs_contract.regNumType">
+								<xs:annotation>
+									<xs:documentation>Номер реестровой записи</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="number">
+								<xs:annotation>
+									<xs:documentation>Номер контракта</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="30"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="signDate" type="xs:date">
+								<xs:annotation>
+									<xs:documentation>Дата заключения контракта</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="customer" type="zfcs_organizationInfoType">
+								<xs:annotation>
+									<xs:documentation>Заказчик</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:sequence>
+					<xs:element name="purchase">
+						<xs:annotation>
+							<xs:documentation>Закупка</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="lotNumber" type="xs:integer">
+									<xs:annotation>
+										<xs:documentation>Номер лота в извещении</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="purchaseObjectInfo">
+									<xs:annotation>
+										<xs:documentation>Наименование объекта закупки</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="2000"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="placingWay">
+									<xs:annotation>
+										<xs:documentation>Подспособ определения поставщика</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" type="oos:zfcs_nsiPlacingWayCodeType">
+												<xs:annotation>
+													<xs:documentation>Код подспособа определения поставщика</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="name" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Наименование подспособа определения поставщика</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="500"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="purchaseNumber" type="oos:zfcs_purchaseNumberType">
+									<xs:annotation>
+										<xs:documentation>Номер закупки</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="customer" type="zfcs_organizationInfoType">
+									<xs:annotation>
+										<xs:documentation>Заказчик</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="contractor">
+						<xs:annotation>
+							<xs:documentation>Поставщик (подрядчик, исполнитель)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:choice>
+									<xs:element name="organization" type="zfcs_organizationInfoType">
+										<xs:annotation>
+											<xs:documentation>Юридическое лицо</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="person">
+										<xs:annotation>
+											<xs:documentation>Физическое лицо</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="name" type="oos:zfcs_contactPersonType">
+													<xs:annotation>
+														<xs:documentation>ФИО поставщика</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="inn" type="oos:zfcs_innType">
+													<xs:annotation>
+														<xs:documentation>ИНН поставщика</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+								<xs:element name="rfResident" type="xs:boolean">
+									<xs:annotation>
+										<xs:documentation>Резидентство поставщика (РФ, ИнГ)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="oos:zfcs_schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="zfcs_customerReportType">
+		<xs:annotation>
+			<xs:documentation>Общая информация об отчете заказчика</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="publishDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата публикации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="registryNum" type="zfcs_registryNumType">
+				<xs:annotation>
+					<xs:documentation>Реестровый номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publishOrg" type="zfcs_organizationInfoWithOgrnType">
+				<xs:annotation>
+					<xs:documentation>Организация, разместившая информацию</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customer" type="zfcs_organizationInfoWithOgrnType">
+				<xs:annotation>
+					<xs:documentation>Заказчик</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="revisionNumber" type="zfcs_revisionNumType">
+				<xs:annotation>
+					<xs:documentation>Номер редакции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstPublishDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата публикации первой редакции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modificationReason" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Причина редактирования информации</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="attachments" type="oos:zfcs_attachmentListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="oos:zfcs_schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="zfcs_customerReportSmallScaleBusinessType">
+		<xs:annotation>
+			<xs:documentation>Отчет об объеме закупок у субъектов малого предпринимательства, социально ориентированных некоммерческих организаций</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_customerReportType">
+				<xs:sequence>
+					<xs:element name="reportingPeriod">
+						<xs:annotation>
+							<xs:documentation>Отчетный период</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="startDate" type="xs:dateTime">
+									<xs:annotation>
+										<xs:documentation>Дата начала отчетного периода</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="endDate" type="xs:dateTime">
+									<xs:annotation>
+										<xs:documentation>Дата окончания отчетного периода</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="zfcs_customerReportContractExecutionType">
+		<xs:annotation>
+			<xs:documentation>Отчет об исполнении контракта (результатах отдельного этапа исполнения контракта)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_customerReportType">
+				<xs:sequence>
+					<xs:element name="contractRegNum" type="oos:zfcs_contract.regNumType">
+						<xs:annotation>
+							<xs:documentation>Реестровый номер контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currentContractStage" type="oos:zfcs_stageType">
+						<xs:annotation>
+							<xs:documentation>Этап контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="otherAttachments" type="oos:zfcs_attachmentListType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Иные необходимые документы и файлы</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="zfcs_customerReportSingleContractorType">
+		<xs:annotation>
+			<xs:documentation>Отчет с обоснованием закупки у единственного поставщика (подрядчика, исполнителя)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_customerReportType">
+				<xs:sequence>
+					<xs:element name="purchaseNumber" type="oos:zfcs_purchaseNumberType">
+						<xs:annotation>
+							<xs:documentation>Номер закупки</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contractRegNum" type="oos:zfcs_contract.regNumType">
+						<xs:annotation>
+							<xs:documentation>Реестровый номер контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lotNumber" type="xs:integer">
+						<xs:annotation>
+							<xs:documentation>Номер лота в извещении</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contractSingleCustomerReason" type="oos:zfcs_nsiContractSingleCustomerReasonType">
+						<xs:annotation>
+							<xs:documentation>Закупка</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="zfcs_organizationInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения об организации</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="oos:zfcs_organizationRef">
+				<xs:sequence>
+					<xs:element name="shortName" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Краткое наименование</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="250"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="inn" type="oos:zfcs_innOrganizationType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>ИНН организации</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="kpp" type="oos:zfcs_kppType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>КПП организации</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="zfcs_organizationInfoWithOgrnType">
+		<xs:annotation>
+			<xs:documentation>Сведения об организации с указанием ОГРН</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_organizationInfoType">
+				<xs:sequence>
+					<xs:element name="ogrn" type="oos:zfcs_ogrnType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>ОГРН организации</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="fcsCustomerReportSmallScaleBusiness" type="zfcs_customerReportSmallScaleBusinessType">
+		<xs:annotation>
+			<xs:documentation>Отчет об объеме закупок у субъектов малого предпринимательства, социально ориентированных некоммерческих организаций</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsCustomerReportContractExecution" type="zfcs_customerReportContractExecutionType">
+		<xs:annotation>
+			<xs:documentation>Отчет об исполнении контракта (результатах отдельного этапа исполнения контракта)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsCustomerReportSingleContractor" type="zfcs_customerReportSingleContractorType">
+		<xs:annotation>
+			<xs:documentation>Отчет с обоснованием закупки у единственного поставщика (подрядчика, исполнителя)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsAddInfo" type="zfcs_addInfoType">
+		<xs:annotation>
+			<xs:documentation>Дополнительная информация: о непредоставлении участником закупки сведений о выгодоприобретателях либо о субподрядчиках, соисполнителях либо решение заказчика об одностороннем отказе от исполнения контракта </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationLotChange" type="oos:zfcs_notificationLotChangeType">
+		<xs:annotation>
+			<xs:documentation>Внесение изменений в извещение в части лота</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="bankGuarantee" type="oos:zfcs_bankGuaranteeType">
+		<xs:annotation>
+			<xs:documentation>Информация о выданной банковской гарантии</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="bankGuaranteeRefusal" type="oos:zfcs_bankGuaranteeRefusalType">
+		<xs:annotation>
+			<xs:documentation>Сведения об отказе заказчика в принятии банковской гарантии</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="checkPlan" type="oos:zfcs_checkPlanType">
+		<xs:annotation>
+			<xs:documentation>План проверок</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="checkResult" type="oos:zfcs_checkResultType">
+		<xs:annotation>
+			<xs:documentation>Результат контроля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="checkResultCancel" type="oos:zfcs_checkResultCancelType">
+		<xs:annotation>
+			<xs:documentation>Информация об отмене результата контроля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="complaint" type="oos:zfcs_complaintType">
+		<xs:annotation>
+			<xs:documentation>Информация по жалобе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="complaintCancel" type="oos:zfcs_complaintCancelType">
+		<xs:annotation>
+			<xs:documentation>Информация об отзыве жалобы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="complaintGroup" type="oos:zfcs_complaintGroupType">
+		<xs:annotation>
+			<xs:documentation>Информация по групповой жалобе</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="contract" type="oos:zfcs_contractType">
+		<xs:annotation>
+			<xs:documentation>Информация о заключенном контракте</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="contractProcedure" type="oos:zfcs_contractProcedureType">
+		<xs:annotation>
+			<xs:documentation>Информация об исполнении (расторжении) контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="contractProcedureCancel" type="oos:zfcs_contractProcedureCancelType">
+		<xs:annotation>
+			<xs:documentation>Информация об отмене исполнения (расторжения) контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsClarification" type="oos:zfcs_clarificationType">
+		<xs:annotation>
+			<xs:documentation>Разъяснения положений документации по запросу ЭП по 44-ФЗ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationCancel" type="oos:zfcs_notificationCancelType">
+		<xs:annotation>
+			<xs:documentation>Извещения об отмене определения поставщика (подрядчика, исполнителя)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationEF" type="oos:zfcs_notificationEFType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЭА (электронный аукцион); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationEP" type="oos:zfcs_notificationEPType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении закупки у ЕП (единственного поставщика); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationISM" type="oos:zfcs_notificationISMType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении закупки многолотовым ИС (иной способ); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationISO" type="oos:zfcs_notificationISOType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении закупки однолотовым ИС (иной способ); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationLotCancel" type="oos:zfcs_notificationLotCancelType">
+		<xs:annotation>
+			<xs:documentation>Извещение об отмене определения поставщика (подрядчика, исполнителя) в части лота</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationOK" type="oos:zfcs_notificationOKType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении OK (открытый конкурс); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationOKD" type="oos:zfcs_notificationOKDType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении OK-Д (двухэтапный конкурс); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationOKOU" type="oos:zfcs_notificationOKOUType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении OK-ОУ (конкурс с ограниченным участием); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationPO" type="oos:zfcs_notificationPOType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ПО (предварительный отбор); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZakA" type="oos:zfcs_notificationZakAType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЗакА (закрытый аукцион); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZakK" type="oos:zfcs_notificationZakKType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЗакK (закрытый конкурс); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZakKD" type="oos:zfcs_notificationZakKDType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЗакK-Д (закрытый двухэтапный конкурс); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZakKOU" type="oos:zfcs_notificationZakKOUType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЗакK-ОУ (закрытый конкурс с ограниченным участием); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZK" type="oos:zfcs_notificationZKType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЗK (запрос котировок); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZKBI" type="oos:zfcs_notificationZKBIType">
+		<xs:annotation>
+			<xs:documentation>Общая информация об объекте закупки и протокол рассмотрения и оценки заявок на участие в ЗК-БИ (запрос котировок без извещения); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsNotificationZP" type="oos:zfcs_notificationZPType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЗП (запрос предложений); внесение изменений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsPurchaseApproval" type="oos:zfcs_purchaseApprovalType">
+		<xs:annotation>
+			<xs:documentation>Квитанция согласования публикации </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsPurchaseDocument" type="fcsPurchaseDocumentType">
+		<xs:annotation>
+			<xs:documentation>Информация о документе закупки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsPurchaseDocumentCancel" type="fcsPurchaseDocumentCancelType">
+		<xs:annotation>
+			<xs:documentation>Информация об отмене документа закупки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsPurchaseProlongationOK" type="oos:zfcs_purchaseProlongationOKType">
+		<xs:annotation>
+			<xs:documentation>Извещение о продлении срока подачи заявок по открытому конкурсу</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fcsPurchaseProlongationZK" type="oos:zfcs_purchaseProlongationZKType">
+		<xs:annotation>
+			<xs:documentation>Извещение извещения о продлении срока подачи котировочных заявок</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sketchPlan" type="oos:zfcs_sketchPlanType">
+		<xs:annotation>
+			<xs:documentation>План закупок в неструктурированной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sketchPlanExecution" type="oos:zfcs_sketchPlanExecutionType">
+		<xs:annotation>
+			<xs:documentation>Сведения об исполнении плана закупок в неструктурированной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="tenderPlan" type="oos:zfcs_tenderPlanType">
+		<xs:annotation>
+			<xs:documentation>План-график в структурированной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="tenderPlanUnstructured" type="oos:zfcs_tenderPlanUnstructuredType">
+		<xs:annotation>
+			<xs:documentation>План-график в неструктурированной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="tenderSuspension" type="oos:zfcs_tenderSuspensionType">
+		<xs:annotation>
+			<xs:documentation>Информация о приостановке определения поставщика</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="unplannedCheck" type="oos:zfcs_unplannedCheckType">
+		<xs:annotation>
+			<xs:documentation>Информация по внеплановой проверке</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="unplannedCheckCancel" type="oos:zfcs_unplannedCheckCancelType">
+		<xs:annotation>
+			<xs:documentation>Информация об отмене проведения внеплановой проверки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:group name="printFormProtocolFields">
+		<xs:annotation>
+			<xs:documentation>Дополнительная информация для ПФ протоколов в неструктурированной форме</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="purchaseObjectInfo" type="oos:zfcs_longTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование объекта закупки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responsibleRole" type="oos:zfcs_responsibleRoleType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Роль организации, осуществляющей закупку
+
+CU - Заказчик;
+OCU - Заказчик в качестве организатора совместного аукциона;
+RA - Уполномоченный орган;
+ORA- Уполномоченный орган в качестве организатора совместного аукциона;
+AI - Уполномоченное учреждение;
+OAI- Уполномоченное учреждение в качестве организатора совместного аукциона;
+OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);
+OOA- Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения) в качестве организатора совместного аукциона;</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="placingWay" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Подспособ определения поставщика</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" type="oos:zfcs_nsiPlacingWayCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Код подспособа определения поставщика</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="name" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование подспособа определения поставщика</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="500"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fullNameResponsible" type="oos:zfcs_longTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации, осуществляющей закупку</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="fcsPurchaseDocumentType">
+		<xs:annotation>
+			<xs:documentation> fcsPurchaseDocument </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="oos:zfcs_purchaseDocumentType">
+				<xs:group ref="printFormProtocolFields" minOccurs="0"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="fcsPurchaseDocumentCancelType">
+		<xs:annotation>
+			<xs:documentation> fcsPurchaseDocumentCancel</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="oos:zfcs_purchaseDocumentCancelType">
+				<xs:sequence>
+					<xs:group ref="printFormProtocolFields" minOccurs="0"/>
+					<xs:element name="docType" type="oos:zfcs_docType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Тип документа</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

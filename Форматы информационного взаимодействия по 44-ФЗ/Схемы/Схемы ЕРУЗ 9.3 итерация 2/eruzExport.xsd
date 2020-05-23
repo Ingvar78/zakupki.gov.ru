@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ EXPORT TYPES Integration Scheme, version 9.3, create date 17.09.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nsi="http://zakupki.gov.ru/eruz/nsi/1" xmlns:eruz="http://zakupki.gov.ru/eruz/types/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/types/1" schemaLocation="eruzIntegrationTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/nsi/1" schemaLocation="eruzNSITypes.xsd"/>
+	<xs:element name="export">
+		<xs:annotation>
+			<xs:documentation>Схема данных подсистемы экспорта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<!--Электронные процедуры-->
+					<!--Открытый конкурс в электронной форме-->
+					<!--Открытый конкурс с ограниченным участием в электронной форме-->
+					<!--Двухэтапный конкурс в электронной форме-->
+					<!--Запрос котировок в электронной форме-->
+					<!--Запрос котировок в электронной форме-->
+					<!--Закрытые способы электронных процедур-->
+					<!--Проекты контрактов-->
+					<xs:element name="eruzContractor" type="eruz:contractorType">
+						<xs:annotation>
+							<xs:documentation>Информация и документы об участнике закупки</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="eruzContractorExclude" type="eruz:contractorExcludeType">
+						<xs:annotation>
+							<xs:documentation>Информация об исключении участнкиа закупки из ЕРУЗ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nsiUserList">
+						<xs:annotation>
+							<xs:documentation>Cправочник пользователей</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiUser" type="nsi:nsiUserType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,1859 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ INTEGRATION TYPES TYPES Integration Scheme, version 9.2, create date 30.05.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/eruz/base/1" xmlns:cmn="http://zakupki.gov.ru/eruz/common/1" targetNamespace="http://zakupki.gov.ru/eruz/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/base/1" schemaLocation="eruzBaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/common/1" schemaLocation="eruzCommonTypes.xsd"/>
+	<!--Технические типы-->
+	<xs:complexType name="confirmationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат обработки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="loadId" type="base:guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор загруженных данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="result" type="base:confirmationResultType">
+				<xs:annotation>
+					<xs:documentation>Результат обработки данных
+
+success - обработано успешно;
+failure - ошибки при обработке;
+processing - обрабатывается.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="violations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Выявленные в процессе обработки нарушения и ошибки</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="violation" type="violationType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="refId" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор обработанного пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="missingIndexNums" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Список пропущенных порядковых номеров пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="indexNum" type="base:indexNumType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Порядковый номер пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Основные документы-->
+	<xs:complexType name="contractorType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация и документы об участнике закупки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа ЕРУЗ.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versionNumber" type="base:versionNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер версии реестровой записи в ЕРУЗ. При приеме, если блок не заполнен, то считается, что принята первая версия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Общая информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="registryNum" type="base:eruzRegistryNumType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер реестровой записи в ЕРУЗ.
+Элемент игнорируется при приёме первой версии документа. Присваивается автоматически после размещения. Требуется обязательное заполнение при приёме изменения документа. Заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registryDT" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата и время размещения (изменения) реестровой записи в ЕРУЗ.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="startRegDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата начала срока регистрации в ЕРУЗ.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endRegDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата окончания срока регистрации в ЕРУЗ.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="href" type="base:hrefType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Гиперссылка на карточку документа в ОЧ.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contractorInfo">
+				<xs:annotation>
+					<xs:documentation>Регистрационные данные.
+При приеме контролируется обязательность заполнения блока "Юридическое лицо иностранного государства" (legalEntityForeignStateNotInRAFPInfo) или "Физическое лицо иностранного государства" (individualPersonForeignStateInfo)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="legalEntityRFInfo" type="legalEntityRFType">
+							<xs:annotation>
+								<xs:documentation>Юридическое лицо РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="filialLegalEntityRFInfo" type="filialLegalEntityRFType">
+							<xs:annotation>
+								<xs:documentation>Филиал юридического лица РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="individualPersonRFInfo" type="individualPersonRFType">
+							<xs:annotation>
+								<xs:documentation>Физическое лицо РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="legalEntityForeignStateInRAFPInfo" type="legalEntityForeignStateInRAFPType">
+							<xs:annotation>
+								<xs:documentation>Аккредитованный филиал или представительство иностранного юридического лица</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="legalEntityForeignStateNotInRAFPInfo" type="legalEntityForeignStateNotInRAFPType">
+							<xs:annotation>
+								<xs:documentation>Юридическое лицо иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="individualPersonForeignStateInfo" type="individualPersonForeignStateType">
+							<xs:annotation>
+								<xs:documentation>Физическое лицо иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="informationType" type="informationType">
+				<xs:annotation>
+					<xs:documentation>Тип передаваемой информации:
+R - информация для/об аккредитации на ЭП;
+P - информация для аккредитации на новый срок;
+M - измененная информация
+В случае, если в поле указано значение "R" или "P", в ответ должен быть направлен пакет "Информация об аккредитации участника закупки на ЭП" (eruzAccreditationResult)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ETP" type="cmn:ETPRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронная площадка. При приеме блок обязателен для заполнения, код контролируется на  присутствие в справочнике "Справочник: Электронные площадки " (nsiETP)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="printFormInfo" type="cmn:printFormType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Печатная форма документа. Игнорируется при приеме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extPrintFormInfo" type="cmn:extPrintFormType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронный документ, полученный из внешней системы
+При приеме контролируется обязательность заполнения блока, в котором будет содержаться xml, сформированный по схеме eruzPrintForm с типом contractor, либо ссылкой на этот xml из файлового хранилища ЕРУЗ. 
+Не заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="accreditationResultType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация об аккредитации участника закупки на ЭП</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="registryNum" type="base:eruzRegistryNumType">
+				<xs:annotation>
+					<xs:documentation>Номер реестровой записи в ЕРУЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ETP" type="cmn:ETPRef">
+				<xs:annotation>
+					<xs:documentation>Электронная площадка. При приеме код контролируется на  присутствие в справочнике "Справочник: Электронные площадки " (nsiETP)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accreditationInfo">
+				<xs:annotation>
+					<xs:documentation>Информация об аккредитации</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="violations">
+							<xs:annotation>
+								<xs:documentation>В процессе обработки выявлены ошибки.
+В случае если заполнен блок, то пакет игнорируется при приеме</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="violation" type="cmn:violationType" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Ошибка</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="successRegister" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>Поставщик аккредитован на ЭП</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="contractorExcludeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация об исключении участника закупки из ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа ЕРУЗ.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonInfo">
+				<xs:annotation>
+					<xs:documentation>Общая информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="registryNum" type="base:eruzRegistryNumType">
+							<xs:annotation>
+								<xs:documentation>Номер реестровой записи в ЕРУЗ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="publishedDT" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата и время размещения документа с информацией об исключении участника закупок.
+Игнорируется при приёме, заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ETP" type="cmn:ETPRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронная площадка. При приеме блок обязателен для заполнения, код контролируется на  присутствие в справочнике "Справочник: Электронные площадки " (nsiETP)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="excludeReasonText" type="base:text500Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Причина исключения.
+Не заполняется, если исключение участника закупок осуществлено в автоматическом режиме</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="excludeReason" type="cmn:contractorExcludeReasonRef">
+				<xs:annotation>
+					<xs:documentation>Основание исключения.
+При приеме код контролируется на присутствие в справочнике "Справочник: Основания исключений" (nsiContractorExcludeReason)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachmentsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Прикрепленная документация.
+Игнорируется при приёме, заполняется при передаче при исключении участника закупки оператором сайта ЕИС</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="foundingDocsCopyInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Копия судебного акта или акта судебного пристава-исполнителя, содержащие запрет на регистрацию участника закупки в единой информационной системе, или на размещение информации и документов в Едином реестре участников закупок.
+Заполняется при исключении участника закупок оператором сайта ЕИС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="printFormInfo" type="cmn:printFormType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Печатная форма документа. Игнорируется при приеме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="printFormFieldsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text1000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Полное наименование организации</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INNOrganization" type="base:innOrganizationType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ИНН организации</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INNIndividual" type="base:innIndividualType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ИНН физического лица</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="nameInfo" type="cmn:personType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="taxPayerCode" type="base:taxPayerCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Аналог идентификационного номера налогоплательщика в соответствии с законодательством иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="extPrintFormInfo" type="cmn:extPrintFormType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронный документ, полученный из внешней системы. 
+При приеме контролируется обязательность заполнения блока, в котором будет содержаться xml, сформированный по схеме eruzPrintForm с типом contractor, либо ссылкой на этот xml из файлового хранилища ЕРУЗ. 
+Не заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Вспомогательные типы-->
+	<xs:complexType name="legalEntityRFType">
+		<xs:annotation>
+			<xs:documentation>Тип: Юридическое лицо РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="legalEntityRFDataInfo">
+				<xs:annotation>
+					<xs:documentation>Регистрационные данные юридического лица РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="legalEntityRFDataType">
+							<xs:sequence>
+								<xs:element name="OKOPF" type="cmn:OKOPFRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Сведения об организационно-правовой форме из ЕГРЮЛ</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="majorTaxPayerKPP" type="base:kppType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>КПП крупнейшего налогоплательщика</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="timeZoneInfo" type="cmn:timeZoneRef">
+									<xs:annotation>
+										<xs:documentation>Часовой пояс.
+При приеме наименование контролируется на присутствие в справочнике "Часовые зоны мира" (nsiWorldTimeZone) </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="maxPrice" type="base:moneyMaxLengthToPoint21Type">
+									<xs:annotation>
+										<xs:documentation>Максимально возможная сумма для заключения контракта по результатам электронных процедур</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="EGRULStatementInfo" type="cmn:attachmentType">
+									<xs:annotation>
+										<xs:documentation>Выписка из ЕГРЮЛ</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="isParticipant" type="xs:boolean">
+									<xs:annotation>
+										<xs:documentation>Участник закупок</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="isSubcontractor" type="xs:boolean">
+									<xs:annotation>
+										<xs:documentation>Субподрядная организация</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="managingOrganization" type="managingOrganizationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Управляющая организация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="informationPersons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о лицах, имеющих право без доверенности действовать от имени юридического лица РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="informationPersonInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о лице, имеющем право без доверенности действовать от имени юридического лица</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="informationPersonType">
+										<xs:sequence>
+											<xs:element name="INN" type="base:innIndividualType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>ИНН</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contactInfo">
+				<xs:annotation>
+					<xs:documentation>Контактная информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="cmn:contactsType">
+							<xs:sequence>
+								<xs:element name="postAdress" type="base:text2000Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Почтовый адрес</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="url" type="base:hrefType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Адрес сайта в сети Интернет</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="attachmentsInfo">
+				<xs:annotation>
+					<xs:documentation>Прикрепленная документация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="foundingDocsCopyInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Копии учредительных документов юридического лица</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="consentDecisionsInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Решение (копия решения) о согласии на совершение или о последующем одобрении крупных сделок по результатам электронных процедур от имени участника закупки - юридического лица с указанием максимальных параметров условий одной сделки</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="filialLegalEntityRFType">
+		<xs:annotation>
+			<xs:documentation>Тип: Филиал юридического лица РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="legalEntityInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения об ЮЛ РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="legalEntityRFDataInfo">
+							<xs:annotation>
+								<xs:documentation>Регистрационные данные юридического лица РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="legalEntityRFDataType">
+										<xs:sequence>
+											<xs:element name="OKOPF" type="cmn:OKOPFRef" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Сведения об организационно-правовой форме из ЕГРЮЛ</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="majorTaxPayerKPP" type="base:kppType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>КПП крупнейшего налогоплательщика</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="EGRULStatementInfo" type="cmn:attachmentType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Выписка из ЕГРЮЛ
+Заполняется, если головная организация не зарегистрирована в ЕРУЗ</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="registryNum" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Номер реестровой записи в ЕРУЗ головной организации.
+Заполняется, если головная организация зарегистрирована в ЕРУЗ</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:simpleContent>
+														<xs:extension base="base:eruzRegistryNumType">
+															<xs:attribute name="isArchived" type="xs:boolean" use="required">
+																<xs:annotation>
+																	<xs:documentation>Признак архивной записи</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:extension>
+													</xs:simpleContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="managingOrganization" type="managingOrganizationType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Управляющая организация</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="informationPersons" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сведения о лицах, имеющих право без доверенности действовать от имени юридического лица РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="informationPersonInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Сведения о лице, имеющем право без доверенности действовать от имени юридического лица</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="nameInfo" type="cmn:personType">
+													<xs:annotation>
+														<xs:documentation>ФИО</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="position" type="base:positionType">
+													<xs:annotation>
+														<xs:documentation>Должность</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="identityDocInfo" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Вид документа, удостоверяющего личность
+Заполняется, если головная организация не зарегистрирована в ЕРУЗ или зарегистрирована в ЕРУЗ, но со статусом реестровой записи "Архив"</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:choice>
+															<xs:element name="passportRFInfo" type="cmn:passportRFType">
+																<xs:annotation>
+																	<xs:documentation>Паспорт гражданина РФ</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="internationalPassportRFInfo" type="cmn:internationalPassportRFType">
+																<xs:annotation>
+																	<xs:documentation>Заграничный паспорт гражданина РФ</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="passportForeignInfo" type="passportForeignType">
+																<xs:annotation>
+																	<xs:documentation>Паспорт иностранного гражданина</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="sojournPermitInfo" type="sojournPermitType">
+																<xs:annotation>
+																	<xs:documentation>Разрешение на временное проживание в РФ</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="permamentResidencyInfo" type="permamentResidencyType">
+																<xs:annotation>
+																	<xs:documentation>Вид на жительство РФ</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:choice>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="INN" type="base:innIndividualType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>ИНН</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="filialInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения об обособленном подразделении ЮЛ РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="filialLegalEntityRFDataInfo">
+							<xs:annotation>
+								<xs:documentation>Регистрационные данные обособленного ЮЛ РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="KPP" type="base:kppType">
+										<xs:annotation>
+											<xs:documentation>КПП</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="fullName" type="base:text1000Type">
+										<xs:annotation>
+											<xs:documentation>Наименование</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAdressInfo" type="factAdressType">
+										<xs:annotation>
+											<xs:documentation>Адрес в пределах места нахождения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="maxPrice" type="base:moneyMaxLengthToPoint21Type">
+										<xs:annotation>
+											<xs:documentation>Максимально возможная сумма для заключения контракта по результатам электронных процедур</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="timeZoneInfo" type="cmn:timeZoneRef">
+										<xs:annotation>
+											<xs:documentation>Часовой пояс.
+При приеме наименование контролируется на присутствие в справочнике "Часовые зоны мира" (nsiWorldTimeZone) </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="isParticipant" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Участник закупок</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="isSubcontractor" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Субподрядная организация</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="filialContactInfo">
+							<xs:annotation>
+								<xs:documentation>Контактная информация обособленного подразделения ЮЛ РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="cmn:contactsType">
+										<xs:sequence>
+											<xs:element name="postAdress" type="base:text2000Type" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Почтовый адрес</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="url" type="base:hrefType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Адрес сайта в сети Интернет</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="attachmentsInfo">
+							<xs:annotation>
+								<xs:documentation>Прикрепленная документация</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="consentDecisionsInfo" type="cmn:attachmentListType">
+										<xs:annotation>
+											<xs:documentation>Решение (копия решения) о согласии на совершение или о последующем одобрении крупных сделок по результатам электронных процедур от имени участника закупки - юридического лица с указанием максимальных параметров условий одной сделки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="foundingDocsCopyInfo" type="cmn:attachmentListType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Копии учредительных документов юридического лица.
+Заполняется, если головная организация не зарегистрирована в ЕРУЗ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="individualPersonRFType">
+		<xs:annotation>
+			<xs:documentation>Тип: Физическое лицо РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="individualPersonRFDataInfo">
+				<xs:annotation>
+					<xs:documentation>Регистрационные данные физического лица РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="cmn:personType">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:innIndividualType">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="factAdressInfo" type="factAdressType">
+							<xs:annotation>
+								<xs:documentation>Адрес места жительства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MSPSign" type="MSPSignType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Признак наличия в Едином реестре МСП.
+
+M - поставщик является субъектом малого предпринимательства;
+S - поставщик является субъектом среднего предпринимательства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="timeZoneInfo" type="cmn:timeZoneRef">
+							<xs:annotation>
+								<xs:documentation>Часовой пояс.
+При приеме наименование контролируется на присутствие в справочнике "Часовые зоны мира" (nsiWorldTimeZone) </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="identityDocInfo">
+							<xs:annotation>
+								<xs:documentation>Вид документа, удостоверяющего личность</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="passportRFInfo" type="cmn:passportRFType">
+										<xs:annotation>
+											<xs:documentation>Паспорт гражданина РФ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="internationalPassportRFInfo" type="cmn:internationalPassportRFType">
+										<xs:annotation>
+											<xs:documentation>Заграничный паспорт гражданина РФ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="IPInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Индивидаульный предприниматель.
+Наличие блока означает, что указан признак "Участник закупок (Физическое лицо РФ, являющееся индивидуальным предпринимателем)"</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="IPInfoType">
+										<xs:sequence>
+											<xs:element name="taxRegDate" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="isParticipant" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Участник закупок (Физическое лицо РФ)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="isSubcontractor" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Субподрядчик</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contactInfo">
+				<xs:annotation>
+					<xs:documentation>Контактная информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="cmn:contactsType">
+							<xs:sequence>
+								<xs:element name="postAdress" type="base:text2000Type">
+									<xs:annotation>
+										<xs:documentation>Почтовый адрес</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="attachmentsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Прикрепленная документация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="passportCopyInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Копия документа, удовстоверяющего личность.
+Обязательно для заполнения, если значение поля "Участник закупок (Физическое лицо РФ)" isParticipant = true</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="legalEntityForeignStateInRAFPType">
+		<xs:annotation>
+			<xs:documentation>Тип: Аккредитованный филиал или представительство иностранного юридического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="legalEntityForeignStateDataInfo" type="legalEntityForeignStateDataType">
+				<xs:annotation>
+					<xs:documentation>Сведения об юридическом лице иностранного государства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="filialLegalEntityForeignStateInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения о филиале/представительстве юридического лица иностранного государства</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="filialLegalEntityForeignStateDataInfo">
+							<xs:annotation>
+								<xs:documentation>Регистрационные данные филиала/представительства юридического лица иностранного государства</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="fullName" type="base:text1000Type">
+										<xs:annotation>
+											<xs:documentation>Полное наименование</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="shortName" type="base:text510Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Сокращенное наименование организации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="INN" type="base:innOrganizationType">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="KPP" type="base:kppType">
+										<xs:annotation>
+											<xs:documentation>КПП</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="regDate" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAdressInfo" type="factAdressType">
+										<xs:annotation>
+											<xs:documentation>Адрес (место нахождения) на территории Российской Федерации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OKVEDs">
+										<xs:annotation>
+											<xs:documentation>Коды ОКВЭД</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="OKVED" type="cmn:OKVEDRef" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Коды ОКВЭД</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="maxPrice" type="base:moneyMaxLengthToPoint21Type">
+										<xs:annotation>
+											<xs:documentation>Максимально возможная сумма для заключения контракта по результатам электронных процедур</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="timeZoneInfo" type="cmn:timeZoneRef">
+										<xs:annotation>
+											<xs:documentation>Часовой пояс.
+При приеме наименование контролируется на присутствие в справочнике "Часовые зоны мира" (nsiWorldTimeZone) </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="isParticipant" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Участник закупок </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="headInfo">
+							<xs:annotation>
+								<xs:documentation>Сведения о руководителе филиала/представительства</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="nameInfo" type="cmn:personType">
+										<xs:annotation>
+											<xs:documentation>ФИО</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="position" type="base:positionType">
+										<xs:annotation>
+											<xs:documentation>Должность</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="identityDocInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Вид документа, удостоверяющего личность</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="passportRFInfo" type="cmn:passportRFType">
+													<xs:annotation>
+														<xs:documentation>Паспорт гражданина РФ</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="internationalPassportRFInfo" type="cmn:internationalPassportRFType">
+													<xs:annotation>
+														<xs:documentation>Заграничный паспорт гражданина РФ</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="passportForeignInfo" type="passportForeignType">
+													<xs:annotation>
+														<xs:documentation>Паспорт иностранного гражданина</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="sojournPermitInfo" type="sojournPermitType">
+													<xs:annotation>
+														<xs:documentation>Разрешение на временное проживание в РФ</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="permamentResidencyInfo" type="permamentResidencyType">
+													<xs:annotation>
+														<xs:documentation>Вид на жительство РФ</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="INN" type="base:innIndividualType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="contactInfo">
+							<xs:annotation>
+								<xs:documentation>Контактная информация</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="cmn:contactsType">
+										<xs:sequence>
+											<xs:element name="postAdress" type="base:text2000Type">
+												<xs:annotation>
+													<xs:documentation>Почтовый адрес</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="url" type="base:hrefType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Адрес сайта в сети Интернет</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="attachmentsInfo">
+							<xs:annotation>
+								<xs:documentation>Прикрепленная документация</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="foundingDocLegalEntityInfo" type="cmn:attachmentListType">
+										<xs:annotation>
+											<xs:documentation>Надлежащим образом заверенный перевод на русский язык учредительных документов юридического лица в соответствии с законодательством иностранного государства</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="consentDecisionInfo" type="cmn:attachmentListType">
+										<xs:annotation>
+											<xs:documentation>Решение (копия решения) о согласии на совершение или о последующем одобрении крупных сделок по результатам электронных процедур от имени участника закупки - юридического лица с указанием максимальных параметров условий одной сделки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="govRegistrationLegalEntityDocInfo" type="cmn:attachmentListType">
+										<xs:annotation>
+											<xs:documentation>Надлежащим образом заверенный перевод на русский язык документов о государственной регистрации юридического лица в соответствии с законодательством иностранного государства</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="legalEntityForeignStateNotInRAFPType">
+		<xs:annotation>
+			<xs:documentation>Тип: Юридическое лицо иностранного государства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="legalEntityForeignStateDataInfo">
+				<xs:annotation>
+					<xs:documentation>Регистрационные данные юридического лица иностранного государства</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="legalEntityForeignStateDataType">
+							<xs:sequence>
+								<xs:element name="factAdress" type="base:text2000Type">
+									<xs:annotation>
+										<xs:documentation>Адрес в пределах места нахождения</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="taxPayerCode" type="base:taxPayerCode">
+									<xs:annotation>
+										<xs:documentation>Аналог идентификационного номера налогоплательщика в соответствии с законодательством иностранного государства</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="maxPrice" type="base:moneyMaxLengthToPoint21Type">
+									<xs:annotation>
+										<xs:documentation>Максимально возможная сумма для заключения контракта по результатам электронных процедур</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="timeZoneInfo" type="cmn:timeZoneRef">
+									<xs:annotation>
+										<xs:documentation>Часовой пояс.
+При приеме наименование контролируется на присутствие в справочнике "Часовые зоны мира" (nsiWorldTimeZone) </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="isParticipant" type="xs:boolean" fixed="true">
+									<xs:annotation>
+										<xs:documentation>Участник закупок </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="informationPersons">
+				<xs:annotation>
+					<xs:documentation>Сведения о лицах, имеющих право без доверенности действовать от имени юридического лица</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="informationPersonInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о лице, имеющем право без доверенности действовать от имени юридического лица</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="informationPersonType">
+										<xs:sequence>
+											<xs:element name="INN" type="base:innIndividualType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>ИНН</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contactInfo">
+				<xs:annotation>
+					<xs:documentation>Контактная информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="cmn:contactsType">
+							<xs:sequence>
+								<xs:element name="postAdress" type="base:text2000Type">
+									<xs:annotation>
+										<xs:documentation>Почтовый адрес</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="url" type="base:hrefType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Адрес сайта в сети Интернет</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="attachmentsInfo">
+				<xs:annotation>
+					<xs:documentation>Прикрепленная документация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="foundingDocLegalEntityInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Надлежащим образом заверенный перевод на русский язык учредительных документов юридического лица в соответствии с законодательством иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="consentDecisionInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Решение (копия решения) о согласии на совершение или о последующем одобрении крупных сделок по результатам электронных процедур от имени участника закупки - юридического лица с указанием максимальных параметров условий одной сделки</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="govRegistrationLegalEntityDocInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Надлежащим образом заверенный перевод на русский язык документов о государственной регистрации юридического лица в соответствии с законодательством иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registrationAuthorityIPInfo" type="cmn:attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Надлежащим образом заверенный перевод на русский язык документов, подтверждающих полномочия физического лица на регистрацию участника закупки в ЕИС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="individualPersonForeignStateType">
+		<xs:annotation>
+			<xs:documentation>Тип: Физическое лицо иностранного государства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="individualPersonForeignStateDataInfo">
+				<xs:annotation>
+					<xs:documentation>Регистрационные данные физического лица иностранного государства</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="cmn:personType">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="nameLatInfo" type="cmn:personType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ФИО (латинскими буквами)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="taxPayerCode" type="base:taxPayerCode">
+							<xs:annotation>
+								<xs:documentation>Аналог идентификационного номера налогоплательщика в соответствии с законодательством иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="countryInfo" type="cmn:OKSMRef" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Страна регистрации.
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="factAdress" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Адрес места жительства.
+Заполняется, если не установлен признак "Участник закупок (Физическое лицо иностранного государства, являющееся индивидуальным предпринимателем)"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="identityDocInfo">
+							<xs:annotation>
+								<xs:documentation>Вид документа, удостоверяющего личность</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="passportForeignInfo" type="passportForeignType">
+										<xs:annotation>
+											<xs:documentation>Паспорт иностранного гражданина</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="sojournPermitInfo" type="sojournPermitType">
+										<xs:annotation>
+											<xs:documentation>Разрешение на временное проживание в РФ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="permamentResidencyInfo" type="permamentResidencyType">
+										<xs:annotation>
+											<xs:documentation>Вид на жительство РФ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="timeZoneInfo" type="cmn:timeZoneRef">
+							<xs:annotation>
+								<xs:documentation>Часовой пояс.
+При приеме наименование контролируется на присутствие в справочнике "Часовые зоны мира" (nsiWorldTimeZone) </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="taxRegDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IPInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Индивидаульный предприниматель.
+Наличие блока означает, что указан признак "Участник закупок (Физическое лицо иностранного государства, являющееся индивидуальным предпринимателем)"</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="INN" type="base:innIndividualType">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OGRNIP" type="base:OGRNIPCodeType">
+										<xs:annotation>
+											<xs:documentation>ОГРНИП</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="regDate" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Дата регистрации индивидуального предпринимателя</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="EGRIPStatementInfo" type="cmn:attachmentType">
+										<xs:annotation>
+											<xs:documentation>Выписка из ЕГРИП</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="MSPSign" type="MSPSignType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Признак наличия в Едином реестре МСП.
+
+M-Поставщик является субъектом малого предпринимательства;
+S-Поставщик является субъектом среднего предпринимательства</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAdressInfo" type="factAdressType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Адрес места жительства</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="isParticipant" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Участник закупок (Физическое лицо иностранного государства)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contactInfo">
+				<xs:annotation>
+					<xs:documentation>Контактная информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="cmn:contactsType">
+							<xs:sequence>
+								<xs:element name="postAdress" type="base:text2000Type">
+									<xs:annotation>
+										<xs:documentation>Почтовый адрес</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="attachmentsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Прикрепленная документация.
+В рамках блока может быть заполнен блок passportCopyInfo и/или gosRegPersonInfo</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="passportCopyInfo" type="cmn:attachmentListType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Копия документа, удовстоверяющего личность.
+Обязателен для заполнения, если  значение поля "Участник закупок (Физическое лицо иностранного государства)" isParticipant = true</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="gosRegPersonInfo" type="cmn:attachmentListType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Надлежащим образом заверенный перевод на русский язык документов о государственной регистрации физического лица в качестве индивидуального предпринимателя в соответствии с законодательством иностранного государства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="legalEntityRFDataType">
+		<xs:annotation>
+			<xs:documentation>Тип: Регистрационные данные юридического лица РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fullName" type="base:text1000Type">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortName" type="base:text510Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="factAdressInfo" type="factAdressType">
+				<xs:annotation>
+					<xs:documentation>Адрес в пределах места нахождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKVEDs">
+				<xs:annotation>
+					<xs:documentation>Коды ОКВЭД</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OKVED" type="cmn:OKVEDRef" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Код ОКВЭД</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="INN" type="base:innOrganizationType">
+				<xs:annotation>
+					<xs:documentation>ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KPP" type="base:kppType">
+				<xs:annotation>
+					<xs:documentation>КПП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OGRN" type="base:OGRNCodeType">
+				<xs:annotation>
+					<xs:documentation>ОГРН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MSPSign" type="MSPSignType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Признак наличия в Едином реестре МСП.
+
+M - поставщик является субъектом малого предпринимательства;
+S - поставщик является субъектом среднего предпринимательства.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="legalEntityForeignStateDataType">
+		<xs:annotation>
+			<xs:documentation>Тип: Регистрационные данные юридического лица иностранного государства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fullName" type="base:text1000Type">
+				<xs:annotation>
+					<xs:documentation>Полное наименование </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortName" type="base:text510Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="countryInfo" type="cmn:OKSMRef">
+				<xs:annotation>
+					<xs:documentation>Страна или территория регистрации.
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="informationPersonType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о лицах, имеющих право без доверенности действовать от имени юридического лица</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="nameInfo" type="cmn:personType">
+				<xs:annotation>
+					<xs:documentation>ФИО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" type="base:positionType">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="identityDocInfo">
+				<xs:annotation>
+					<xs:documentation>Вид документа, удостоверяющего личность</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="passportRFInfo" type="cmn:passportRFType">
+							<xs:annotation>
+								<xs:documentation>Паспорт гражданина РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="internationalPassportRFInfo" type="cmn:internationalPassportRFType">
+							<xs:annotation>
+								<xs:documentation>Заграничный паспорт гражданина РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="passportForeignInfo" type="passportForeignType">
+							<xs:annotation>
+								<xs:documentation>Паспорт иностранного гражданина</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="sojournPermitInfo" type="sojournPermitType">
+							<xs:annotation>
+								<xs:documentation>Разрешение на временное проживание в РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="permamentResidencyInfo" type="permamentResidencyType">
+							<xs:annotation>
+								<xs:documentation>Вид на жительство РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IPInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация об индивидуальном предпринимателе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OGRNIP" type="base:OGRNIPCodeType">
+				<xs:annotation>
+					<xs:documentation>ОГРНИП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата регистрации индивидуального предпринимателя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EGRIPStatementInfo" type="cmn:attachmentType">
+				<xs:annotation>
+					<xs:documentation>Выписка из ЕГРИП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="managingOrganizationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Управляющая организация</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fullName" type="base:text1000Type">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="INN" type="base:innOrganizationType">
+				<xs:annotation>
+					<xs:documentation>ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KPP" type="base:kppType">
+				<xs:annotation>
+					<xs:documentation>КПП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OGRN" type="base:OGRNCodeType">
+				<xs:annotation>
+					<xs:documentation>ОГРН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EGRULStatementInfo" type="cmn:attachmentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Выписка из ЕГРЮЛ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="managingOrganization" type="managingOrganizationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Управляющая организация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="passportForeignType">
+		<xs:annotation>
+			<xs:documentation>Тип: Паспорт иностранного гражданина</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="number" type="base:passportLENumberType">
+				<xs:annotation>
+					<xs:documentation>Номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issuingStateInfo" type="cmn:OKSMRef">
+				<xs:annotation>
+					<xs:documentation>Государство выдачи.
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issuedBy" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Кем выдан</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validityDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Срок действия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="permamentResidencyType">
+		<xs:annotation>
+			<xs:documentation>Тип: Вид на жительство РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="series" type="base:permamentResidencySeriesType">
+				<xs:annotation>
+					<xs:documentation>Серия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="number" type="base:permamentResidencyNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issuedBy" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Кем выдан</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validityDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Срок действия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="citizenshipInfo" type="cmn:OKSMRef">
+				<xs:annotation>
+					<xs:documentation>Гражданство.
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthPlace" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Место рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="factAdressType">
+		<xs:annotation>
+			<xs:documentation>Тип: Фактический адрес</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="kladrCode" type="base:KLADRCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код КЛАДР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zip" type="base:ZIPCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Почтовый индекс</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="factAdress" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Адрес в пределах места нахождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regionCode" type="base:regionCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код региона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regionInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Субъект РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text50Type">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:text36Type">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="areaInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Район</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text50Type">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:text36Type">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cityInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Город</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text50Type">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:text36Type">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="settlementInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Населенный пункт</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text255Type">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:text36Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shortStreetInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Улица</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text255Type">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:text36Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="building" type="base:text50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дом</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="housing" type="base:text50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Корпус (строение)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="flat" type="base:text50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Квартира (офис)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="sojournPermitType">
+		<xs:annotation>
+			<xs:documentation>Тип: Разрешение на временое проживание в РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="number" type="base:tempResPermitRFNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="citizenshipInfo" type="cmn:OKSMRef">
+				<xs:annotation>
+					<xs:documentation>Гражданство.
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issuedBy" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Кем выдано</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validityDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Срок действия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthPlace" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Место рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="violationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушение приема</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errCode" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="level" type="violationLevelType">
+				<xs:annotation>
+					<xs:documentation>Тип:
+error - Ошибка
+warning - Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text200Type">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullErrorLog" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полный текст ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="informationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Признак передаваемой информации об участнике закупок:
+
+R - Информации для аккредитации на ЭП;
+P - Информация для аккредитации на новый срок;
+M - Измененная информация</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="M"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MSPSignType">
+		<xs:annotation>
+			<xs:documentation>Тип: Признак наличия в Едином реестре МСП:
+ M-Поставщик является субъектом малого предпринимательства;
+ S-Поставщик является субъектом среднего предпринимательства.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="violationLevelType">
+		<xs:annotation>
+			<xs:documentation>Тип: Тип нарушения в протоколе приема</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="error"/>
+			<xs:enumeration value="warning"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

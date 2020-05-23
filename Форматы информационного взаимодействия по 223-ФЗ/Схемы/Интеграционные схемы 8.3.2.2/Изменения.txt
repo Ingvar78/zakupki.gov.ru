@@ -1,0 +1,35 @@
+﻿1. contactInfo.xsd
+	1.1. В типе "Сведения о договоре" (contractDataType)
+		1.1.1. Добавлен элемент "Договор сформирован на основании договора в электронной форме" (isElectronicPlace) - type="xs:boolean" minOccurs="0"
+		1.1.2. Добавлен элемент "Информация об электронной площадке для договора, сформированного на основании договора в электронной форме" (electronicPlaceInfo) - type="t:electronicPlaceInfoType" minOccurs="0"
+		1.1.3. Добавлен элемент "Дата размещения договора в электронной форме на электронной площадке" (electorincPlacePublishDate) - type="xs:dateTime" minOccurs="0"
+2. purchase.xsd
+	2.1. В тип "Протокол отказа от заключения договора (для конкурса, аукциона, запроса котировок или предложений в электронной форме, участниками которого могут являться только субъекты малого и среднего предпринимательства)" (purchaseProtocolRejectionDataType)
+		2.1.1. Добавлен элемент "Сведения о заявке" (protocolRejectionFinalProtocolApplicationInfo) - type="protocolRejectionFinalProtocolApplicationInfoType"
+		2.1.2. Добавлен элемент "Сведения о решении" (protocolRejectionDecisionInfo) - type="protocolRejectionDecisionInfoType"
+	2.2. Тип purchaseProtocolRejectionKESMBODataType удален
+	2.3. Тип purchaseProtocolRejectionAESMBODataType удален
+	2.4. Тип purchaseProtocolRejectionZPESMBODataType удален
+	2.5. Тип protocolRejectionFinalProtocolApplicationInfoType (Сведения о заявке) добавлен
+	2.6. Тип protocolRejectionDecisionInfoType (Сведения о решении) добавлен
+	2.7. Тип protocolRejectionLotType (Сведения о лоте в протоколе отказа от заключения договора) добавлен
+	2.7. Тип protocolRejectionApplicationType (Заявка в протоколе отказа от заключения договора) добавлен
+	2.8. В типе "Протокол сопоставления ценовых предложений аукциона в электронной форме, участниками которого могут являться только субъекты малого и среднего предпринимательства" (purchaseProtocolCollationAESMBODataType)
+		2.8.1. Добавлен элемент protocolZRPZRegistryNumber (Протокол запроса разъяснений положений заявки)
+	2.9. В типе "Протокол рассмотрения вторых частей заявок аукциона в электронной форме, участниками которого могут являться только субъекты малого и среднего предпринимательства" (purchaseProtocolRZ2AESMBODataType)
+		2.9.1. Добавлен элемент protocolRZ1RegistryNumber (Протокола рассмотрения первых частей заявок)
+	2.10. В типе "Информации о направлении запроса разъяснений" (explanationRequestInfoType)
+		2.10.1. Элемент guid (GUID запроса разъяснений) на explanationRequestGuidList (Guid-ы запросов разъяснений по текущей заявке)
+	2.11. Элемент "Порядок рассмотрения первых частей заявок" (applExaminationOrder) сделан обязательным для заполнения.
+	2.12. Элемент "Дата начала срока подачи ценовых предложений" (pricesProvisionStartDate) сделан обязательным для заполнения.
+	2.13. Элемент "Порядок подачи ценовых предложений" (pricesProvisionOrder) сделан обязательным для заполнения.
+	2.14. Элемент "Порядок проведения сопоставления ценовых предложений" (pricesMatchingOrder) сделан обязательным для заполнения.
+	2.15. Элемент "Порядок рассмотрения вторых частей заявок" (considerationSecondPartOrder) сделан обязательным для заполнения.
+3. purchasePlan.xsd
+	3.1. В типе "Позиция плана" (basePlanDataItemType)
+		3.1.1. Изменен тип элемента minimumRequirements (Минимальные требования). Добавлено ограничение на длину 2000 смиволов
+4.Types.xsd
+	4.1. В типе "Основная информация об организации" (customerMainInfoType)
+		4.1.1. Добавлен элемент "Временная зона" (timeZone)
+		4.1.2. Добавлен элемент "Регион" (region)
+	4.2. Добавлен тип timeZoneType (Временная зона)		

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ INTEGRATION TYPES Integration Scheme, version 9.2, create date 30.05.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:eruz="http://zakupki.gov.ru/eruz/types/1" xmlns:nsi="http://zakupki.gov.ru/eruz/nsi/1" xmlns:base="http://zakupki.gov.ru/eruz/base/1" targetNamespace="http://zakupki.gov.ru/eruz/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/base/1" schemaLocation="eruzBaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/types/1" schemaLocation="eruzIntegrationTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/nsi/1" schemaLocation="eruzNSITypes.xsd"/>
+	<!--ЕРУЗ-->
+	<xs:element name="eruzContractor">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация и документы об участнике закупки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="eruz:contractorType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eruzAccreditationResult">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация об аккредитации участника закупки на ЭП</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="eruz:accreditationResultType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eruzContractorExclude">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация об исключении участника закупки из ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="eruz:contractorExcludeType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eruzConfirmation">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Уведомление о результатах обработки информационного пакета</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="eruz:confirmationType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eruzMasterData">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Набор элементов справочников</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="nsi:masterDataType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!--Общие типы-->
+	<xs:complexType name="as2PacketType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Пакет данных AS2 протокола</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Индексная карточка информационного пакета</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Индексная карточка пакета данных</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="id" type="base:guidType">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор  информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="sender" type="base:text200Type">
+							<xs:annotation>
+								<xs:documentation>Отправитель</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="receiver" type="base:text200Type">
+							<xs:annotation>
+								<xs:documentation>Получатель</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="createDateTime" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Дата и время формирования информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="objectType" type="base:indexObjectTypeEnum">
+							<xs:annotation>
+								<xs:documentation>Кодовое наименование объекта информационного обмена, 
+информация о котором содержится в данном пакете:
+
+ERUZ - Единый реестр участников закупок (ЕРУЗ).
+
+</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="objectId" type="base:guidType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Идентификатор объекта информационного обмена (реестровый номер)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="indexNum" type="base:indexNumType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Порядковый номер пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="signature">
+							<xs:annotation>
+								<xs:documentation>ЭЦП на данные информационного пакета</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:base64Binary">
+										<xs:attribute name="type" type="base:signatureType" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="mode" type="base:indexModeType">
+							<xs:annotation>
+								<xs:documentation>Режим передачи информации
+			PROD - промышленная эксплуатация
+			TEST - тестовые данные</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

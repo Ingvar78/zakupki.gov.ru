@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:sch="http://zakupki.gov.ru/fz44/ws/priz"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://zakupki.gov.ru/fz44/ws/priz">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://zakupki.gov.ru/fz44/ws/priz"
+                        schemaLocation="docs-ws-api.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="getRKObjectInfoRequest">
+        <wsdl:part element="sch:getRKObjectInfoRequest" name="getRKObjectInfoRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getRKObjectListRequest">
+        <wsdl:part element="sch:getRKObjectListRequest" name="getRKObjectListRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getRKObjectInfoResponse">
+        <wsdl:part element="sch:getRKObjectInfoResponse" name="getRKObjectInfoResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getRKObjectListResponse">
+        <wsdl:part element="sch:getRKObjectListResponse" name="getRKObjectListResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="GetDataPortType">
+        <wsdl:operation name="getRKObjectInfo">
+            <wsdl:input message="sch:getRKObjectInfoRequest" name="getRKObjectInfoRequest"></wsdl:input>
+            <wsdl:output message="sch:getRKObjectInfoResponse" name="getRKObjectInfoResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getRKObjectList">
+            <wsdl:input message="sch:getRKObjectListRequest" name="getRKObjectListRequest"></wsdl:input>
+            <wsdl:output message="sch:getRKObjectListResponse" name="getRKObjectListResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GetDataPortTypeSoap11" type="sch:GetDataPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getRKObjectInfo">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getRKObjectInfoRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getRKObjectInfoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getRKObjectList">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getRKObjectListRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getRKObjectListResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="GetDataPortTypeService">
+        <wsdl:port binding="sch:GetDataPortTypeSoap11" name="GetDataPortTypeSoap11">
+            <soap:address location="${serviceLocation}"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
