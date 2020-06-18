@@ -2,10 +2,10 @@
 zakupki.gov.ru
 
 # Требования к информационному взаимодействию ЕИС с другими информационными системами
-https://zakupki.gov.ru/epz/main/public/document/view.html?searchString=&sectionId=362
+[Требования к ЕИС](https://zakupki.gov.ru/epz/main/public/document/view.html?searchString=&sectionId=362)
 
 # Форматы информационного взаимодействия по 223-ФЗ
-https://zakupki.gov.ru/epz/main/public/document/view.html?searchString=&sectionId=386
+[Форматы 223-ФЗ](https://zakupki.gov.ru/epz/main/public/document/view.html?searchString=&sectionId=386)
 
 # Форматы информационного взаимодействия по 44-ФЗ
-https://zakupki.gov.ru/epz/main/public/document/view.html?searchString=&sectionId=432
+[Форматы 44-ФЗ](https://zakupki.gov.ru/epz/main/public/document/view.html?searchString=&sectionId=432)
