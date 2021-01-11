@@ -1,0 +1,37 @@
+﻿<!--Единый сервис межсистемного взаимодействия (ЕСМВ) ПОИ ГИИС ЭБ, версия альбома ТФО 1.3, дата  начала действия - 03.05.2018-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:typ="http://www.roskazna.ru/eb/services/transferDocumentService/types" xmlns:tns="http://www.roskazna.ru/eb/services/transferDocumentService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="transferDocumentService" targetNamespace="http://www.roskazna.ru/eb/services/transferDocumentService">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://www.roskazna.ru/eb/services/transferDocumentService/types" schemaLocation="transferDocumentTypes.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="requestMessage">
+		<wsdl:part name="payload" element="typ:transferDocumentRequest"/>
+	</wsdl:message>
+	<wsdl:message name="replyMessage">
+		<wsdl:part name="payload" element="typ:transferDocumentResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="transferDocumentService_ptt">
+		<wsdl:operation name="transferDocument">
+			<wsdl:input message="tns:requestMessage"/>
+			<wsdl:output message="tns:replyMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="transferDocumentService_pttBinding" type="tns:transferDocumentService_ptt">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="transferDocument">
+			<soap:operation soapAction="transferDocument" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="transferDocumentService_pttBindingQSService">
+		<wsdl:port name="transferDocumentService_pttBindingQSPort" binding="tns:transferDocumentService_pttBinding">
+			<soap:address location="http://eb-dev-osb.otr.ru:8011/DocumentExchangeServices/ProxyServices/ImportDocumentProxy"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

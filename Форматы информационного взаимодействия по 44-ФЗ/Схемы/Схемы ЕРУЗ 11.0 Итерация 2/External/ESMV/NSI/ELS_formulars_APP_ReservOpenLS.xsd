@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<!-- Версия xsd: 5.0 Дата последнего изменения: 10.09.2020 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://www.roskazna.ru/eb/domain/common/applied" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/APP_ReservLS/formular" targetNamespace="http://www.roskazna.ru/eb/domain/APP_ReservLS/formular">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="ELS_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common/applied" schemaLocation="ELS_appliedTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="ELS_common.xsd"/>
+	<element name="APP_ReservOpenLS" type="self:tAPP_ReservLOpenS"/>
+	<complexType name="tOKVEDCodes">
+		<annotation>
+			<documentation>Виды деятельности</documentation>
+		</annotation>
+		<sequence>
+			<element name="OKVEDCodesITEM" type="self:tOKVEDCodesITEM" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tOKVEDCodesITEM">
+		<annotation>
+			<documentation>Виды деятельности</documentation>
+		</annotation>
+		<sequence>
+			<element name="OKVEDCode" type="app:tStringLessOrEqual8">
+				<annotation>
+					<documentation>Код по ОКВЭД</documentation>
+				</annotation>
+			</element>
+			<element name="OKVEDName" type="app:tStringLessOrEqual500">
+				<annotation>
+					<documentation>Наименование вида деятельности</documentation>
+				</annotation>
+			</element>
+			<element name="OKVEDTypeCode" type="app:tStringExactly1">
+				<annotation>
+					<documentation>Код типа вида деятельности</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tAPP_ReservLOpenS">
+		<annotation>
+			<documentation>Заявление на резервирование/ открытие (закрытие) лицевого счета</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="cm:tFormular">
+				<sequence>
+					<element name="GUID" type="app:tGUID1">
+						<annotation>
+							<documentation>Глобальный уникальный идентификатор </documentation>
+						</annotation>
+					</element>
+					<element name="ReqDate" type="app:tDctDt">
+						<annotation>
+							<documentation>Дата Заявления</documentation>
+						</annotation>
+					</element>
+					<element name="ReqType" type="app:tReqType">
+						<annotation>
+							<documentation>Тип Заявления</documentation>
+						</annotation>
+					</element>
+					<element name="BudgCode" type="app:tCd8" minOccurs="0">
+						<annotation>
+							<documentation>Код бюджета</documentation>
+						</annotation>
+					</element>
+					<element name="BudgOKTMO" type="app:tString8or11" minOccurs="0">
+						<annotation>
+							<documentation>Код бюджета по ОКТМО</documentation>
+						</annotation>
+					</element>
+					<element name="BudgName" type="app:tFullNm" minOccurs="0">
+						<annotation>
+							<documentation>Наименование бюджета организации</documentation>
+						</annotation>
+					</element>
+					<element name="TypeCustom" type="app:tTypeCustom">
+						<annotation>
+							<documentation>Тип клиента</documentation>
+						</annotation>
+					</element>
+					<element name="ClientCode" type="app:tCd8" minOccurs="0">
+						<annotation>
+							<documentation>Код клиента</documentation>
+						</annotation>
+					</element>
+					<element name="OrgOGRN" type="app:tOGRN" minOccurs="0">
+						<annotation>
+							<documentation>ОГРН</documentation>
+						</annotation>
+					</element>
+					<element name="OGRNIP" type="app:tStringExactly15" minOccurs="0">
+						<annotation>
+							<documentation>ОГРНИП</documentation>
+						</annotation>
+					</element>
+					<element name="OKPO" type="app:tString8or10" minOccurs="0">
+						<annotation>
+							<documentation>ОКПО </documentation>
+						</annotation>
+					</element>
+					<element name="INN" type="app:tString10or12" minOccurs="0">
+						<annotation>
+							<documentation>ИНН </documentation>
+						</annotation>
+					</element>
+					<element name="KPP" type="app:tStringExactly9" minOccurs="0">
+						<annotation>
+							<documentation>КПП</documentation>
+						</annotation>
+					</element>
+					<element name="PersAccountNum" type="app:tAcntNm" minOccurs="0">
+						<annotation>
+							<documentation>Номер лицевого счета</documentation>
+						</annotation>
+					</element>
+					<element name="OwnerFullName" type="app:tFullNm" minOccurs="0">
+						<annotation>
+							<documentation>Полное наименование клиента</documentation>
+						</annotation>
+					</element>
+					<element name="OwnerShortName" type="app:tFullNm" minOccurs="0">
+						<annotation>
+							<documentation>Сокращенное наименование клиента</documentation>
+						</annotation>
+					</element>
+					<element name="OwnerAltName" type="app:tStringLessOrEqual160" minOccurs="0">
+						<annotation>
+							<documentation>Краткое наименование клиента</documentation>
+						</annotation>
+					</element>
+					<element name="OKOPFCode" type="app:tStringExactly5" minOccurs="0">
+						<annotation>
+							<documentation>Код ОКОПФ</documentation>
+						</annotation>
+					</element>
+					<element name="OKOPFName" type="app:tStringLessOrEqual250" minOccurs="0">
+						<annotation>
+							<documentation>Наименование ОКОПФ</documentation>
+						</annotation>
+					</element>
+					<element name="OKFSCode" type="app:tStringExactly2" minOccurs="0">
+						<annotation>
+							<documentation>Код ОКФС</documentation>
+						</annotation>
+					</element>
+					<element name="OKFSName" type="app:tStringLessOrEqual250" minOccurs="0">
+						<annotation>
+							<documentation>Наименование по ОКФС</documentation>
+						</annotation>
+					</element>
+					<element name="ClientEmail" type="app:tStringLessOrEqual2000" minOccurs="0">
+						<annotation>
+							<documentation>Адрес электронной почты</documentation>
+						</annotation>
+					</element>
+					<element name="RegionCode" type="app:tStringExactly2" minOccurs="0">
+						<annotation>
+							<documentation>Код субъекта</documentation>
+						</annotation>
+					</element>
+					<element name="RegionType" type="app:tStringLessOrEqual36" minOccurs="0">
+						<annotation>
+							<documentation>Тип субъекта</documentation>
+						</annotation>
+					</element>
+					<element name="RegionName" type="app:tStringLessOrEqual1000" minOccurs="0">
+						<annotation>
+							<documentation>Наименование субъекта</documentation>
+						</annotation>
+					</element>
+					<element name="PostIndex" type="app:tStringExactly6" minOccurs="0">
+						<annotation>
+							<documentation>Индекс  </documentation>
+						</annotation>
+					</element>
+					<element name="AreaType" type="app:tStringLessOrEqual36" minOccurs="0">
+						<annotation>
+							<documentation>Тип района</documentation>
+						</annotation>
+					</element>
+					<element name="AreaName" type="app:tStringLessOrEqual1000" minOccurs="0">
+						<annotation>
+							<documentation>Наименование района</documentation>
+						</annotation>
+					</element>
+					<element name="CityType" type="app:tStringLessOrEqual36" minOccurs="0">
+						<annotation>
+							<documentation>Тип города</documentation>
+						</annotation>
+					</element>
+					<element name="CityName" type="app:tStringLessOrEqual1000" minOccurs="0">
+						<annotation>
+							<documentation>Наименование города</documentation>
+						</annotation>
+					</element>
+					<element name="LocalType" type="app:tStringLessOrEqual36" minOccurs="0">
+						<annotation>
+							<documentation>Тип населенного пункта</documentation>
+						</annotation>
+					</element>
+					<element name="LocalName" type="app:tStringLessOrEqual1000" minOccurs="0">
+						<annotation>
+							<documentation>Наименование населенного пункта</documentation>
+						</annotation>
+					</element>
+					<element name="StreetType" type="app:tStringLessOrEqual36" minOccurs="0">
+						<annotation>
+							<documentation>Тип улицы</documentation>
+						</annotation>
+					</element>
+					<element name="StreetName" type="app:tStringLessOrEqual1000" minOccurs="0">
+						<annotation>
+							<documentation>Наименование улицы</documentation>
+						</annotation>
+					</element>
+					<element name="House" type="app:tText50" minOccurs="0">
+						<annotation>
+							<documentation>Дом</documentation>
+						</annotation>
+					</element>
+					<element name="Building" type="app:tText50" minOccurs="0">
+						<annotation>
+							<documentation>Корпус или строение</documentation>
+						</annotation>
+					</element>
+					<element name="Apartment" type="app:tText50" minOccurs="0">
+						<annotation>
+							<documentation>Офис или квартира</documentation>
+						</annotation>
+					</element>
+					<element name="OKTMOCode" type="app:tString8or11" minOccurs="0">
+						<annotation>
+							<documentation>Код по ОКТМО</documentation>
+						</annotation>
+					</element>
+					<element name="OKTMOName" type="app:tStringLessOrEqual250" minOccurs="0">
+						<annotation>
+							<documentation>Наименование по ОКТМО</documentation>
+						</annotation>
+					</element>
+					<element name="OKVEDCodes" type="self:tOKVEDCodes" minOccurs="0">
+						<annotation>
+							<documentation>Виды деятельности</documentation>
+						</annotation>
+					</element>
+					<element name="SignHeads" type="self:tSignHeads" minOccurs="0">
+						<annotation>
+							<documentation>Руководители с правом подписи</documentation>
+						</annotation>
+					</element>
+					<element name="Contract" type="self:tContract" minOccurs="0">
+						<annotation>
+							<documentation>Основание</documentation>
+						</annotation>
+					</element>
+					<element name="CloseDocs" type="self:tCloseDocs" minOccurs="0">
+						<annotation>
+							<documentation>Основания закрытия</documentation>
+						</annotation>
+					</element>
+					<element name="PosHead" type="app:tStringLessOrEqual255" minOccurs="0">
+						<annotation>
+							<documentation>Должность руководителя (уполномоченного лица)</documentation>
+						</annotation>
+					</element>
+					<element name="NameHead" type="app:tStringLessOrEqual180">
+						<annotation>
+							<documentation>ФИО руководителя (уполномоченного лица)</documentation>
+						</annotation>
+					</element>
+					<element name="ChfAccntnt" type="app:tStringLessOrEqual255" minOccurs="0">
+						<annotation>
+							<documentation>Должность главного бухгалтера (уполномоченного лица)</documentation>
+						</annotation>
+					</element>
+					<element name="FIOAccntnt" type="app:tStringLessOrEqual180" minOccurs="0">
+						<annotation>
+							<documentation>ФИО главного бухгалтера (уполномоченного лица)</documentation>
+						</annotation>
+					</element>
+					<element name="DtSgnng" type="app:tDctDt" minOccurs="0">
+						<annotation>
+							<documentation>Дата подписания руководителем (уполномоченным лицом)</documentation>
+						</annotation>
+					</element>
+					<element name="HdPhone" type="app:tStringLessOrEqual50" minOccurs="0">
+						<annotation>
+							<documentation>Контактный телефон</documentation>
+						</annotation>
+					</element>
+					<element name="CloseReason" type="app:tCloseReason" minOccurs="0">
+						<annotation>
+							<documentation>Причина закрытия</documentation>
+						</annotation>
+					</element>
+					<element name="Attachments" type="self:tAttachments" minOccurs="0">
+						<annotation>
+							<documentation>Вложенные документы</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="tCloseDocs">
+		<annotation>
+			<documentation>Основания закрытия</documentation>
+		</annotation>
+		<sequence>
+			<element name="CloseDocITEM" type="self:tCloseDocITEM">
+				<annotation>
+					<documentation>Основание закрытия</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tCloseDocITEM">
+		<annotation>
+			<documentation>Основание закрытия</documentation>
+		</annotation>
+		<sequence>
+			<element name="NameCloseDoc" type="app:tStringLessOrEqual100ContractName">
+				<annotation>
+					<documentation>Наименование документа-основания закрытия</documentation>
+				</annotation>
+			</element>
+			<element name="NumCloseDoc" type="app:tStringLessOrEqual50">
+				<annotation>
+					<documentation>Номер документа-основания закрытия</documentation>
+				</annotation>
+			</element>
+			<element name="DateCloseDoc" type="app:tDctDt">
+				<annotation>
+					<documentation>Дата документа-основания закрытия</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tContract">
+		<annotation>
+			<documentation>Основание</documentation>
+		</annotation>
+		<sequence>
+			<element name="OrgCodeContract" type="app:tCd8" minOccurs="0">
+				<annotation>
+					<documentation>Код по Сводному реестру/реестру ИП и КФХ заказчика</documentation>
+				</annotation>
+			</element>
+			<element name="OrgNameContract" type="app:tFullNm" minOccurs="0">
+				<annotation>
+					<documentation>Наименование по Сводному реестру/реестру ИП и КФХ заказчика </documentation>
+				</annotation>
+			</element>
+			<element name="INN_Org" type="app:tString10or12" minOccurs="0">
+				<annotation>
+					<documentation>ИНН заказичка</documentation>
+				</annotation>
+			</element>
+			<element name="NameContract" type="app:tStringLessOrEqual100ContractName" minOccurs="0">
+				<annotation>
+					<documentation>Наименование документа-основания</documentation>
+				</annotation>
+			</element>
+			<element name="NumContract" type="app:tStringLessOrEqual50" minOccurs="0">
+				<annotation>
+					<documentation>Номер документа – основания</documentation>
+				</annotation>
+			</element>
+			<element name="DateContract" type="app:tDctDt" minOccurs="0">
+				<annotation>
+					<documentation>Дата документа – основания</documentation>
+				</annotation>
+			</element>
+			<element name="IGK" type="self:tIGK" minOccurs="0">
+				<annotation>
+					<documentation>ИГК</documentation>
+				</annotation>
+			</element>
+			<element name="Number_note" type="app:ttext16or19" minOccurs="0">
+				<annotation>
+					<documentation>Номер реестровой записи контракта (договора)</documentation>
+				</annotation>
+			</element>
+			<element name="Link" type="app:tFullNm" minOccurs="0">
+				<annotation>
+					<documentation>Ссылка</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tSignHeadsITEM">
+		<annotation>
+			<documentation>Руководители с правом подписи</documentation>
+		</annotation>
+		<sequence>
+			<element name="HeadSurname" type="app:tStringLessOrEqual60">
+				<annotation>
+					<documentation>Фамилия руководителя</documentation>
+				</annotation>
+			</element>
+			<element name="HeadName" type="app:tStringLessOrEqual60">
+				<annotation>
+					<documentation>Имя руководителя</documentation>
+				</annotation>
+			</element>
+			<element name="HeadMiddlename" type="app:tStringLessOrEqual60" minOccurs="0">
+				<annotation>
+					<documentation>Отчество руководителя</documentation>
+				</annotation>
+			</element>
+			<element name="HeadPost" type="app:tStringLessOrEqual255">
+				<annotation>
+					<documentation>Должность руководителя</documentation>
+				</annotation>
+			</element>
+			<element name="HeadMain" type="base:tBln">
+				<annotation>
+					<documentation>Первое лицо</documentation>
+				</annotation>
+			</element>
+			<element name="HeadINN" type="app:tINN_FizLico">
+				<annotation>
+					<documentation>ИНН руководителя</documentation>
+				</annotation>
+			</element>
+			<element name="HeadSNILS" type="app:tSNILS">
+				<annotation>
+					<documentation>СНИЛС</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tSignHeads">
+		<annotation>
+			<documentation>Руководители с правом подписи</documentation>
+		</annotation>
+		<sequence>
+			<element name="SignHeadsCodesITEM" type="self:tSignHeadsITEM" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tAttachments">
+		<annotation>
+			<documentation>Вложенные документы</documentation>
+		</annotation>
+		<sequence>
+			<element name="AttachmentsITEM" type="self:tAttachmentsITEM" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tAttachmentsITEM">
+		<annotation>
+			<documentation>Вложенные документы</documentation>
+		</annotation>
+		<sequence>
+			<element name="AttachmentType" type="self:tAttachmentType">
+				<annotation>
+					<documentation>Тип документа вложения</documentation>
+				</annotation>
+			</element>
+			<element name="FileName" type="app:tStringLessOrEqual256">
+				<annotation>
+					<documentation>Имя файла</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tAttachmentType">
+		<annotation>
+			<documentation>Код типа и наименование документа вложения</documentation>
+		</annotation>
+		<sequence>
+			<element name="Cd" type="base:tTES2">
+				<annotation>
+					<documentation>Код типа документа вложения</documentation>
+				</annotation>
+			</element>
+			<element name="value" type="app:tTpDoc" minOccurs="0">
+				<annotation>
+					<documentation>Наименование типа документа вложения</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tIGK">
+		<annotation>
+			<documentation>ИГК</documentation>
+		</annotation>
+		<sequence>
+			<element name="tIGKITEM" type="app:tIGK" minOccurs="1" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Идентификационный номер государственного контракта.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

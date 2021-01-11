@@ -1,0 +1,2176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Версия xsd: 2.0. Дата последнего изменения: 24.04.2019 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/common/applied" targetNamespace="http://www.roskazna.ru/eb/domain/common/applied">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="esmv_commonRDO_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="esmv_commonRDO_common.xsd"/>
+	<simpleType name="tString10or12">
+		<restriction base="base:tTS10or12"/>
+	</simpleType>
+	<simpleType name="tDateTime">
+		<restriction base="base:tTDT"/>
+	</simpleType>
+	<simpleType name="tGUID">
+		<restriction base="base:tTGUID"/>
+	</simpleType>
+	<simpleType name="tStringExactly9">
+		<restriction base="base:tKPP"/>
+	</simpleType>
+	<simpleType name="tString5or8">
+		<restriction base="base:tTSD5or8"/>
+	</simpleType>
+	<simpleType name="tCODE_3">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Код 3</eb:Label>
+				<eb:Definition>Код 3</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText3"/>
+	</simpleType>
+	<simpleType name="tNUM_CHNG">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Номер изменения</eb:Label>
+				<eb:Definition>Номер изменения</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax7Text"/>
+	</simpleType>
+	<simpleType name="tCODE_8">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Код 8</eb:Label>
+				<eb:Definition>Код 8</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText8"/>
+	</simpleType>
+	<simpleType name="tCODE_TOFK">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Код органа ФК</eb:Label>
+				<eb:Definition>Код органа ФК</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText4"/>
+	</simpleType>
+	<simpleType name="tNUM_ACNT">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Номер лицевого счета</eb:Label>
+				<eb:Definition>Номер лицевого счета</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText11"/>
+	</simpleType>
+	<simpleType name="tKBK">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Код по БК</eb:Label>
+				<eb:Definition>Код по БК</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText20"/>
+	</simpleType>
+	<simpleType name="tBLN">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Код 3</eb:Label>
+				<eb:Definition>Код 3</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tBln"/>
+	</simpleType>
+	<simpleType name="tDATE">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Дата</eb:Label>
+				<eb:Definition>Дата</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tDate"/>
+	</simpleType>
+	<simpleType name="tSUM">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Сумма</eb:Label>
+				<eb:Definition>Сумма</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tAmnt"/>
+	</simpleType>
+	<simpleType name="tNm100">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Наименование100</eb:Label>
+				<eb:Definition>Наименование100</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax100Text"/>
+	</simpleType>
+	<simpleType name="tFullNm">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Полное наименование</eb:Label>
+				<eb:Definition>Полное наименование</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="ttext3">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст3</eb:Label>
+				<eb:Definition>Текст3</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText3"/>
+	</simpleType>
+	<simpleType name="ttext4">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст4</eb:Label>
+				<eb:Definition>Текст4</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText4"/>
+	</simpleType>
+	<simpleType name="ttext5">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст5</eb:Label>
+				<eb:Definition>Текст5</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText5"/>
+	</simpleType>
+	<simpleType name="ttext6">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст6</eb:Label>
+				<eb:Definition>Текст6</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText6"/>
+	</simpleType>
+	<simpleType name="ttext8">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст8</eb:Label>
+				<eb:Definition>Текст8</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText8"/>
+	</simpleType>
+	<simpleType name="ttext9">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст9</eb:Label>
+				<eb:Definition>Текст9</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText9"/>
+	</simpleType>
+	<simpleType name="ttext11">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст11</eb:Label>
+				<eb:Definition>Текст11</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText11"/>
+	</simpleType>
+	<simpleType name="ttext18">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст18</eb:Label>
+				<eb:Definition>Текст18</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText18"/>
+	</simpleType>
+	<simpleType name="ttext5_8">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 8</eb:Label>
+				<eb:Definition>Текст 8</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:t_ttext5_8"/>
+	</simpleType>
+	<simpleType name="tText16_19">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст19</eb:Label>
+				<eb:Definition>Текст19</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText16_19"/>
+	</simpleType>
+	<simpleType name="ttext20">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст20</eb:Label>
+				<eb:Definition>Текст20</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText20"/>
+	</simpleType>
+	<simpleType name="tText15">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 15</eb:Label>
+				<eb:Definition>Текст 15</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_15"/>
+	</simpleType>
+	<simpleType name="tGuid">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Гуид</eb:Label>
+				<eb:Definition>Гуид</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText36"/>
+	</simpleType>
+	<simpleType name="ttext36">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст36</eb:Label>
+				<eb:Definition>Текст36</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText__36"/>
+	</simpleType>
+	<simpleType name="tText8">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 8</eb:Label>
+				<eb:Definition>Текст 8</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_8"/>
+	</simpleType>
+	<simpleType name="tText14">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 14</eb:Label>
+				<eb:Definition>Текст 14</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_14"/>
+	</simpleType>
+	<simpleType name="tText1">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 1</eb:Label>
+				<eb:Definition>Текст 1</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_1"/>
+	</simpleType>
+	<simpleType name="tInteger4">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Целый 4</eb:Label>
+				<eb:Definition>Целый 4</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tInteger_4"/>
+	</simpleType>
+	<simpleType name="tMax4Nomber">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Номер 4</eb:Label>
+				<eb:Definition>Номер 4</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax4Number"/>
+	</simpleType>
+	<simpleType name="tLogicalElement">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Логический</eb:Label>
+				<eb:Definition>Логический</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tLogicElement"/>
+	</simpleType>
+	<simpleType name="tText4">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 4</eb:Label>
+				<eb:Definition>Текст 4</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_4"/>
+	</simpleType>
+	<simpleType name="tText20">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 20</eb:Label>
+				<eb:Definition>Текст 20</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_20"/>
+	</simpleType>
+	<simpleType name="tText200">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 200</eb:Label>
+				<eb:Definition>Текст 200</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_200"/>
+	</simpleType>
+	<simpleType name="tText150">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 150</eb:Label>
+				<eb:Definition>Текст 150</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_150"/>
+	</simpleType>
+	<simpleType name="tText10">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 10</eb:Label>
+				<eb:Definition>Текст 10</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_10"/>
+	</simpleType>
+	<simpleType name="tDateDoc">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Дата</eb:Label>
+				<eb:Definition>Дата</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tDate"/>
+	</simpleType>
+	<simpleType name="tText2000">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 2000</eb:Label>
+				<eb:Definition>Текст 2000</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_2000"/>
+	</simpleType>
+	<simpleType name="tSUMMA">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Сумма</eb:Label>
+				<eb:Definition>Сумма</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tSUMM"/>
+	</simpleType>
+	<simpleType name="tText11">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 11</eb:Label>
+				<eb:Definition>Текст 11</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_11"/>
+	</simpleType>
+	<simpleType name="tText18">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 18</eb:Label>
+				<eb:Definition>Текст 18</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_18"/>
+	</simpleType>
+	<simpleType name="tText50">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 50</eb:Label>
+				<eb:Definition>Текст 50</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_50"/>
+	</simpleType>
+	<simpleType name="tText36">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 36</eb:Label>
+				<eb:Definition>Текст 36</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_36"/>
+	</simpleType>
+	<simpleType name="tText512">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 512</eb:Label>
+				<eb:Definition>Текст 512</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_512"/>
+	</simpleType>
+	<simpleType name="tText100">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 100</eb:Label>
+				<eb:Definition>Текст 100</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_100"/>
+	</simpleType>
+	<simpleType name="tText2">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 2</eb:Label>
+				<eb:Definition>Текст 2</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_2"/>
+	</simpleType>
+	<simpleType name="tText9">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 9</eb:Label>
+				<eb:Definition>Текст 9</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_9"/>
+	</simpleType>
+	<simpleType name="tText12">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 12</eb:Label>
+				<eb:Definition>Текст 12</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_12"/>
+	</simpleType>
+	<simpleType name="tINN">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>ИНН</eb:Label>
+				<eb:Definition>ИНН</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:t_INN"/>
+	</simpleType>
+	<simpleType name="tIGK">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>ИГК</eb:Label>
+				<eb:Definition>ИГК</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:t_IGK"/>
+	</simpleType>
+	<simpleType name="tText160">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 160</eb:Label>
+				<eb:Definition>Текст 160</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_160"/>
+	</simpleType>
+	<simpleType name="tText25">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 25</eb:Label>
+				<eb:Definition>Текст 25</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_25"/>
+	</simpleType>
+	<simpleType name="tText210">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 210</eb:Label>
+				<eb:Definition>Текст 210</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_210"/>
+	</simpleType>
+	<simpleType name="tText3">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 3</eb:Label>
+				<eb:Definition>Текст 3</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_3"/>
+	</simpleType>
+	<simpleType name="tText30">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст30</eb:Label>
+				<eb:Definition>Текст30</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_30"/>
+	</simpleType>
+	<simpleType name="tText254">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст254</eb:Label>
+				<eb:Definition>Текст254</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_254"/>
+	</simpleType>
+	<simpleType name="tText6">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 6</eb:Label>
+				<eb:Definition>Текст 6</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_6"/>
+	</simpleType>
+	<simpleType name="tText240">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 240</eb:Label>
+				<eb:Definition>Текст 240</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_240"/>
+	</simpleType>
+	<simpleType name="tText7">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст7</eb:Label>
+				<eb:Definition>Текст7</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_7"/>
+	</simpleType>
+	<simpleType name="tText140">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст140</eb:Label>
+				<eb:Definition>Текст140</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_140"/>
+	</simpleType>
+	<simpleType name="tText250">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст250</eb:Label>
+				<eb:Definition>Текст250</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_250"/>
+	</simpleType>
+	<simpleType name="tText1M">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 1М</eb:Label>
+				<eb:Definition>Текст 1М</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_1M"/>
+	</simpleType>
+	<simpleType name="tText10000">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст 10000</eb:Label>
+				<eb:Definition>Текст 10000</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_10000"/>
+	</simpleType>
+	<simpleType name="tText127">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст127</eb:Label>
+				<eb:Definition>Текст127</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_127"/>
+	</simpleType>
+	<simpleType name="tText4000">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст4000</eb:Label>
+				<eb:Definition>Текст4000</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_4000"/>
+	</simpleType>
+	<simpleType name="tText300">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст300</eb:Label>
+				<eb:Definition>Текст300</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_300"/>
+	</simpleType>
+	<simpleType name="tText5">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст5</eb:Label>
+				<eb:Definition>Текст5</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_5"/>
+	</simpleType>
+	<simpleType name="tText26">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст26</eb:Label>
+				<eb:Definition>Текст26</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_26"/>
+	</simpleType>
+	<simpleType name="tText21">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст21</eb:Label>
+				<eb:Definition>Текст21</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText_21"/>
+	</simpleType>
+	<simpleType name="tAttach_link">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Ссылка на вложение</eb:Label>
+				<eb:Definition>Ссылка на вложение</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tLink_Of_Attach"/>
+	</simpleType>
+	<complexType name="tAppSolDocTypComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tAppSolDocTyp"/>
+	</complexType>
+	<simpleType name="tAppSolDocTyp">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Тип дока Шаблон согласования</eb:Label>
+				<eb:Definition>Тип документа для Шаблона листа согласования</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Сведения о соглашени/об изменении соглашении">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Lit1</eb:ID>
+						<eb:Label>Сведения о соглашени/об изменении соглашении</eb:Label>
+						<eb:Definition>Сведения о соглашени/об изменении соглашении</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Сведения о БО">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Lit2</eb:ID>
+						<eb:Label>Сведения о БО</eb:Label>
+						<eb:Definition>Сведения о БО</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Сведения о ДО">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Lit3</eb:ID>
+						<eb:Label>Сведения о ДО</eb:Label>
+						<eb:Definition>Сведения о ДО</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Решение">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Lit4</eb:ID>
+						<eb:Label>Решение</eb:Label>
+						<eb:Definition>Решение</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Протокол">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Lit5</eb:ID>
+						<eb:Label>Протокол</eb:Label>
+						<eb:Definition>Протокол</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tDecision_TypeDocComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tDecision_TypeDoc"/>
+	</complexType>
+	<simpleType name="tDecision_TypeDoc">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Тип документа решения</eb:Label>
+				<eb:Definition>Тип документа решения</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Сведения о соглашении и БО">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit1</eb:ID>
+						<eb:Label>Сведения о соглашении и БО</eb:Label>
+						<eb:Definition>Сведения о соглашении и БО</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Сведения о БО и ГК">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit2</eb:ID>
+						<eb:Label>Сведения о БО и ГК</eb:Label>
+						<eb:Definition>Сведения о БО и ГК</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Сведения о БО">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit3</eb:ID>
+						<eb:Label>Сведения о БО</eb:Label>
+						<eb:Definition>Сведения о БО</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Сведения о ДО">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit4</eb:ID>
+						<eb:Label>Сведения о ДО</eb:Label>
+						<eb:Definition>Сведения о ДО</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Информация об отчетности">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit5</eb:ID>
+						<eb:Label>Информация об отчетности</eb:Label>
+						<eb:Definition>Информация об отчетности</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Уведомление об уточнении операций клиента">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>UK</eb:ID>
+						<eb:Label>Уведомление об уточнении операций клиента</eb:Label>
+						<eb:Definition>Уведомление об уточнении операций клиента</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Платежное поручение">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PP</eb:ID>
+						<eb:Label>Платежное поручение</eb:Label>
+						<eb:Definition>Платежное поручение</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tmatching_stateComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tmatching_state"/>
+	</complexType>
+	<simpleType name="tmatching_state">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Состояния согласования</eb:Label>
+				<eb:Definition>Состояния согласования</eb:Definition>
+			</appinfo>
+			<documentation>Перечень состояний процесса согласования</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Решение не сформировано">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>notFormed</eb:ID>
+						<eb:Label>Решение не сформировано</eb:Label>
+						<eb:Definition>Решение не сформировано</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Требует согласования">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>requiresAgreement</eb:ID>
+						<eb:Label>Требует согласования</eb:Label>
+						<eb:Definition>Требует согласования</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Направлен на согласование">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>sentForAgreement</eb:ID>
+						<eb:Label>Направлен на согласование</eb:Label>
+						<eb:Definition>Направлен на согласование</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Не требует согласования">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>notRequiresAgreement</eb:ID>
+						<eb:Label>Не требует согласования</eb:Label>
+						<eb:Definition>Не требует согласования</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Согласован">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>agreed</eb:ID>
+						<eb:Label>Согласован</eb:Label>
+						<eb:Definition>Согласован</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Не согласован">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>disagreed</eb:ID>
+						<eb:Label>Не согласован</eb:Label>
+						<eb:Definition>Не согласован</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tAgreementStateComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tAgreementState"/>
+	</complexType>
+	<simpleType name="tAgreementState">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Состояние согласования</eb:Label>
+				<eb:Definition>Состояние согласования</eb:Definition>
+			</appinfo>
+			<documentation>Перечень состояний процесса согласования</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="На согласовании">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>sentForAgreement</eb:ID>
+						<eb:Label>На согласовании</eb:Label>
+						<eb:Definition>На согласовании</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Согласовано">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>agreed</eb:ID>
+						<eb:Label>Согласовано</eb:Label>
+						<eb:Definition>Согласовано</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отклонено">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>disagreed</eb:ID>
+						<eb:Label>Отклонено</eb:Label>
+						<eb:Definition>Отклонено</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tApprovementStateComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tApprovementState"/>
+	</complexType>
+	<simpleType name="tApprovementState">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Состояние утверждения</eb:Label>
+				<eb:Definition>Состояние утверждения</eb:Definition>
+			</appinfo>
+			<documentation>Перечень состояний процесса согласования</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="На утверждении">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>sentForAgreement</eb:ID>
+						<eb:Label>На утверждении</eb:Label>
+						<eb:Definition>На утверждении</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Утверждено">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>agreed</eb:ID>
+						<eb:Label>Утверждено</eb:Label>
+						<eb:Definition>Утверждено</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отклонено">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>disagreed</eb:ID>
+						<eb:Label>Отклонено</eb:Label>
+						<eb:Definition>Отклонено</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tExecuteStateComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tExecuteState"/>
+	</complexType>
+	<simpleType name="tExecuteState">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Состояние исполнения</eb:Label>
+				<eb:Definition>Состояние исполнения</eb:Definition>
+			</appinfo>
+			<documentation>Перечень состояний процесса согласования</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="На исполнении">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>sentForAgreement</eb:ID>
+						<eb:Label>На исполнении</eb:Label>
+						<eb:Definition>На исполнении</eb:Definition>
+					</appinfo>
+					<documentation>На исполнении</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Исполнено">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>agreed</eb:ID>
+						<eb:Label>Исполнено</eb:Label>
+						<eb:Definition>Исполнено</eb:Definition>
+					</appinfo>
+					<documentation>Исполнено</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отклонено">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>disagreed</eb:ID>
+						<eb:Label>Отклонено</eb:Label>
+						<eb:Definition>Отклонено</eb:Definition>
+					</appinfo>
+					<documentation>Отклонено</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tDocSrcComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tDocSrc"/>
+	</complexType>
+	<simpleType name="tDocSrc">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Источник</eb:Label>
+				<eb:Definition>Источник</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="PUR">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PUR</eb:ID>
+						<eb:Label>Подсистема управления расходами</eb:Label>
+						<eb:Definition>Подсистема управления расходами</eb:Definition>
+					</appinfo>
+					<documentation>Подсистема управления расходами</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PUZ">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PUZ</eb:ID>
+						<eb:Label>Подсистема управления закупками</eb:Label>
+						<eb:Definition>Подсистема управления закупками</eb:Definition>
+					</appinfo>
+					<documentation>Подсистема управления закупками</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>BP</eb:ID>
+						<eb:Label>Бюджетное планирование</eb:Label>
+						<eb:Definition>Бюджетное планирование</eb:Definition>
+					</appinfo>
+					<documentation>Бюджетное планирование</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ASFK">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ASFK</eb:ID>
+						<eb:Label>АСФК</eb:Label>
+						<eb:Definition>АСФК</eb:Definition>
+					</appinfo>
+					<documentation>АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GASU">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>GASU</eb:ID>
+						<eb:Label>ГАСУ</eb:Label>
+						<eb:Definition>ГАСУ</eb:Definition>
+					</appinfo>
+					<documentation>ГАСУ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ES</eb:ID>
+						<eb:Label>ИС клиента</eb:Label>
+						<eb:Definition>ИС клиента</eb:Definition>
+					</appinfo>
+					<documentation>ИС клиента</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MGR">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>MGR</eb:ID>
+						<eb:Label>Мигрирован</eb:Label>
+						<eb:Definition>Мигрирован</eb:Definition>
+					</appinfo>
+					<documentation>Мигрирован</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SUFD">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SUFD</eb:ID>
+						<eb:Label>СУФД</eb:Label>
+						<eb:Definition>СУФД</eb:Definition>
+					</appinfo>
+					<documentation>СУФД</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PFHD">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PFHD</eb:ID>
+						<eb:Label>ПФХД</eb:Label>
+						<eb:Definition>ПФХД</eb:Definition>
+					</appinfo>
+					<documentation>ПФХД</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ПУР КС">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PURKS</eb:ID>
+						<eb:Label>ПУР КС</eb:Label>
+						<eb:Definition>ПУР КС</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tFlgYorNComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tFlgYorN"/>
+	</complexType>
+	<simpleType name="tFlgYorN">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>ФлагДаНет</eb:Label>
+				<eb:Definition>Флаг Да или Нет</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Y">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Yes</eb:ID>
+						<eb:Label>Да</eb:Label>
+						<eb:Definition>Да</eb:Definition>
+					</appinfo>
+					<documentation>Да</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="N">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>No</eb:ID>
+						<eb:Label>Нет</eb:Label>
+						<eb:Definition>Нет</eb:Definition>
+					</appinfo>
+					<documentation>Нет</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tSecrLevelComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tSecrLevel"/>
+	</complexType>
+	<simpleType name="tSecrLevel">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Секретность</eb:Label>
+				<eb:Definition>Секретность</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="не секретно">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>L0</eb:ID>
+						<eb:Label>не секретно</eb:Label>
+						<eb:Definition>не секретно</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="ДСП">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>L1</eb:ID>
+						<eb:Label>ДСП</eb:Label>
+						<eb:Definition>ДСП</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="секретно">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>L2</eb:ID>
+						<eb:Label>секретно</eb:Label>
+						<eb:Definition>секретно</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="совершенно секретно">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>L3</eb:ID>
+						<eb:Label>совершенно секретно</eb:Label>
+						<eb:Definition>совершенно секретно</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tStateListFKComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tStateListFK"/>
+	</complexType>
+	<simpleType name="tStateListFK">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Перечень состояний согласований АСФК</eb:Label>
+				<eb:Definition>Перечень состояний согласований АСФК</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Требует согласования">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit1</eb:ID>
+						<eb:Label>Требует согласования</eb:Label>
+						<eb:Definition>Требует согласования</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Согласован">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit2</eb:ID>
+						<eb:Label>Согласован</eb:Label>
+						<eb:Definition>Согласован</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отменен">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit3</eb:ID>
+						<eb:Label>Отменен</eb:Label>
+						<eb:Definition>Отменен</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Направлен на согласование">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>lit4</eb:ID>
+						<eb:Label>Направлен на согласование</eb:Label>
+						<eb:Definition>Направлен на согласование</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tTrnsfrStComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tTrnsfrSt"/>
+	</complexType>
+	<simpleType name="tTrnsfrSt">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Транспортный статус</eb:Label>
+				<eb:Definition>Транспортный статус</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Отправляется в АСФК">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Send</eb:ID>
+						<eb:Label>Отправляется в АСФК</eb:Label>
+						<eb:Definition>Отправляется в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Отправляется в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Sent">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Sent</eb:ID>
+						<eb:Label>Отправлен в АСФК</eb:Label>
+						<eb:Definition>Отправлен в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Отправлен в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorSend">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorSend</eb:ID>
+						<eb:Label>Ошибка отправки в АСФК</eb:Label>
+						<eb:Definition>Ошибка отправки в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка отправки в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Delivered">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Delivered</eb:ID>
+						<eb:Label>Доставлен в АСФК</eb:Label>
+						<eb:Definition>Доставлен в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Доставлен в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Undelivered">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Undelivered</eb:ID>
+						<eb:Label>Ошибка доставки в АСФК</eb:Label>
+						<eb:Definition>Ошибка доставки в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка доставки в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ReceivedFromBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ReceivedFromBP</eb:ID>
+						<eb:Label>Принят из БП</eb:Label>
+						<eb:Definition>Принят из БП</eb:Definition>
+					</appinfo>
+					<documentation>Принят из БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ReceivedFromASFK">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ReceivedFromASFK</eb:ID>
+						<eb:Label>Принят из АСФК</eb:Label>
+						<eb:Definition>Принят из АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Принят из АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SendNotRequired">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SendNotRequired</eb:ID>
+						<eb:Label>Отправка в АСФК не требуется</eb:Label>
+						<eb:Definition>Отправка в АСФК не требуется</eb:Definition>
+					</appinfo>
+					<documentation>Отправка в АСФК не требуется</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SendRequired">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SendRequired</eb:ID>
+						<eb:Label>Требуется отправка в АСФК</eb:Label>
+						<eb:Definition>Требуется отправка в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Требуется отправка в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Processed">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Processed</eb:ID>
+						<eb:Label>Обработан в АСФК</eb:Label>
+						<eb:Definition>Обработан в АСФК</eb:Definition>
+					</appinfo>
+					<documentation>Обработан в АСФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SendToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SendToNSI</eb:ID>
+						<eb:Label>Отправляется в НСИ</eb:Label>
+						<eb:Definition>Отправляется в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Отправляется в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SentToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SentToNSI</eb:ID>
+						<eb:Label>Отправлен в НСИ</eb:Label>
+						<eb:Definition>Отправлен в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Отправлен в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorSendToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorSendToNSI</eb:ID>
+						<eb:Label>Ошибка отправки в НСИ</eb:Label>
+						<eb:Definition>Ошибка отправки в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка отправки в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DeliveredToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>DeliveredToNSI</eb:ID>
+						<eb:Label>Доставлен в НСИ</eb:Label>
+						<eb:Definition>Доставлен в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Доставлен в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UndeliveredToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>UndeliveredToNSI</eb:ID>
+						<eb:Label>Ошибка доставки в НСИ</eb:Label>
+						<eb:Definition>Ошибка доставки в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка доставки в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ProcessedToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ProcessedToNSI</eb:ID>
+						<eb:Label>Обработан в НСИ</eb:Label>
+						<eb:Definition>Обработан в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Обработан в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NotProcessedToNSI">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>NotProcessedToNSI</eb:ID>
+						<eb:Label>Ошибка обработки в НСИ</eb:Label>
+						<eb:Definition>Ошибка обработки в НСИ</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка обработки в НСИ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ReceivedFromES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ReceivedFromES</eb:ID>
+						<eb:Label>Принят из ВС</eb:Label>
+						<eb:Definition>Принят из ВС</eb:Definition>
+					</appinfo>
+					<documentation>Принят из ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SendToES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SendToES</eb:ID>
+						<eb:Label>Отправляется в ВС</eb:Label>
+						<eb:Definition>Отправляется в ВС</eb:Definition>
+					</appinfo>
+					<documentation>Отправляется в ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SentToES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SentToES</eb:ID>
+						<eb:Label>Отправлен в ВС</eb:Label>
+						<eb:Definition>Отправлен в ВС</eb:Definition>
+					</appinfo>
+					<documentation>Отправлен в ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorSendToES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorSendToES</eb:ID>
+						<eb:Label>Ошибка отправки в ВС</eb:Label>
+						<eb:Definition>Ошибка отправки в ВС</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка отправки в ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DeliveredToES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>DeliveredToES</eb:ID>
+						<eb:Label>Доставлен в ВС</eb:Label>
+						<eb:Definition>Доставлен в ВС</eb:Definition>
+					</appinfo>
+					<documentation>Доставлен в ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UndeliveredToES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>UndeliveredToES</eb:ID>
+						<eb:Label>Ошибка доставки в ВС</eb:Label>
+						<eb:Definition>Ошибка доставки в ВС</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка доставки в ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ProcessedInES">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ProcessedInES</eb:ID>
+						<eb:Label>Обработан в ВС</eb:Label>
+						<eb:Definition>Обработан в ВС</eb:Definition>
+					</appinfo>
+					<documentation>Обработан в ВС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SendToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SendToBP</eb:ID>
+						<eb:Label>Отправляется в БП</eb:Label>
+						<eb:Definition>Отправляется в БП</eb:Definition>
+					</appinfo>
+					<documentation>Отправляется в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SentToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SentToBP</eb:ID>
+						<eb:Label>Отправлен в БП</eb:Label>
+						<eb:Definition>Отправлен в БП</eb:Definition>
+					</appinfo>
+					<documentation>Отправлен в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorSentToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorSentToBP</eb:ID>
+						<eb:Label>Ошибка отправки в БП</eb:Label>
+						<eb:Definition>Ошибка отправки в БП</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка отправки в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ProcessedToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ProcessedToBP</eb:ID>
+						<eb:Label>Обработан в БП</eb:Label>
+						<eb:Definition>Обработан в БП</eb:Definition>
+					</appinfo>
+					<documentation>Обработан в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorProcessedToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorProcessedToBP</eb:ID>
+						<eb:Label>Ошибка обработки в БП</eb:Label>
+						<eb:Definition>Ошибка обработки в БП</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка обработки в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SentToBPNotRequired">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SentToBPNotRequired</eb:ID>
+						<eb:Label>Отправка в БП не требуется</eb:Label>
+						<eb:Definition>Отправка в БП не требуется</eb:Definition>
+					</appinfo>
+					<documentation>Отправка в БП не требуется</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DeliveredToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>DeliveredToBP</eb:ID>
+						<eb:Label>Доставлен в БП</eb:Label>
+						<eb:Definition>Доставлен в БП</eb:Definition>
+					</appinfo>
+					<documentation>Доставлен в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UndeliveredToBP">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>UndeliveredToBP</eb:ID>
+						<eb:Label>Ошибка доставки в БП</eb:Label>
+						<eb:Definition>Ошибка доставки в БП</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка доставки в БП</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SendToEIS">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SendToEIS</eb:ID>
+						<eb:Label>Отправляется в ЕИС</eb:Label>
+						<eb:Definition>Отправляется в ЕИС</eb:Definition>
+					</appinfo>
+					<documentation>Отправляется в ЕИС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SentToEIS">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SentToEIS</eb:ID>
+						<eb:Label>Отправлен в ЕИС</eb:Label>
+						<eb:Definition>Отправлен в ЕИС</eb:Definition>
+					</appinfo>
+					<documentation>Отправлен в ЕИС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PendSubmis">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PendSubmis</eb:ID>
+						<eb:Label>Ожидает отправки</eb:Label>
+						<eb:Definition>Ожидает отправки</eb:Definition>
+					</appinfo>
+					<documentation>Ожидает отправки</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorSentToEIS">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorSentToEIS</eb:ID>
+						<eb:Label>Ошибка отправки в ЕИС</eb:Label>
+						<eb:Definition>Ошибка отправки в ЕИС</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка отправки в ЕИС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ErrorProcessedToEIS">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ErrorProcessedToEIS</eb:ID>
+						<eb:Label>Ошибка обработки в ЕИС</eb:Label>
+						<eb:Definition>Ошибка обработки в ЕИС</eb:Definition>
+					</appinfo>
+					<documentation>Ошибка обработки в ЕИС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ProcessedToEIS">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ProcessedToEIS</eb:ID>
+						<eb:Label>Обработан в ЕИС</eb:Label>
+						<eb:Definition>Обработан в ЕИС</eb:Definition>
+					</appinfo>
+					<documentation>Обработан в ЕИС</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ReceivedFromPFHD">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ReceivedFromPFHD</eb:ID>
+						<eb:Label>Принят из ПФХД</eb:Label>
+						<eb:Definition>Принят из ПФХД</eb:Definition>
+					</appinfo>
+					<documentation>Принят из ПФХД</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ReceivedFromSUFD">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ReceivedFromSUFD</eb:ID>
+						<eb:Label>Принят из СУФД</eb:Label>
+						<eb:Definition>Принят из СУФД</eb:Definition>
+					</appinfo>
+					<documentation>Принят из СУФД</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tClntStateComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tClntState"/>
+	</complexType>
+	<simpleType name="tClntState">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Статус клиента</eb:Label>
+				<eb:Definition>Статус клиента</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Черновик">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>CREATED</eb:ID>
+						<eb:Label>Черновик</eb:Label>
+						<eb:Definition>Черновик</eb:Definition>
+					</appinfo>
+					<documentation>Черновик</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="Новый">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>NEWDOC</eb:ID>
+						<eb:Label>Новый</eb:Label>
+						<eb:Definition>Новый</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Проверен">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>CHECKED</eb:ID>
+						<eb:Label>Проверен</eb:Label>
+						<eb:Definition>Проверен</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="На исполнении">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>EXECUTING</eb:ID>
+						<eb:Label>На исполнении</eb:Label>
+						<eb:Definition>На исполнении</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Утвержден">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>APPROVED</eb:ID>
+						<eb:Label>Утвержден</eb:Label>
+						<eb:Definition>Утвержден</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="На утверждении">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>APPROVING</eb:ID>
+						<eb:Label>На утверждении</eb:Label>
+						<eb:Definition>На утверждении</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Согласован">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AGREED</eb:ID>
+						<eb:Label>Согласован</eb:Label>
+						<eb:Definition>Согласован</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="На согласовании">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AGREEING</eb:ID>
+						<eb:Label>На согласовании</eb:Label>
+						<eb:Definition>На согласовании</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="К отмене">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>TO_CANCEL</eb:ID>
+						<eb:Label>К отмене</eb:Label>
+						<eb:Definition>К отмене</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отменен">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>CANCELED</eb:ID>
+						<eb:Label>Отменен</eb:Label>
+						<eb:Definition>Отменен</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Исполнен">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>EXECUTED</eb:ID>
+						<eb:Label>Исполнен</eb:Label>
+						<eb:Definition>Исполнен</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отозван">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>REVOKED</eb:ID>
+						<eb:Label>Отозван</eb:Label>
+						<eb:Definition>Отозван</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Утвержден клиентом">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>CLIENT_APPROVE</eb:ID>
+						<eb:Label>Утвержден клиентом</eb:Label>
+						<eb:Definition>Утвержден клиентом</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отклонен клиентом">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>CLIENT_CANCELED</eb:ID>
+						<eb:Label>Отклонен клиентом</eb:Label>
+						<eb:Definition>Отклонен клиентом</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="На доработке">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>EDITING</eb:ID>
+						<eb:Label>На доработке</eb:Label>
+						<eb:Definition>На доработке</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tChecksPUIOComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tChecksPUIO"/>
+	</complexType>
+	<simpleType name="tChecksPUIO">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Отражение на лс ПУиО</eb:Label>
+				<eb:Definition>Отражение на лс ПУиО</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Нет отражения в учете">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l1</eb:ID>
+						<eb:Label>Нет отражения в учете</eb:Label>
+						<eb:Definition>Нет отражения в учете</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Формирование проводок">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l2</eb:ID>
+						<eb:Label>Формирование проводок</eb:Label>
+						<eb:Definition>Формирование проводок</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Есть отражение в учете">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l3</eb:ID>
+						<eb:Label>Есть отражение в учете</eb:Label>
+						<eb:Definition>Есть отражение в учете</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Ошибка отражения в учете">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l4</eb:ID>
+						<eb:Label>Ошибка отражения в учете</eb:Label>
+						<eb:Definition>Ошибка отражения в учете</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Показатели на лс аннулированы">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l5</eb:ID>
+						<eb:Label>Показатели на лс аннулированы</eb:Label>
+						<eb:Definition>Показатели на лс аннулированы</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tChecksFTASComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tChecksFTAS"/>
+	</complexType>
+	<simpleType name="tChecksFTAS">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Проверка в ФК</eb:Label>
+				<eb:Definition>Проверка в ФК</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Контроль не выполнялся">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l1</eb:ID>
+						<eb:Label>Контроль не выполнялся</eb:Label>
+						<eb:Definition>Контроль не выполнялся</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Прохождение контролей">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l2</eb:ID>
+						<eb:Label>Прохождение контролей</eb:Label>
+						<eb:Definition>Прохождение контролей</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Контроль пройден">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l3</eb:ID>
+						<eb:Label>Контроль пройден</eb:Label>
+						<eb:Definition>Контроль пройден</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Ошибка контроля ФК">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l4</eb:ID>
+						<eb:Label>Ошибка контроля ФК</eb:Label>
+						<eb:Definition>Ошибка контроля ФК</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Аннулирован">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l5</eb:ID>
+						<eb:Label>Аннулирован</eb:Label>
+						<eb:Definition>Аннулирован</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tDcmntTpComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tDcmntTp"/>
+	</complexType>
+	<simpleType name="tDcmntTp">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Тип Документа</eb:Label>
+				<eb:Definition>Тип Документа</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Задание">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Task</eb:ID>
+						<eb:Label>Задание</eb:Label>
+						<eb:Definition>Задание</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отчет">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Report</eb:ID>
+						<eb:Label>Отчет</eb:Label>
+						<eb:Definition>Отчет</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Распределение">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Distr</eb:ID>
+						<eb:Label>Распределение</eb:Label>
+						<eb:Definition>Распределение</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Соглашение">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Agreement</eb:ID>
+						<eb:Label>Соглашение</eb:Label>
+						<eb:Definition>Соглашение</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tChecksRDOComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tChecksRDO"/>
+	</complexType>
+	<simpleType name="tChecksRDO">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Состояние включение заявки в Реестр</eb:Label>
+				<eb:Definition>Состояние включение заявки в Реестр</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Не включен в реестр документов-оснований">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l1</eb:ID>
+						<eb:Label>Не включен в реестр документов-оснований</eb:Label>
+						<eb:Definition>Не включен в реестр документов-оснований</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Включен в реестр документов-оснований">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l3</eb:ID>
+						<eb:Label>включен в реестр документов оснований</eb:Label>
+						<eb:Definition>включен в реестр документов оснований</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tStatus" mixed="true">
+		<attribute name="code" type="self:t_Status_3" use="required"/>
+		<attribute name="value">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="Исполнение"/>
+					<enumeration value="Исполнение завершено"/>
+					<enumeration value="Исполнение прекращено"/>
+					<enumeration value="Аннулировано"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+	<simpleType name="t_Status_3">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Статус контракта</eb:Label>
+				<eb:Definition>Статус контракта</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>1</eb:ID>
+						<eb:Label>Исполнение</eb:Label>
+						<eb:Definition>Исполнение</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>2</eb:ID>
+						<eb:Label>Исполнение завершено</eb:Label>
+						<eb:Definition>Исполнение завершено</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>3</eb:ID>
+						<eb:Label>Исполнение прекращено</eb:Label>
+						<eb:Definition>Исполнение прекращено</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>4</eb:ID>
+						<eb:Label>Аннулировано</eb:Label>
+						<eb:Definition>Аннулировано</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tBankComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tBank"/>
+	</complexType>
+	<simpleType name="tBank">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Банк</eb:Label>
+				<eb:Definition>Банк</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Ожидает отправки в банк">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l1</eb:ID>
+						<eb:Label>Ожидает отправки в банк</eb:Label>
+						<eb:Definition>Ожидает отправки в банк</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отправлено в банк">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l2</eb:ID>
+						<eb:Label>Отправлено в банк</eb:Label>
+						<eb:Definition>Отправлено в банк</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Получено подтверждение банком">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l3</eb:ID>
+						<eb:Label>Получено подтверждение банком</eb:Label>
+						<eb:Definition>Получено подтверждение банком</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отказано банком">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l4</eb:ID>
+						<eb:Label>Отказано банком</eb:Label>
+						<eb:Definition>Отказано банком</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tLCRecipientComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tLCRecipient"/>
+	</complexType>
+	<simpleType name="tCdPmnt">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Макс30Текст</eb:Label>
+				<eb:Definition>Макс30Текст</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax30Text">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tCdPmnt_1">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Макс30Текст</eb:Label>
+				<eb:Definition>Макс30Текст</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax30Text">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tLCRecipient">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>ЛС получателя</eb:Label>
+				<eb:Definition>ЛС получателя</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Нет отражения на л/с получателя">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l1</eb:ID>
+						<eb:Label>Нет отражения на л/с получателя</eb:Label>
+						<eb:Definition>Нет отражения на л/с получателя</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отражено на л/с получателя">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l3</eb:ID>
+						<eb:Label>Отражено на л/с получателя</eb:Label>
+						<eb:Definition>Отражено на л/с получателя</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Ошибка при отражении на л/с получателя">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>l4</eb:ID>
+						<eb:Label>Ошибка при отражении на л/с получателя</eb:Label>
+						<eb:Definition>Ошибка при отражении на л/с получателя</eb:Definition>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+</schema>

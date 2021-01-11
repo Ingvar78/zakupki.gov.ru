@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://www.roskazna.ru/eb/domain/common/applied" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/MSC_RcptPUR_EB/formular" targetNamespace="http://www.roskazna.ru/eb/domain/MSC_RcptPUR_EB/formular">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="esmv_commonRcpt_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common/applied" schemaLocation="esmv_commonRcpt_appliedTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="esmv_commonRcpt_common.xsd"/>
+	<element name="MSC_RcptPUR_EB" type="self:tMSC_RcptPUR_EB"/>
+	<complexType name="tVltnErr_ITEM">
+		<sequence>
+			<element name="ErCd" type="app:tGUID"/>
+			<element name="ErTp" type="app:tIndex10"/>
+			<element name="ErNm" type="app:tNm200" minOccurs="0"/>
+			<element name="Dscrptn" type="app:tErMsg" minOccurs="0"/>
+			<element name="SI_PrcsSgn" type="app:tNm1000" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="tPstnRslt_ITEM">
+		<sequence>
+			<element name="BlockName" type="app:tNm100"/>
+			<element name="FieldName" type="app:tNm100"/>
+			<element name="FieldValue" type="app:tErMsg"/>
+			<!--<element name="VltnErr" type="self:tVltnErr" minOccurs="0" maxOccurs="1"/>-->
+		</sequence>
+	</complexType>
+	<complexType name="tVltnErr">
+		<sequence>
+			<element name="VltnErr_ITEM" type="self:tVltnErr_ITEM" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tPstnRslt">
+		<sequence>
+			<element name="PstnRslt_ITEM" type="self:tPstnRslt_ITEM" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tMSC_RcptPUR_EB">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Type>Formular</eb:Type>
+			</appinfo>
+		</annotation>
+		<complexContent>
+			<extension base="cm:tFormular">
+				<sequence>
+					<element name="GUID" type="app:tGUID"/>
+					<element name="RcptDtTm" type="app:tDtTm"/>
+					<element name="GUIDParentDoc" type="app:tGUID2"/>
+					<element name="Rslt" type="app:tCd2_1" minOccurs="0"/>
+					<element name="DtSt" type="app:tDctDt" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата присвоения статуса</eb:Label>
+								<eb:Definition>Дата присвоения статуса</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="SytemIN" type="app:tCd6" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Система источник</eb:Label>
+								<eb:Definition>Система источник</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="SytemOut" type="app:tCd6" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Система приемник</eb:Label>
+								<eb:Definition>Система приемник</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="DscrptnGI" type="app:tErMsg" minOccurs="0"/>
+					<element name="Operation" type="app:tNm100" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Код обработки документа</eb:Label>
+								<eb:Definition>Код обработки документа</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<!--<element name="RcrdsQnt" type="app:tQnt20" maxOccurs="1"/>-->
+					<!--<element name="SndrCd" type="app:tCd6" maxOccurs="1"/>
+					<element name="RcvrCd" type="app:tCd6" maxOccurs="1"/>-->
+					<element name="RfrncCd" type="base:tMax50Text"/>
+					<element name="FlNm" type="app:tNm256" minOccurs="0"/>
+					<element name="PstnRslt" type="self:tPstnRslt" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="tDOC_BASE">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Type>Formular</eb:Type>
+			</appinfo>
+		</annotation>
+		<complexContent>
+			<extension base="cm:tFormular">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

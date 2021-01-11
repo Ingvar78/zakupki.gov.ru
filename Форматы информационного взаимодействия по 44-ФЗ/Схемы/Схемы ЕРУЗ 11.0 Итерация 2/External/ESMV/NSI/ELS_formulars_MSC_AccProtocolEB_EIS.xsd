@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<!-- Версия xsd: 2.0 Дата последнего изменения: 03.02.2020 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://www.roskazna.ru/eb/domain/common/applied" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/MSC_AccProtocolEB_EIS/formular" targetNamespace="http://www.roskazna.ru/eb/domain/MSC_AccProtocolEB_EIS/formular">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="ELS_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common/applied" schemaLocation="ELS_appliedTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="ELS_common.xsd"/>
+	<element name="MSC_AccProtocolEB_EIS" type="self:tMSC_AccProtocolEB_EIS"/>
+	<complexType name="tMSC_AccProtocolEB_EIS">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Type>Formular</eb:Type>
+				<eb:Label>Протокол</eb:Label>
+				<eb:Definition>Протокол</eb:Definition>
+			</appinfo>
+			<documentation>Протокол об отказе в открытии (закрытии) единого лицевого счета для учета операций неучастника бюджетного процесса</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="cm:tFormular">
+				<sequence>
+					<element name="GUID" type="app:tGUID1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Глобальный уникальный идентификатор протокола</eb:Label>
+								<eb:Definition>Глобальный уникальный идентификатор протокола</eb:Definition>
+							</appinfo>
+							<documentation>Глобальный идентификатор Протокола</documentation>
+						</annotation>
+					</element>
+					<element name="NumProt" type="app:tStringLessOrEqual20">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Номер Протокола</eb:Label>
+								<eb:Definition>Номер Протокола</eb:Definition>
+							</appinfo>
+							<documentation>Номер Протокола</documentation>
+						</annotation>
+					</element>
+					<element name="ProtDtTm" type="app:tDateTime">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата протокола</eb:Label>
+								<eb:Definition>Дата протокола</eb:Definition>
+							</appinfo>
+							<documentation>Дата и время формирования Протокола</documentation>
+						</annotation>
+					</element>
+					<!--<element name="ProtInfo_RecipientCode" type="app:tDocSrcComplex" minOccurs="0" maxOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>КодСистемыПолучателя</eb:Label>
+								<eb:Definition>Код системы-получателя</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>-->
+					<element name="GUIDReq" type="app:tGUID1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Глобальный уникальный идентификатор документа</eb:Label>
+								<eb:Definition>Глобальный уникальный идентификатор документа</eb:Definition>
+							</appinfo>
+							<documentation>Глобальный уникальный идентификатор документа, на который сформирован Протокол (Заявления)</documentation>
+						</annotation>
+					</element>
+					<element name="NameDoc" type="app:tNmDc">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Наименование документа-основания</eb:Label>
+								<eb:Definition>Наименование документа-основания</eb:Definition>
+							</appinfo>
+							<documentation>Наименование документа, на который сформирован Протокол (Заявления)</documentation>
+						</annotation>
+					</element>
+					<element name="ReqType" type="app:tProtocolReqType">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Код документа</eb:Label>
+								<eb:Definition>Код документа</eb:Definition>
+							</appinfo>
+							<documentation>Тип Заявления</documentation>
+						</annotation>
+					</element>
+					<element name="NumReq" type="app:tStringLessOrEqual100">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Номер документа-основания</eb:Label>
+								<eb:Definition>Номер документа-основания</eb:Definition>
+							</appinfo>
+							<documentation>Номер Заявления</documentation>
+						</annotation>
+					</element>
+					<element name="ReqDate" type="app:tDctDt">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата документа-основания</eb:Label>
+								<eb:Definition>Дата документа-основания</eb:Definition>
+							</appinfo>
+							<documentation>Дата Заявления</documentation>
+						</annotation>
+					</element>
+					<!--<element name="DocInfo_ConsoleRegCode" type="app:tUBP_NUBP_Code">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Код клиента по Сводному реестру</eb:Label>
+								<eb:Definition>Код клиента по Сводному реестру</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="DocInfo_UncNmOrg" type="app:tRBSCd" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Уникальный номер организации клиента</eb:Label>
+								<eb:Definition>Уникальный номер организации клиента</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>-->
+					<element name="BudgName" type="app:tStringLessOrEqual512" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Наименование бюджета</eb:Label>
+								<eb:Definition>Наименование бюджета</eb:Definition>
+							</appinfo>
+							<documentation>Наименование бюджета</documentation>
+						</annotation>
+					</element>
+					<element name="DocInfo_ProcessDate" type="app:tDctDt">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Наименование финансового органа</eb:Label>
+								<eb:Definition>Наименование финансового органа</eb:Definition>
+							</appinfo>
+							<documentation>Дата принятия Заявления для обработки </documentation>
+						</annotation>
+					</element>
+					<element name="Rslt" type="app:tTRT">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Признак принятия к учету (аннулирования)</eb:Label>
+								<eb:Definition>Признак принятия к учету (аннулирования)</eb:Definition>
+							</appinfo>
+							<documentation>Статус обработки Заявления</documentation>
+						</annotation>
+					</element>
+					<element name="DocInfo_Note" type="app:tFullNm">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата принятия для обработки или на учет (аннулирования)</eb:Label>
+								<eb:Definition>Дата принятия для обработки или на учет (аннулирования)</eb:Definition>
+							</appinfo>
+							<documentation>Примечание</documentation>
+						</annotation>
+					</element>
+					<!--<element name="FKInfo_ProtAssignDate" type="app:tDtTm">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата подписания Протокола</eb:Label>
+								<eb:Definition>Дата подписания Протокола</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>-->
+					<element name="Executor_NmExec" type="app:tStringLessOrEqual180">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>ФИО исполнителя</eb:Label>
+								<eb:Definition>ФИО исполнителя</eb:Definition>
+							</appinfo>
+							<documentation>ФИО ответственного исполнителя</documentation>
+						</annotation>
+					</element>
+					<element name="Executor_PstExec" type="app:tStringLessOrEqual255">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Должность исполнителя</eb:Label>
+								<eb:Definition>Должность исполнителя</eb:Definition>
+							</appinfo>
+							<documentation>Должность ответственного исполнителя</documentation>
+						</annotation>
+					</element>
+					<element name="Executor_DtSgnngExec" type="app:tDctDt">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата подписания ответственным исполнителем</eb:Label>
+								<eb:Definition>Дата подписания ответственным исполнителем</eb:Definition>
+							</appinfo>
+							<documentation>Дата подписания ответственным исполнителем</documentation>
+						</annotation>
+					</element>
+					<!--<element name="ApprInf_ApprFIO" type="app:tNm100" minOccurs="0" maxOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>ФИО утвердившего</eb:Label>
+								<eb:Definition>ФИО утвердившего</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="ApprInf_AppPost" type="app:tPstn" minOccurs="0" maxOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Должность утвердившего</eb:Label>
+								<eb:Definition>Должность утвердившего</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="ApprInf_DtSnd" type="app:tDctDt" minOccurs="0" maxOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата направления</eb:Label>
+								<eb:Definition>Дата направления</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="ApprInf_DateAppr" type="app:tDctDt" minOccurs="0" maxOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата утверждения</eb:Label>
+								<eb:Definition>Дата утверждения</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>
+					<element name="ApprInf_Notings" type="app:tName_2" minOccurs="0" maxOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Примечание</eb:Label>
+								<eb:Definition>Примечание</eb:Definition>
+							</appinfo>
+						</annotation>
+					</element>-->
+					<element name="ProtInfo_MSC_OrFK_Sender" type="self:tProtInfo_MSC_OrFK_Sender">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>ОрФК_отправитель</eb:Label>
+								<eb:Definition>ОрФК_отправитель</eb:Definition>
+							</appinfo>
+							<documentation>ОрФК-отправитель</documentation>
+						</annotation>
+					</element>
+					<element name="DocInfo_Cstmr" type="app:tDocInfo_Cstmr">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Клиент</eb:Label>
+								<eb:Definition>Клиент</eb:Definition>
+							</appinfo>
+							<documentation>Клиент</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="tProtInfo_MSC_OrFK_Sender">
+		<annotation>
+			<documentation>ОрФК-отправитель</documentation>
+		</annotation>
+		<sequence>
+			<element name="Cd" type="app:tStringExactly4">
+				<annotation>
+					<documentation>Код ОрФК</documentation>
+				</annotation>
+			</element>
+			<element name="Nm" type="app:tFullNm">
+				<annotation>
+					<documentation>Полное наименование ОрФК</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,12 @@
+изменение схем ПУР КС в части передачи сведений о контракте
+
+1. Добавлены схемы:
+
+	-esmv_commonRcpt_appliedTypes
+	
+	-esmv_commonRcpt_baseTypes
+	
+	-esmv_commonRcpt_common
+	
+	-esmv_MSC_RcptPUR_EB_formular
+	

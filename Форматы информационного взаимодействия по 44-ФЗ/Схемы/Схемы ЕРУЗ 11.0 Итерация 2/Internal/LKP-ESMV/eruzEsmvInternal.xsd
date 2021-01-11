@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ ESMV INTERNAL Integration Scheme, version 11.0, create date 16.10.2020 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/esmv/internal/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:esmv="http://zakupki.gov.ru/eruz/esmv/types/1" xmlns:base="http://zakupki.gov.ru/eruz/esmv/types/base/1" targetNamespace="http://zakupki.gov.ru/eruz/esmv/internal/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/esmv/types/base/1" schemaLocation="eruzEsmvBaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/eruz/esmv/types/1" schemaLocation="eruzEsmvIntegrationTypes.xsd"/>
+	<!--Технические пакеты-->
+	<xs:element name="confirmSinc" type="esmv:tConfirmSinc">
+		<xs:annotation>
+			<xs:documentation>Предварительное подтверждение</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="confirmASinc" type="esmv:tConfirmASinc">
+		<xs:annotation>
+			<xs:documentation>Окончательное подтверждение</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Лицевые счета-->
+	<xs:element name="requestPA" type="esmv:tRequestPA">
+		<xs:annotation>
+			<xs:documentation>Заявление на резервирование/открытие лицевого счёта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="requestResultPA" type="esmv:tRequestResultPA">
+		<xs:annotation>
+			<xs:documentation>Результат рассмотрения заявления на резервирование/открытие лицевого счёта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Казначейское сопровождение-->
+	<xs:element name="contractInfoRequest" type="esmv:contractInfoType">
+		<xs:annotation>
+			<xs:documentation>Сведения о субподрядном договоре для формирования заявки на внесение сведений в реестр документов-оснований</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="contractInfoResult" type="esmv:contractInfoResultType">
+		<xs:annotation>
+			<xs:documentation>Результат включения сведений о субподрядном договоре в перечень документов-оснований</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

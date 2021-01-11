@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<!-- Версия xsd: 2.0. Дата последнего изменения: 29.04.2019 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://www.roskazna.ru/eb/domain/common/applied" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/TSE_AppInfrmRDO/formular" targetNamespace="http://www.roskazna.ru/eb/domain/TSE_AppInfrmRDO/formular">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="esmv_commonRDO_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common/applied" schemaLocation="esmv_commonRDO_appliedTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="esmv_commonRDO_common.xsd"/>
+	<element name="TSE_AppInfrmRDO" type="self:tTSE_AppInfrmRDO">
+		<annotation>
+			<documentation>Сведения о контрактах и договорах для формирования заявки на внесение сведений в перечень документов-оснований</documentation>
+		</annotation>
+	</element>
+	<complexType name="tTSE_AppInfrmRDO">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Type>Formular</eb:Type>
+				<eb:Label>Сведения о контрактах и договорах для формирования заявки на внесение сведений в перечень документов-оснований</eb:Label>
+				<eb:Definition>Сведения о контрактах и договорах для формирования заявки на внесение сведений в перечень документов-оснований</eb:Definition>
+			</appinfo>
+			<documentation>Сведения о контрактах и договорах для формирования заявки на внесение сведений в перечень документов-оснований</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="cm:tFormular">
+				<sequence>
+					<element name="NmbrChng" type="app:tNUM_CHNG">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Номер изменения</eb:Label>
+								<eb:Definition>Номер изменения</eb:Definition>
+							</appinfo>
+							<documentation>Номер изменения</documentation>
+						</annotation>
+					</element>
+					<element name="DtTmChng" type="app:tDateTime">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата и время изменения</eb:Label>
+								<eb:Definition>Дата и время изменения</eb:Definition>
+							</appinfo>
+							<documentation>Дата и время изменения</documentation>
+						</annotation>
+					</element>
+					<element name="Status" type="app:tStatus">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Статус контракта</eb:Label>
+								<eb:Definition>Статус контракта</eb:Definition>
+							</appinfo>
+							<documentation>Статус контракта</documentation>
+						</annotation>
+					</element>
+					<element name="Executor" type="self:tExecutor" minOccurs="1">
+						<annotation>
+							<documentation>Исполнитель</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_DocNum" type="app:tNm100" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Номер документа</eb:Label>
+								<eb:Definition>Номер документа</eb:Definition>
+							</appinfo>
+							<documentation>Номер документа</documentation>
+						</annotation>
+					</element>
+					<element name="Link_contract" type="self:tLink_contract">
+						<annotation>
+							<documentation>Ссылка</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_DocDate" type="app:tDATE">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата заключения</eb:Label>
+								<eb:Definition>Дата заключения</eb:Definition>
+							</appinfo>
+							<documentation>Дата заключения</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_DateStart" type="app:tDATE" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата действия с</eb:Label>
+								<eb:Definition>Дата действия с</eb:Definition>
+							</appinfo>
+							<documentation>Дата действия с</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_DateEnd" type="app:tDATE" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата действия по</eb:Label>
+								<eb:Definition>Дата действия по</eb:Definition>
+							</appinfo>
+							<documentation>Дата действия по</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_SUMMA" type="app:tSUM">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Сумма</eb:Label>
+								<eb:Definition>Сумма</eb:Definition>
+							</appinfo>
+							<documentation>Сумма</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_ImprestSum" type="app:tSUM" minOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Сумма аванса</eb:Label>
+								<eb:Definition>Сумма аванса</eb:Definition>
+							</appinfo>
+							<documentation>Сумма аванса</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_ImperstRer" type="app:tInteger4" minOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Процент аванса</eb:Label>
+								<eb:Definition>Процент аванса</eb:Definition>
+							</appinfo>
+							<documentation>% аванса</documentation>
+						</annotation>
+					</element>
+					<element name="TSE_SumYear_D02" type="self:tTSE_SumYear_D02" minOccurs="0">
+						<annotation>
+							<documentation>Сумма по годам</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_AddDocNum" type="app:tNm100" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Номер дополнительного соглашения</eb:Label>
+								<eb:Definition>Номер дополнительного соглашения</eb:Definition>
+							</appinfo>
+							<documentation>Номер дополнительного соглашения</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_AddDocDate" type="app:tDATE" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Дата дополнительного соглашения</eb:Label>
+								<eb:Definition>Дата дополнительного соглашения</eb:Definition>
+							</appinfo>
+							<documentation>Дата дополнительного соглашения</documentation>
+						</annotation>
+					</element>
+					<element name="TSE_IGK_D02" type="self:tTSE_IGK_D02" minOccurs="1">
+						<annotation>
+							<documentation>ИГК</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_SUMMANDS" type="app:tSUM">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Сумма НДС</eb:Label>
+								<eb:Definition>Сумма НДС</eb:Definition>
+							</appinfo>
+							<documentation>Сумма НДС</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_PurchaseID" type="app:tGUID" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Идентификационный код закупки</eb:Label>
+								<eb:Definition>Идентификационный код закупки</eb:Definition>
+							</appinfo>
+							<documentation>ИКЗ</documentation>
+						</annotation>
+					</element>
+					<element name="BaseDoc_Subject" type="app:tFullNm" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Предмет</eb:Label>
+								<eb:Definition>Предмет</eb:Definition>
+							</appinfo>
+							<documentation>Предмет закупки</documentation>
+						</annotation>
+					</element>
+					<element name="Client_INN" type="app:tString10or12" minOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>ИНН</eb:Label>
+								<eb:Definition>ИНН</eb:Definition>
+							</appinfo>
+							<documentation>ИНН заказчика</documentation>
+						</annotation>
+					</element>
+					<element name="Client_KPP" type="app:tStringExactly9" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>КПП</eb:Label>
+								<eb:Definition>КПП</eb:Definition>
+							</appinfo>
+							<documentation>КПП заказчика</documentation>
+						</annotation>
+					</element>
+					<element name="Client_FullName" type="app:tFullNm">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Полное наименование</eb:Label>
+								<eb:Definition>Полное наименование</eb:Definition>
+							</appinfo>
+							<documentation>Полное наименование заказчика</documentation>
+						</annotation>
+					</element>
+					<element name="Client_ShortName" type="app:tFullNm" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Сокращенное наименование</eb:Label>
+								<eb:Definition>Сокращенное наименование</eb:Definition>
+							</appinfo>
+							<documentation>Сокращенное наименование заказчика</documentation>
+						</annotation>
+					</element>
+					<element name="Client_AccNum" type="app:tNUM_ACNT" minOccurs="0">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Лицевой счет</eb:Label>
+								<eb:Definition>Лицевой счет</eb:Definition>
+							</appinfo>
+							<documentation>Лицевой счет заказчика</documentation>
+						</annotation>
+					</element>
+					<element name="Number_note" type="app:tText16_19" minOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Номер реестровой записи контракта</eb:Label>
+								<eb:Definition>Номер реестровой записи контракта</eb:Definition>
+							</appinfo>
+							<documentation>Номер реестровой записи контракта/договора</documentation>
+						</annotation>
+					</element>
+					<element name="Sign_KS" type="app:tBLN" minOccurs="1">
+						<annotation>
+							<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+								<eb:Label>Признак КС</eb:Label>
+								<eb:Definition>Признак КС</eb:Definition>
+							</appinfo>
+							<documentation>Признак КС</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="tLink_contract">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Ссылка</eb:Label>
+				<eb:Definition>Ссылка</eb:Definition>
+			</appinfo>
+			<documentation>Ссылка</documentation>
+		</annotation>
+		<sequence>
+			<element name="Link_contract_ITEM" type="self:tLink_contract_ITEM" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tLink_contract_ITEM">
+		<sequence>
+			<element name="Link" type="app:tFullNm">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Ссылка</eb:Label>
+						<eb:Definition>Ссылка</eb:Definition>
+					</appinfo>
+					<documentation>Ссылка</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tExecutor">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Исполнитель</eb:Label>
+				<eb:Definition>Исполнитель</eb:Definition>
+			</appinfo>
+			<documentation>Исполнитель</documentation>
+		</annotation>
+		<sequence>
+			<element name="Executor_ITEM" type="self:tExecutor_ITEM" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tExecutor_ITEM">
+		<sequence>
+			<element name="Executor_INN" type="app:tString10or12" minOccurs="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>ИНН</eb:Label>
+						<eb:Definition>ИНН</eb:Definition>
+					</appinfo>
+					<documentation>ИНН исполнителя</documentation>
+				</annotation>
+			</element>
+			<element name="Executor_KPP" type="app:tStringExactly9" minOccurs="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>КПП</eb:Label>
+						<eb:Definition>КПП</eb:Definition>
+					</appinfo>
+					<documentation>КПП исполнителя</documentation>
+				</annotation>
+			</element>
+			<element name="Executor_FullName" type="app:tFullNm">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Полное наименование</eb:Label>
+						<eb:Definition>Полное наименование</eb:Definition>
+					</appinfo>
+					<documentation>Полное наименование исполнителя</documentation>
+				</annotation>
+			</element>
+			<element name="Executor_ShortName" type="app:tFullNm" minOccurs="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Сокращенное наименование</eb:Label>
+						<eb:Definition>Сокращенное наименование</eb:Definition>
+					</appinfo>
+					<documentation>Сокращенное наименование исполнителя</documentation>
+				</annotation>
+			</element>
+			<element name="Executor_OKOPF" type="app:ttext5" minOccurs="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>ОКОПФ</eb:Label>
+						<eb:Definition>ОКОПФ</eb:Definition>
+					</appinfo>
+					<documentation>Код по ОКОПФ исполнителя</documentation>
+				</annotation>
+			</element>
+			<element name="Executor_CSOrgCo" type="app:tCODE_8" minOccurs="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Код исполнителя по Сводному реестру</eb:Label>
+						<eb:Definition>Код исполнителя по Сводному реестру</eb:Definition>
+					</appinfo>
+					<documentation>Код исполнителя по Сводному реестру</documentation>
+				</annotation>
+			</element>
+			<element name="Executor_AccNum" type="app:tNUM_ACNT" minOccurs="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Лицевой счет</eb:Label>
+						<eb:Definition>Лицевой счет</eb:Definition>
+					</appinfo>
+					<documentation>Лицевой счет исполнителя</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tTSE_SumYear_D02">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Сумма по годам</eb:Label>
+				<eb:Definition>Сумма по годам</eb:Definition>
+			</appinfo>
+			<documentation>Сумма по годам</documentation>
+		</annotation>
+		<sequence>
+			<element name="TSE_SumYear_D02_ITEM" type="self:tTSE_SumYear_D02_ITEM" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tTSE_SumYear_D02_ITEM">
+		<sequence>
+			<element name="Year" type="app:ttext4" minOccurs="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Год</eb:Label>
+						<eb:Definition>Год</eb:Definition>
+					</appinfo>
+					<documentation>Год</documentation>
+				</annotation>
+			</element>
+			<element name="SUMMA" type="app:tSUM" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Сумма</eb:Label>
+						<eb:Definition>Сумма</eb:Definition>
+					</appinfo>
+					<documentation>Сумма</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="tTSE_IGK_D02">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>ИГК</eb:Label>
+				<eb:Definition>ИГК</eb:Definition>
+			</appinfo>
+			<documentation>ИГК</documentation>
+		</annotation>
+		<sequence>
+			<element name="TSE_IGK_D02_ITEM" type="self:tTSE_IGK_D02_ITEM" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="tTSE_IGK_D02_ITEM">
+		<sequence>
+			<element name="IGK" type="app:tIGK" minOccurs="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>ИГК</eb:Label>
+						<eb:Definition>ИГК</eb:Definition>
+					</appinfo>
+					<documentation>ИГК</documentation>
+				</annotation>
+			</element>
+			<element name="SUMMA" type="app:tSUM" minOccurs="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:Label>Сумма</eb:Label>
+						<eb:Definition>Сумма</eb:Definition>
+					</appinfo>
+					<documentation>Сумма</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

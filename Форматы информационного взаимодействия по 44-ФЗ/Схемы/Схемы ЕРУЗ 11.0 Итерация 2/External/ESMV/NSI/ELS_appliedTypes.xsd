@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by User (EMBRACE) -->
+<!-- Дата последнего изменения: 10.02.2020 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/common/applied" targetNamespace="http://www.roskazna.ru/eb/domain/common/applied">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="ELS_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="ELS_common.xsd"/>
+	<simpleType name="tGUID1">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Глобальный уникальный идентификатор1</eb:Label>
+				<eb:Definition>Глобальный уникальный идентификатор1</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tGUID"/>
+	</simpleType>
+	<simpleType name="tSNILS">
+		<restriction base="base:tTSNILS"/>
+	</simpleType>
+	<simpleType name="tCd8">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Код8</eb:Label>
+				<eb:Definition>Код8</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tLen8Text"/>
+	</simpleType>
+	<simpleType name="tDateTime">
+		<restriction base="base:tTDT"/>
+	</simpleType>
+	<simpleType name="tStringExactly1">
+		<restriction base="base:tTSE1"/>
+	</simpleType>
+	<simpleType name="tDctDt">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Дата</eb:Label>
+				<eb:Definition>Дата</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tStringExactly2">
+		<restriction base="base:tTSE2"/>
+	</simpleType>
+	<simpleType name="tStringExactly3">
+		<restriction base="base:tTSE3"/>
+	</simpleType>
+	<simpleType name="tStringExactly4">
+		<restriction base="base:tTSE4"/>
+	</simpleType>
+	<simpleType name="tStringExactly20">
+		<restriction base="base:tTSE20"/>
+	</simpleType>
+	<simpleType name="ttext19">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст19</eb:Label>
+				<eb:Definition>Текст19</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText19"/>
+	</simpleType>
+	<simpleType name="ttext16or19">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Текст16или19</eb:Label>
+				<eb:Definition>Текст16или19</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tText16or19"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual8">
+		<restriction base="base:tTS8"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual20">
+		<restriction base="base:tTS20"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual250">
+		<restriction base="base:tTS250"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual255">
+		<restriction base="base:tTS255"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual256">
+		<restriction base="base:tTS256"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual1000">
+		<restriction base="base:tTS1000"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual2000">
+		<restriction base="base:tTS2000"/>
+	</simpleType>
+	<simpleType name="tOtherReason">
+		<restriction base="base:tTS2000Other"/>
+	</simpleType>
+	<simpleType name="tStringExactly5">
+		<restriction base="base:tTSE5"/>
+	</simpleType>
+	<simpleType name="tOGRN">
+		<restriction base="base:tES13"/>
+	</simpleType>
+	<simpleType name="tINN_FizLico">
+		<restriction base="base:tDigit_ES12"/>
+	</simpleType>
+	<simpleType name="tString10or12">
+		<restriction base="base:tTS10or12"/>
+	</simpleType>
+	<simpleType name="tString8or10">
+		<restriction base="base:tTS8or10"/>
+	</simpleType>
+	<simpleType name="tStringExactly6">
+		<restriction base="base:tTSE6"/>
+	</simpleType>
+	<simpleType name="tText50">
+		<restriction base="base:tS50"/>
+	</simpleType>
+	<simpleType name="tString8or11">
+		<restriction base="base:tTS8or11"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual500">
+		<restriction base="base:tTS500"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual60">
+		<restriction base="base:tTS60"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual160">
+		<restriction base="base:tTSE160"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual50">
+		<restriction base="base:tTS50"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual100">
+		<restriction base="base:tTSE100"/>
+	</simpleType>
+	<simpleType name="tRsltType">
+		<restriction base="base:tTSbef10"/>
+	</simpleType>
+	<simpleType name="tAcntNm">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Номер лицевого счета</eb:Label>
+				<eb:Definition>Номер лицевого счета</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tLen11Text"/>
+	</simpleType>
+	<complexType name="tDocInfo_Cstmr">
+		<sequence>
+			<element name="Cd" type="self:tCd8">
+				<annotation>
+					<documentation>Код клиента</documentation>
+				</annotation>
+			</element>
+			<element name="FullNm" type="self:tFullNm" minOccurs="0">
+				<annotation>
+					<documentation>Полное наименование клиента</documentation>
+				</annotation>
+			</element>
+			<element name="PersAccountNum" type="self:tAcntNm">
+				<annotation>
+					<documentation>Номер лицевого счета клиента</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<simpleType name="tNmDc">
+		<restriction base="base:tTPrtN"/>
+	</simpleType>
+	<simpleType name="tResTp">
+		<restriction base="base:tTPrTp"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual512">
+		<restriction base="base:tTSE512"/>
+	</simpleType>
+	<simpleType name="tString5or8">
+		<restriction base="base:tTSD5or8"/>
+	</simpleType>
+	<simpleType name="tTRT">
+		<restriction base="base:tTRW"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual180">
+		<restriction base="base:tTSE180"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual100ContractName">
+		<restriction base="base:tTS100"/>
+	</simpleType>
+	<simpleType name="tStringExactly9">
+		<restriction base="base:tKPP"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual36">
+		<restriction base="base:tTT36"/>
+	</simpleType>
+	<simpleType name="tStringLessOrEqual23">
+		<restriction base="base:tTT23"/>
+	</simpleType>
+	<simpleType name="tFullNm">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Полное наименование</eb:Label>
+				<eb:Definition>Полное наименование</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="tRType">
+		<restriction base="base:tTSbef14"/>
+	</simpleType>
+	<simpleType name="tPRType">
+		<restriction base="base:tPTSbef14"/>
+	</simpleType>
+	<simpleType name="tStringExactly15">
+		<restriction base="base:tTSE15"/>
+	</simpleType>
+	<simpleType name="tTpCstm">
+		<restriction base="base:tTS3"/>
+	</simpleType>
+	<simpleType name="tTpDoc">
+		<restriction base="base:tTS4"/>
+	</simpleType>
+	<complexType name="tTypeCustom" mixed="true">
+		<attribute name="Cd" type="base:tTES1" use="required"/>
+		<attribute name="value" type="self:tTpCstm"/>
+	</complexType>
+	<complexType name="tReqType" mixed="true">
+		<attribute name="Cd" type="base:tTS1" use="required"/>
+		<attribute name="value" type="self:tRType"/>
+	</complexType>
+	<complexType name="tProtocolReqType" mixed="true">
+		<attribute name="Cd" type="base:tPTS1" use="required"/>
+		<attribute name="value" type="self:tPRType"/>
+	</complexType>
+	<complexType name="tCloseReason" mixed="true">
+		<attribute name="Cd" type="base:tCR2" use="required"/>
+		<attribute name="value" type="base:tCR500"/>
+	</complexType>
+	<simpleType name="tBooln">
+		<restriction base="base:tBln"/>
+	</simpleType>
+	<simpleType name="tIGK">
+		<restriction base="base:ttText20Or25"/>
+	</simpleType>
+	<simpleType name="tINN">
+		<restriction base="base:ttTextMax12"/>
+	</simpleType>
+	<simpleType name="tNOM_DOC">
+		<restriction base="base:ttTextMax15"/>
+	</simpleType>
+	<simpleType name="tSUM">
+		<restriction base="base:ttAmount"/>
+	</simpleType>
+	<simpleType name="tLEVEL">
+		<restriction base="base:ttCd1"/>
+	</simpleType>
+	<simpleType name="tCAUSE">
+		<restriction base="base:ttTextMax150"/>
+	</simpleType>
+	<simpleType name="tNUM_LINE">
+		<restriction base="base:ttNmbrLine"/>
+	</simpleType>
+</schema>

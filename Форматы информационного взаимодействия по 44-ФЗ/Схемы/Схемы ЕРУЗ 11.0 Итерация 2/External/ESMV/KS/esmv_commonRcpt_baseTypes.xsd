@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by max (max) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/common/base" targetNamespace="http://www.roskazna.ru/eb/domain/common/base">
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="esmv_commonRcpt_common.xsd"/>
+	<simpleType name="tAmnt">
+		<restriction base="decimal">
+			<totalDigits value="20" fixed="true"/>
+			<fractionDigits value="2" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tBln">
+		<restriction base="boolean"/>
+	</simpleType>
+	<simpleType name="tDocDate">
+		<restriction base="date"/>
+	</simpleType>
+	<simpleType name="tDateTime">
+		<restriction base="dateTime"/>
+	</simpleType>
+	<simpleType name="tMax4">
+		<restriction base="int">
+			<totalDigits value="4" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax5">
+		<restriction base="int">
+			<totalDigits value="5" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax6">
+		<restriction base="int">
+			<totalDigits value="6" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tInteger20">
+		<restriction base="long">
+			<totalDigits value="20" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax1Text">
+		<restriction base="string">
+			<maxLength value="1" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax2Text">
+		<restriction base="string">
+			<length value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax2_1Text">
+		<restriction base="string">
+			<maxLength value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax3Text">
+		<restriction base="string">
+			<maxLength value="3" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax4Text">
+		<restriction base="string">
+			<maxLength value="4" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax5Text">
+		<restriction base="string">
+			<maxLength value="5" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax6Text">
+		<restriction base="string">
+			<maxLength value="6" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax8Text">
+		<restriction base="string">
+			<maxLength value="8" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax9Text">
+		<restriction base="string">
+			<maxLength value="9" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax10Text">
+		<restriction base="string">
+			<maxLength value="10" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax11Text">
+		<restriction base="string">
+			<maxLength value="11" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax12Text">
+		<restriction base="string">
+			<maxLength value="12" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax13Text">
+		<restriction base="string">
+			<maxLength value="13" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax14Text">
+		<restriction base="string">
+			<maxLength value="14" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax15Text">
+		<restriction base="string">
+			<maxLength value="15" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax16Text">
+		<restriction base="string">
+			<maxLength value="16" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax18Text">
+		<restriction base="string">
+			<maxLength value="18" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax19Text">
+		<restriction base="string">
+			<maxLength value="19" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax20Text">
+		<restriction base="string">
+			<maxLength value="20" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax25Text">
+		<restriction base="string">
+			<maxLength value="25" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax26Text">
+		<restriction base="string">
+			<maxLength value="26" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax30Text">
+		<restriction base="string">
+			<maxLength value="30" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax34Text">
+		<restriction base="string">
+			<maxLength value="34" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax36Text">
+		<restriction base="string">
+			<maxLength value="36" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax60Text">
+		<restriction base="string">
+			<maxLength value="60" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax40Text">
+		<restriction base="string">
+			<maxLength value="40" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax45Text">
+		<restriction base="string">
+			<maxLength value="45" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax50Text">
+		<restriction base="string">
+			<maxLength value="50" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax100Text">
+		<restriction base="string">
+			<maxLength value="100" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax120Text">
+		<restriction base="string">
+			<maxLength value="120" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax160Text">
+		<restriction base="string">
+			<maxLength value="160" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax200Text">
+		<restriction base="string">
+			<maxLength value="200" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax210Text">
+		<restriction base="string">
+			<maxLength value="210" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax250Text">
+		<restriction base="string">
+			<maxLength value="250" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax254Text">
+		<restriction base="string">
+			<maxLength value="254" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax255Text">
+		<restriction base="string">
+			<maxLength value="255" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax256Text">
+		<restriction base="string">
+			<maxLength value="256" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax512Text">
+		<restriction base="string">
+			<maxLength value="512" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax700Text">
+		<restriction base="string">
+			<maxLength value="700" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax1000Text">
+		<restriction base="string">
+			<maxLength value="1000" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax2000Text">
+		<restriction base="string">
+			<maxLength value="2000" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax4000Text">
+		<restriction base="string">
+			<maxLength value="4000" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tUUID36">
+		<restriction base="string">
+			<minLength value="36" fixed="true"/>
+			<maxLength value="36" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax80Text">
+		<restriction base="string">
+			<maxLength value="80" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax360Text">
+		<restriction base="string">
+			<maxLength value="360" fixed="true"/>
+		</restriction>
+	</simpleType>
+</schema>

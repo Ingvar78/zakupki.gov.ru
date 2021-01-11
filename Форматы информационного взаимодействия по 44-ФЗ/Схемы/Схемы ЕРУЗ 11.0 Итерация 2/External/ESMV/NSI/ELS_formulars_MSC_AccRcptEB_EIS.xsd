@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<!-- Версия xsd: 3.0 Дата последнего изменения: 10.09.2020 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:app="http://www.roskazna.ru/eb/domain/common/applied" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/MSC_AccRcptEB_EIS/formular" targetNamespace="http://www.roskazna.ru/eb/domain/MSC_AccRcptEB_EIS/formular">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="ELS_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common/applied" schemaLocation="ELS_appliedTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="ELS_common.xsd"/>
+	<element name="MSC_AccRcptEB_EIS" type="self:tMSC_AccRcptEB_EIS"/>
+	<complexType name="tMSC_AccRcptEB_EIS">
+		<annotation>
+			<documentation>Квитанция о резервировании (открытии, закрытии) лицевого счета для учета операций неучастника бюджетного процесса</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="cm:tFormular">
+				<sequence>
+					<element name="GUID" type="app:tGUID1">
+						<annotation>
+							<documentation>Глобальный уникальный идентификатор </documentation>
+						</annotation>
+					</element>
+					<element name="RcptDtTm" type="app:tDateTime">
+						<annotation>
+							<documentation>Дата и время формирования Квитанции</documentation>
+						</annotation>
+					</element>
+					<element name="RcptNum" type="app:tStringLessOrEqual20">
+						<annotation>
+							<documentation>Номер Квитанции</documentation>
+						</annotation>
+					</element>
+					<element name="GUIDReq" type="app:tGUID1">
+						<annotation>
+							<documentation>Глобальный идентификатор Заявления </documentation>
+						</annotation>
+					</element>
+					<element name="Rslt" type="app:tRsltType">
+						<annotation>
+							<documentation>Статус обработки Заявления</documentation>
+						</annotation>
+					</element>
+					<element name="DocInfo_Cstmr" type="app:tDocInfo_Cstmr">
+						<annotation>
+							<documentation>Клиент</documentation>
+						</annotation>
+					</element>
+					<element name="DocInfo_Bank_RC" type="self:tDocInfo_Bank_RC" minOccurs="0">
+						<annotation>
+							<documentation>Банковские реквизиты РЦ</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="tDocInfo_Bank_RC">
+		<sequence>
+			<element name="Cd" type="app:tStringExactly4">
+				<annotation>
+					<documentation>Код ТОФК РЦ</documentation>
+				</annotation>
+			</element>
+			<element name="Nm" type="app:tFullNm">
+				<annotation>
+					<documentation>Наименование ТОФК РЦ</documentation>
+				</annotation>
+			</element>
+			<element name="TOFKAddress" type="app:tStringLessOrEqual2000">
+				<annotation>
+					<documentation>Место нахождения ТОФК</documentation>
+				</annotation>
+			</element>
+			<element name="BankAccountNum" type="app:tStringExactly20">
+				<annotation>
+					<documentation>Номер банковского счета</documentation>
+				</annotation>
+			</element>
+			<element name="TOFKBIK" type="app:tStringExactly9">
+				<annotation>
+					<documentation>БИК ТОФК</documentation>
+				</annotation>
+			</element>
+			<element name="BankName" type="app:tStringLessOrEqual160">
+				<annotation>
+					<documentation>Наименование банка</documentation>
+				</annotation>
+			</element>
+			<element name="KSNum" type="app:tStringExactly20">
+				<annotation>
+					<documentation>Номер казначейского счета</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

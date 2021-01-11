@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by User (EMBRACE) -->
+<!-- Дата последнего изменения: 10.02.2020 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/common/base" targetNamespace="http://www.roskazna.ru/eb/domain/common/base">
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="ELS_common.xsd"/>
+	<simpleType name="tGUID">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>GUID</eb:Label>
+				<eb:Definition>GUID</eb:Definition>
+			</appinfo>
+			<documentation>VARCHAR2(36BYTE)</documentation>
+		</annotation>
+		<restriction base="string">
+			<length value="36"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tLen11Text">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Max11Text</eb:Label>
+				<eb:Definition>Max11Text</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<length value="11"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tMax2000Text">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Max2000Text</eb:Label>
+				<eb:Definition>Max2000Text</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<maxLength value="2000" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tDocDate">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Дата</eb:Label>
+				<eb:Definition>Дата</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="date"/>
+	</simpleType>
+	<simpleType name="tTSNILS">
+		<restriction base="string">
+			<minLength value="14" fixed="true"/>
+			<maxLength value="14" fixed="true"/>
+			<pattern value="\d{3}-\d{3}-\d{3} \d{2}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tLen8Text">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Max8Text</eb:Label>
+				<eb:Definition>Max8Text</eb:Definition>
+			</appinfo>
+		</annotation>
+		<restriction base="string">
+			<length value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTDT">
+		<restriction base="dateTime"/>
+	</simpleType>
+	<simpleType name="tTSE1">
+		<restriction base="string">
+			<minLength value="1" fixed="true"/>
+			<maxLength value="1" fixed="true"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE6">
+		<restriction base="string">
+			<minLength value="6" fixed="true"/>
+			<maxLength value="6" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE4">
+		<restriction base="string">
+			<minLength value="4" fixed="true"/>
+			<maxLength value="4" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE20">
+		<restriction base="string">
+			<minLength value="20" fixed="true"/>
+			<maxLength value="20" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tText19">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Text19</eb:Label>
+				<eb:Definition>Text19</eb:Definition>
+			</appinfo>
+			<documentation>Строка с длиной 19 знаков.&#13;
+</documentation>
+		</annotation>
+		<restriction base="string">
+			<length value="19"/>
+			<pattern value="[0-9]+"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tText16or19">
+		<annotation>
+			<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+				<eb:Label>Text16or19</eb:Label>
+				<eb:Definition>Text16or19</eb:Definition>
+			</appinfo>
+			<documentation>Строка с длиной 16 либо 19 знаков.&#13;
+</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="\d{16}|\d{19}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS2000">
+		<restriction base="string">
+			<maxLength value="2000" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS2000Other">
+		<restriction base="string">
+			<maxLength value="2000" fixed="true"/>
+			<minLength value="1"/>
+			<enumeration value="реорганизация юридического лица"/>
+			<enumeration value="ликвидация юридического лица"/>
+			<enumeration value="прекращение деятельности"/>
+			<enumeration value="исполнение договора, (контракта, соглашения)"/>
+			<enumeration value="расторжение договора (контракта, соглашения)"/>
+			<enumeration value="отсутствия операций на лицевом счете в течение трех лет"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE3">
+		<restriction base="string">
+			<minLength value="3" fixed="true"/>
+			<maxLength value="3" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE2">
+		<restriction base="string">
+			<minLength value="2" fixed="true"/>
+			<maxLength value="2" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS8or10">
+		<restriction base="string">
+			<pattern value="\d{8}|\d{10}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS8or11">
+		<restriction base="string">
+			<pattern value="\d{8}|\d{11}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE5">
+		<restriction base="string">
+			<minLength value="5" fixed="true"/>
+			<maxLength value="5" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS20">
+		<restriction base="string">
+			<maxLength value="20" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS60">
+		<restriction base="string">
+			<maxLength value="60" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS255">
+		<restriction base="string">
+			<maxLength value="255" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS256">
+		<restriction base="string">
+			<maxLength value="256" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS1000">
+		<restriction base="string">
+			<maxLength value="1000" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS8">
+		<restriction base="string">
+			<maxLength value="8" fixed="true"/>
+			<minLength value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS500">
+		<restriction base="string">
+			<maxLength value="500" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS50">
+		<restriction base="string">
+			<maxLength value="50" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS250">
+		<restriction base="string">
+			<maxLength value="250" fixed="true"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tDigit_ES12">
+		<restriction base="string">
+			<minLength value="12" fixed="true"/>
+			<maxLength value="12" fixed="true"/>
+			<pattern value="\d{12}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS10or12">
+		<restriction base="string">
+			<pattern value="\w{10}|\w{12}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tES13">
+		<restriction base="string">
+			<minLength value="13"/>
+			<maxLength value="13"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tS50">
+		<restriction base="string">
+			<maxLength value="50"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE160">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="160"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE100">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="100"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSbef10">
+		<restriction base="string">
+			<maxLength value="10"/>
+			<minLength value="10"/>
+			<enumeration value="Обработано"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTPrtN">
+		<restriction base="string">
+			<maxLength value="70"/>
+			<minLength value="1"/>
+			<enumeration value="Заявление на резервирование / открытие (закрытие) лицевого счета"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTPrTp">
+		<restriction base="string">
+			<maxLength value="8"/>
+			<minLength value="1"/>
+			<enumeration value="Открытие"/>
+			<enumeration value="Закрытие"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE512">
+		<restriction base="string">
+			<maxLength value="512"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSD5or8">
+		<restriction base="string">
+			<pattern value="((\w|[а-яА-Я]){5})|(\w|[а-яА-Я]){8}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTRW">
+		<restriction base="string">
+			<maxLength value="8"/>
+			<minLength value="8"/>
+			<enumeration value="Отказано"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE180">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="180"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tKPP">
+		<restriction base="string">
+			<minLength value="9"/>
+			<maxLength value="9"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTT36">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="36"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTT23">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="23"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSE15">
+		<restriction base="string">
+			<minLength value="15"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS3">
+		<restriction base="string">
+			<maxLength value="5" fixed="true"/>
+			<minLength value="2"/>
+			<enumeration value="ИП"/>
+			<enumeration value="ЮЛ"/>
+			<enumeration value="КФХ"/>
+			<enumeration value="ОП ЮЛ"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS4">
+		<restriction base="string">
+			<maxLength value="200" fixed="true"/>
+			<minLength value="1"/>
+			<enumeration value="Ходатайство юридического лица об открытии лицевого счета обособленному подразделению"/>
+			<enumeration value="Ходатайство юридического лица о решении закрыть лицевой счет, открытый обособленному подразделению"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTES1">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTES2">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTSbef14">
+		<restriction base="string">
+			<minLength value="8"/>
+			<maxLength value="14"/>
+			<enumeration value="Резервирование"/>
+			<enumeration value="Открытие"/>
+			<enumeration value="Закрытие"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tPTSbef14">
+		<restriction base="string">
+			<minLength value="8"/>
+			<maxLength value="8"/>
+			<enumeration value="Открытие"/>
+			<enumeration value="Закрытие"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS1">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tPTS1">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tBln">
+		<restriction base="boolean"/>
+	</simpleType>
+	<simpleType name="tTS2">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tTS100">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="100"/>
+			<enumeration value="Государственный контракт"/>
+			<enumeration value="Договор"/>
+			<enumeration value="Свидетельство о прекращении деятельности"/>
+			<enumeration value="Свидетельство о ликвидации"/>
+			<enumeration value="Свидетельство о реорганизации"/>
+			<enumeration value="Акт выполненных работ"/>
+			<enumeration value="Дополнительное соглашение к договору о расторжении"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="tCR2">
+		<restriction base="string">
+			<minLength value="2"/>
+			<maxLength value="2"/>
+			<enumeration value="R1">
+				<annotation>
+					<documentation>реорганизацией (ликвидацией) клиента</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="R2">
+				<annotation>
+					<documentation>исполнением (расторжением) государственного контракта, соглашения, контракта учреждения, договора о капитальных вложениях, договора о проведении капитального ремонта, договора, на основании которых открыты разделы на лицевом счете, и (или) отсутствием операций на лицевом счете в течение одного года</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="R3">
+				<annotation>
+					<documentation>изменением структуры номера лицевого счета клиента</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="R4">
+				<annotation>
+					<documentation>переводом клиента на обслуживание в другой территориальный орган ФК</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="R5">
+				<annotation>
+					<documentation>реорганизацией (ликвидацией) органа Федерального казначейства, открывшего лицевой счет клиенту</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="R6">
+				<annotation>
+					<documentation>иными случаями, предусмотренными законодательством Российской Федерации и иными нормативными правовыми актами Российской Федерации</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<simpleType name="tCR500">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="500"/>
+			<enumeration value="реорганизацией (ликвидацией) клиента"/>
+			<enumeration value="исполнением (расторжением) государственного контракта, соглашения, контракта учреждения, договора о капитальных вложениях, договора о проведении капитального ремонта, договора, на основании которых открыты разделы на лицевом счете, и (или) отсутствием операций на лицевом счете в течение одного года"/>
+			<enumeration value="изменением структуры номера лицевого счета клиента"/>
+			<enumeration value="переводом клиента на обслуживание в другой территориальный орган ФК"/>
+			<enumeration value="реорганизацией (ликвидацией) органа Федерального казначейства, открывшего лицевой счет клиенту"/>
+			<enumeration value="иными случаями, предусмотренными законодательством Российской Федерации и иными нормативными правовыми актами Российской Федерации"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttNmbrLine">
+		<annotation>
+			<documentation>Порядковый номер</documentation>
+		</annotation>
+		<restriction base="integer">
+			<totalDigits value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttText20Or25">
+		<annotation>
+			<documentation>Текст размерностью 20 или 25 символов</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="\w{20}|\w{25}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttTextMax12">
+		<annotation>
+			<documentation>Текст размерностью от 1 до 12 символов</documentation>
+		</annotation>
+		<restriction base="string">
+			<minLength value="1" fixed="true"/>
+			<maxLength value="12" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttTextMax15">
+		<annotation>
+			<documentation>Текст размерностью от 1 до 15 символов</documentation>
+		</annotation>
+		<restriction base="string">
+			<minLength value="1" fixed="true"/>
+			<maxLength value="15" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttAmount">
+		<annotation>
+			<documentation>Сумма</documentation>
+		</annotation>
+		<restriction base="decimal">
+			<totalDigits value="20" fixed="true"/>
+			<fractionDigits value="2" fixed="true"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttCd1">
+		<annotation>
+			<documentation>Текст размерностью 1 символа</documentation>
+		</annotation>
+		<restriction base="string">
+			<length value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ttTextMax150">
+		<annotation>
+			<documentation>Текст размерностью от 1 до 150 символов</documentation>
+		</annotation>
+		<restriction base="string">
+			<minLength value="1" fixed="true"/>
+			<maxLength value="150" fixed="true"/>
+		</restriction>
+	</simpleType>
+</schema>

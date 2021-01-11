@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by max (max) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:base="http://www.roskazna.ru/eb/domain/common/base" xmlns:cm="http://www.roskazna.ru/eb/domain/common" xmlns:eb="http://www.roskazna.ru/eb/domain/appinfo" xmlns:self="http://www.roskazna.ru/eb/domain/common/applied" targetNamespace="http://www.roskazna.ru/eb/domain/common/applied">
+	<import namespace="http://www.roskazna.ru/eb/domain/common/base" schemaLocation="esmv_commonRcpt_baseTypes.xsd"/>
+	<import namespace="http://www.roskazna.ru/eb/domain/common" schemaLocation="esmv_commonRcpt_common.xsd"/>
+	<simpleType name="tIDCd">
+		<restriction base="base:tMax25Text"/>
+	</simpleType>
+	<simpleType name="tGUID">
+		<restriction base="base:tMax36Text"/>
+	</simpleType>
+	<simpleType name="tGUID2">
+		<restriction base="base:tMax60Text"/>
+	</simpleType>
+	<simpleType name="tUUID">
+		<restriction base="cm:tGuid"/>
+	</simpleType>
+	<simpleType name="tCntrctDt">
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tDctDt">
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tStrtDt">
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tEndDt">
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tCrtnDt">
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tSgngDt">
+		<restriction base="base:tDocDate"/>
+	</simpleType>
+	<simpleType name="tDtTm">
+		<restriction base="base:tDateTime"/>
+	</simpleType>
+	<simpleType name="tYear">
+		<restriction base="base:tMax4Text"/>
+	</simpleType>
+	<simpleType name="tQnt">
+		<restriction base="base:tMax5"/>
+	</simpleType>
+	<simpleType name="tQnt20">
+		<restriction base="base:tInteger20"/>
+	</simpleType>
+	<simpleType name="tHrchLvl">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tBdgtCd">
+		<restriction base="base:tMax8Text"/>
+	</simpleType>
+	<simpleType name="tOKVCd">
+		<restriction base="base:tMax3Text"/>
+	</simpleType>
+	<simpleType name="tOKPDCd">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tOKTMOCd">
+		<restriction base="base:tMax11Text"/>
+	</simpleType>
+	<simpleType name="tOrgCd">
+		<restriction base="base:tMax40Text"/>
+	</simpleType>
+	<simpleType name="tOGRN">
+		<restriction base="base:tMax13Text"/>
+	</simpleType>
+	<simpleType name="tINN10">
+		<restriction base="base:tMax10Text"/>
+	</simpleType>
+	<simpleType name="tKPP">
+		<restriction base="base:tMax9Text"/>
+	</simpleType>
+	<simpleType name="tRBSCd">
+		<restriction base="base:tMax5Text"/>
+	</simpleType>
+	<simpleType name="tGRBSCd">
+		<restriction base="base:tMax3Text"/>
+	</simpleType>
+	<simpleType name="tUBPCd">
+		<restriction base="base:tMax5Text"/>
+	</simpleType>
+	<simpleType name="tTOFKCd">
+		<restriction base="base:tMax4Text"/>
+	</simpleType>
+	<simpleType name="tCd2">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tCd2_1">
+		<restriction base="base:tMax2_1Text"/>
+	</simpleType>
+	<simpleType name="tCd6">
+		<restriction base="base:tMax6Text"/>
+	</simpleType>
+	<simpleType name="tCd20">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tCd30">
+		<restriction base="base:tMax30Text"/>
+	</simpleType>
+	<simpleType name="tNmbr3">
+		<restriction base="base:tMax3Text"/>
+	</simpleType>
+	<simpleType name="tNmbr6">
+		<restriction base="base:tMax6Text"/>
+	</simpleType>
+	<simpleType name="tNmbr13">
+		<restriction base="base:tMax13Text"/>
+	</simpleType>
+	<simpleType name="tNmbr15">
+		<restriction base="base:tMax15Text"/>
+	</simpleType>
+	<simpleType name="tNmbr18">
+		<restriction base="base:tMax18Text"/>
+	</simpleType>
+	<simpleType name="tNmbr45">
+		<restriction base="base:tMax45Text"/>
+	</simpleType>
+	<simpleType name="tNmbr50">
+		<restriction base="base:tMax50Text"/>
+	</simpleType>
+	<simpleType name="tCntrctNm">
+		<restriction base="base:tMax100Text"/>
+	</simpleType>
+	<simpleType name="tRgstrNm">
+		<restriction base="base:tMax3Text"/>
+	</simpleType>
+	<simpleType name="tRqstNm">
+		<restriction base="base:tMax15Text"/>
+	</simpleType>
+	<simpleType name="tPyOrdrNm">
+		<restriction base="base:tMax10Text"/>
+	</simpleType>
+	<simpleType name="tOblgtNm">
+		<restriction base="base:tMax16Text"/>
+	</simpleType>
+	<simpleType name="tRwNm">
+		<restriction base="base:tMax4"/>
+	</simpleType>
+	<simpleType name="tAcntNm">
+		<restriction base="base:tMax11Text"/>
+	</simpleType>
+	<simpleType name="tBnkAcNm">
+		<restriction base="base:tMax34Text"/>
+	</simpleType>
+	<simpleType name="tCrAccNm">
+		<restriction base="base:tMax34Text"/>
+	</simpleType>
+	<simpleType name="tOKPOCd">
+		<restriction base="base:tMax8Text"/>
+	</simpleType>
+	<simpleType name="tCrAccNm20">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tPyOrdrNm9">
+		<restriction base="base:tMax9Text"/>
+	</simpleType>
+	<simpleType name="tTlphn">
+		<restriction base="base:tMax50Text"/>
+	</simpleType>
+	<simpleType name="tKBK">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tTrgtCd">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tPrtCd">
+		<restriction base="base:tMax1Text"/>
+	</simpleType>
+	<simpleType name="tFAIPObjCd">
+		<restriction base="base:tMax14Text"/>
+	</simpleType>
+	<simpleType name="tPyPrt">
+		<restriction base="base:tMax1Text"/>
+	</simpleType>
+	<simpleType name="tINN12">
+		<restriction base="base:tMax12Text"/>
+	</simpleType>
+	<simpleType name="tBnkBIK">
+		<restriction base="base:tMax9Text"/>
+	</simpleType>
+	<simpleType name="tTxprSts">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tPyTp">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tTrnsTp">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tFnMnth">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tSrcCd">
+		<restriction base="base:tMax1Text"/>
+	</simpleType>
+	<simpleType name="tPyDrct">
+		<restriction base="base:tMax1Text"/>
+	</simpleType>
+	<simpleType name="tCphr">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tRcrdNm">
+		<restriction base="base:tInteger20"/>
+	</simpleType>
+	<simpleType name="tIDDcNmbr">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tBnkCrdNm">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tDbtCrdt">
+		<restriction base="base:tMax26Text"/>
+	</simpleType>
+	<simpleType name="tCd5">
+		<restriction base="base:tMax5Text"/>
+	</simpleType>
+	<simpleType name="tOKUDCdFrm">
+		<restriction base="base:tMax50Text"/>
+	</simpleType>
+	<simpleType name="tBdgtLvl">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tSrlNmbr">
+		<restriction base="base:tMax6"/>
+	</simpleType>
+	<simpleType name="tNm100">
+		<restriction base="base:tMax100Text"/>
+	</simpleType>
+	<simpleType name="tNm120">
+		<restriction base="base:tMax120Text"/>
+	</simpleType>
+	<simpleType name="tNm160">
+		<restriction base="base:tMax160Text"/>
+	</simpleType>
+	<simpleType name="tNm200">
+		<restriction base="base:tMax200Text"/>
+	</simpleType>
+	<simpleType name="tNm256">
+		<restriction base="base:tMax256Text"/>
+	</simpleType>
+	<simpleType name="tNm1000">
+		<restriction base="base:tMax1000Text"/>
+	</simpleType>
+	<simpleType name="tShrtNm">
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="tFullNm">
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="tBdgtNm">
+		<restriction base="base:tMax512Text"/>
+	</simpleType>
+	<simpleType name="tPstn">
+		<restriction base="base:tMax100Text"/>
+	</simpleType>
+	<simpleType name="tFllNmF">
+		<restriction base="base:tMax50Text"/>
+	</simpleType>
+	<simpleType name="tSpclInst">
+		<restriction base="base:tMax700Text"/>
+	</simpleType>
+	<simpleType name="tNt">
+		<restriction base="base:tMax254Text"/>
+	</simpleType>
+	<simpleType name="tDcCmnt">
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="tExcPrt">
+		<restriction base="base:tMax250Text"/>
+	</simpleType>
+	<simpleType name="tPyPrps">
+		<restriction base="base:tMax210Text"/>
+	</simpleType>
+	<simpleType name="tDcKnd">
+		<restriction base="base:tMax50Text"/>
+	</simpleType>
+	<simpleType name="tSbjct">
+		<restriction base="base:tMax512Text"/>
+	</simpleType>
+	<simpleType name="tBckpFld">
+		<restriction base="base:tMax40Text"/>
+	</simpleType>
+	<simpleType name="tCntnt">
+		<restriction base="base:tMax16Text"/>
+	</simpleType>
+	<simpleType name="tPyPsDtls">
+		<restriction base="base:tMax1000Text"/>
+	</simpleType>
+	<simpleType name="tIDDcNm">
+		<restriction base="base:tMax255Text"/>
+	</simpleType>
+	<simpleType name="tSrnm">
+		<restriction base="base:tMax40Text"/>
+	</simpleType>
+	<simpleType name="tSubNm">
+		<restriction base="base:tMax20Text"/>
+	</simpleType>
+	<simpleType name="tMdlNm">
+		<restriction base="base:tMax30Text"/>
+	</simpleType>
+	<simpleType name="tDcNm">
+		<restriction base="base:tMax250Text"/>
+	</simpleType>
+	<simpleType name="tTextDate">
+		<restriction base="base:tMax8Text"/>
+	</simpleType>
+	<simpleType name="tCntrlInfrm">
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="tErMsg">
+		<restriction base="base:tMax2000Text"/>
+	</simpleType>
+	<simpleType name="tErMsg4000">
+		<restriction base="base:tMax4000Text"/>
+	</simpleType>
+	<simpleType name="tNMBO">
+		<restriction base="base:tMax19Text"/>
+	</simpleType>
+	<simpleType name="tLegalAdress">
+		<restriction base="base:tMax80Text"/>
+	</simpleType>
+	<simpleType name="tAdrss">
+		<restriction base="base:tMax360Text"/>
+	</simpleType>
+	<simpleType name="tIndex2">
+		<restriction base="base:tMax2Text"/>
+	</simpleType>
+	<simpleType name="tIndex10">
+		<restriction base="base:tMax10Text"/>
+	</simpleType>
+	<simpleType name="tIndex15">
+		<restriction base="base:tMax15Text"/>
+	</simpleType>
+	<complexType name="tMSC_ScrcSgnComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_ScrcSgn"/>
+	</complexType>
+	<simpleType name="tMSC_ScrcSgn">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>NotSecret</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>DSP</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Secret</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>TopSecret</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_SpcInstCdComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_SpcInstCd"/>
+	</complexType>
+	<simpleType name="tMSC_SpcInstCd">
+		<restriction base="string">
+			<enumeration value="01">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>FinForeignCurr</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="02">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IntraReorg</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="03">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>BudgetFigures</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="05">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AddBudgetFunding</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="06">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>RepTmBudgetDt</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="07">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SpecialExpenses</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="08">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>InterDepartReorg</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_BKTpComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_BKTp"/>
+	</complexType>
+	<simpleType name="tMSC_BKTp">
+		<restriction base="string">
+			<enumeration value="10">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Costs</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="20">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Incomes</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="31">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IVFDB</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="32">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IVnFDB</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_BKTp10Complex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_BKTp10"/>
+	</complexType>
+	<simpleType name="tMSC_BKTp10">
+		<restriction base="string">
+			<enumeration value="10">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Costs</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="31">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IVFDB</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="32">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IVnFDB</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_BKTp20Complex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_BKTp20"/>
+	</complexType>
+	<simpleType name="tMSC_BKTp20">
+		<restriction base="string">
+			<enumeration value="20">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Incomes</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="31">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IVFDB</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="32">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>IVnFDB</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_BKTp10_20Complex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_BKTp10_20"/>
+	</complexType>
+	<simpleType name="tMSC_BKTp10_20">
+		<restriction base="string">
+			<enumeration value="10">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Costs</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="20">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Incomes</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_RqstTpComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_RqstTp"/>
+	</complexType>
+	<simpleType name="tMSC_RqstTp">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ZKR</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ShortZKR</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_AdvnPySgnComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_AdvnPySgn"/>
+	</complexType>
+	<simpleType name="tMSC_AdvnPySgn">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PayNotAdvance </eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PayAdvance </eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_ShrtPyKndComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_ShrtPyKnd"/>
+	</complexType>
+	<simpleType name="tMSC_ShrtPyKnd">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Empty</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Urgently</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_BsPySgnComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_BsPySgn"/>
+	</complexType>
+	<simpleType name="tMSC_BsPySgn">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PayBase </eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>DocBase </eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_FndsSrcComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_FndsSrc"/>
+	</complexType>
+	<simpleType name="tMSC_FndsSrc">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>BudgetFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AddBudgetFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>OperSearchFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="5">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>TempFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="6">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>LegalEntFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_PrntKPPSgnComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_PrntKPPSgn"/>
+	</complexType>
+	<simpleType name="tMSC_PrntKPPSgn">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>NotPrint</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Print</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_ExplnSgnComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_ExplnSgn"/>
+	</complexType>
+	<simpleType name="tMSC_ExplnSgn">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Yes</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>No</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_PyKndComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_PyKnd"/>
+	</complexType>
+	<simpleType name="tMSC_PyKnd">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Empty</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Post</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Telegraph</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Urgently</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_SrcKndComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_SrcKnd"/>
+	</complexType>
+	<simpleType name="tMSC_SrcKnd">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>BudgetFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AddBudgetFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>OperSearchFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="5">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>TempFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_StSrcKndComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_StSrcKnd"/>
+	</complexType>
+	<simpleType name="tMSC_StSrcKnd">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>BudgetFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AddBudgetFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>OperSearchFunds</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_RfndDcComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_RfndDc"/>
+	</complexType>
+	<simpleType name="tMSC_RfndDc">
+		<restriction base="string">
+			<enumeration value="Заявка на возврат">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>A</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Заявка на кассовый расход">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>B</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Заявка на получение наличных денег">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>C</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Заявка на получение денежных средств, перечисляемых на карту">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>D</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Платежное поручение">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>E</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Бухгалтерская справка ф. 0504833">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>F</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Уведомление об уточнении операций клиента">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>G</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Сводная заявка на кассовый расход (для уплаты налогов)">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>H</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_PyDrctnComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_PyDrctn"/>
+	</complexType>
+	<simpleType name="tMSC_PyDrctn">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Enrollment</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>WriteOff</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_RgstrTpComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_RgstrTp"/>
+	</complexType>
+	<simpleType name="tMSC_RgstrTp">
+		<restriction base="string">
+			<enumeration value="0">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Empty</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Full</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Change</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_SctnCdComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_SctnCd"/>
+	</complexType>
+	<simpleType name="tMSC_SctnCd">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>TransBudgetData</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>BudgetObligation</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Operations</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_RfOprKndComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_RfOprKnd"/>
+	</complexType>
+	<simpleType name="tMSC_RfOprKnd">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Receipt</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>ReturnReceipts</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>CashFlow</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="4">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>RestorCashFlow</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_AcntTpComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_AcntTp"/>
+	</complexType>
+	<simpleType name="tMSC_AcntTp">
+		<restriction base="string">
+			<enumeration value="03">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>First</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="14">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Second</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="41">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Third</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_AcntCdsComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_AcntCds"/>
+	</complexType>
+	<simpleType name="tMSC_AcntCds">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>All</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>FortyFirst</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="3">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>NotFortyFirst</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_ViewRegisterPIAOComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_ViewRegisterPIAO"/>
+	</complexType>
+	<simpleType name="tMSC_ViewRegisterPIAO">
+		<restriction base="string">
+			<enumeration value="1">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>AllAccount</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="2">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PartAccount</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="tMSC_IndicatorStateComplex" mixed="true">
+		<attribute name="code" type="NCName"/>
+		<attribute name="value" type="self:tMSC_IndicatorState"/>
+	</complexType>
+	<simpleType name="tMSC_IndicatorState">
+		<restriction base="string">
+			<enumeration value="Пусто">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Empty</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Принят">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>SuccessfullyProcessed</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Частично принят">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>PartlyProcessed</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+			<enumeration value="Отклонен">
+				<annotation>
+					<appinfo source="http://www.roskazna.ru/eb/domain/appinfo">
+						<eb:ID>Rejected</eb:ID>
+					</appinfo>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+</schema>

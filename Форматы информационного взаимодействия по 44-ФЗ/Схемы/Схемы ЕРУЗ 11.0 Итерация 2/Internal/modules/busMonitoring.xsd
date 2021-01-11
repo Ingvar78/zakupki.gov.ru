@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS INTEGRATION_SERVICE_TYPES Integration Scheme, version 11.0, create date 16.10.2020 -->
+<xs:schema xmlns="http://zakupki.gov.ru/busMonitoring" xmlns:bus="http://zakupki.gov.ru/busMonitoring" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/busMonitoring" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="sentPackageListRequest" type="bus:packageListRequestType">
+		<xs:annotation>
+			<xs:documentation>Запрос списка отправленных пакетов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sentPackageList" type="bus:packageListType">
+		<xs:annotation>
+			<xs:documentation>
+Список отправленных пакетов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="reSendPackage" type="bus:reSendPackageType">
+		<xs:annotation>
+			<xs:documentation>Запрос на повторную отправку пакетов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="receivedPackageListRequest" type="bus:packageListRequestType">
+		<xs:annotation>
+			<xs:documentation>Запрос списка полученных пакетов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="receivedPackageList" type="bus:packageListType">
+		<xs:annotation>
+			<xs:documentation>Список полученных пакетов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="docProjectStatusRequest" type="bus:docProjectStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Запрос информации о статусе размещения проектов документов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="docProjectStatusResponse" type="bus:docProjectStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос о статусе размещения проектов документов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="confirmation" type="confirmationType">
+		<xs:annotation>
+			<xs:documentation>Уведомление о результатах обработки информационного пакета</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Типы-->
+	<xs:complexType name="confirmationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат обработки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="loadId" type="guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор загруженных данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="result" type="confirmationResultType">
+				<xs:annotation>
+					<xs:documentation>Результат обработки данных
+
+success - обработано успешно;
+failure - ошибки при обработке;
+processing - обрабатывается.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="violations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Выявленные в процессе обработки нарушения и ошибки</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="violation" type="violationType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="refId" type="guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор обработанного пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="missingIndexNums" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Список пропущенных порядковых номеров пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="indexNum" type="indexNumType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Порядковый номер пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="packageListRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос списка пакетов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Id" type="guidType">
+				<xs:annotation>
+					<xs:documentation>id запроса на список переданных/полученных пакетов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodInfo">
+				<xs:annotation>
+					<xs:documentation>Период, за который необходимо получить список пакетов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fromDT" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Начало временного интервала, в котором ведется поиск (включается)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="toDT" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Конец временного интервала, в котором ведется поиск (не включается)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="documentKind" type="text200Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Вид документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="objectType" type="text200Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое наименование объекта информационного обмена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="objectId" type="guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор объекта информационного обмена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="packageListType">
+		<xs:annotation>
+			<xs:documentation>Тип: Ответ на запрос списка переданных/полученных пакетов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestId" type="guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>id запроса на список переданных/полученных пакетов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packagesInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Список пакетов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="packageInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения по пакету</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="id" type="guidType">
+										<xs:annotation>
+											<xs:documentation>Глобальный идентификатор  информационного пакета из индексной карточки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="status" type="messageStatusEnum">
+										<xs:annotation>
+											<xs:documentation>Статус передачи информационного пакета:
+processing - В процессе обработки, промежуточный статус;
+error - Ошибка обработки, окончательный статус;
+completed - Обработка завершена, окончательный статус подтверждений;
+wait_confirmation - Ожидает получения подтверждения приема, промежуточный статус бизнес-сообщения;
+confirmation_processing - Получено промежуточное подтверждение приема, промежуточный статус бизнес-сообщения;
+confirmation_ok - Получен положительный результат приема, окончательный статус бизнес-сообщения;
+confirmation_fail - Получен негативный результат приема, окончательный статус бизнес-сообщения;
+resend - Требует переотправки, промежуточный статус сообщения;
+resend_fail - Попытки переотправки не удались, промежуточный статус сообщения, требующий рассмотрения службой сопровождения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="sender" type="text200Type">
+										<xs:annotation>
+											<xs:documentation>Отправитель</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="receiver" type="text200Type">
+										<xs:annotation>
+											<xs:documentation>Получатель</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="createDT" type="xs:dateTime">
+										<xs:annotation>
+											<xs:documentation>Дата и время формирования информационного пакета</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="operationDT" type="xs:dateTime">
+										<xs:annotation>
+											<xs:documentation>Дата и время последней обработки сообщения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="documentKind" type="text200Type">
+										<xs:annotation>
+											<xs:documentation>Вид документа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="objectType" type="text200Type">
+										<xs:annotation>
+											<xs:documentation>Кодовое наименование объекта информационного обмена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="objectId" type="guidType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификатор объекта информационного обмена (реестровый номер)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="indexNum" type="xs:int" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Порядковый номер пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="reSendPackageType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос на повторную отправку пакетов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reSendingPackagesIds">
+				<xs:annotation>
+					<xs:documentation>Список идентификаторов пакетов, которые необходимо направить повторно</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="guidType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор  информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="docProjectStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос информации о статусе размещения проектов документов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="docProjectsIds">
+				<xs:annotation>
+					<xs:documentation>Список идентификаторов пакетов, содержащих проекты документов, информацию о статусе которых необходимо получить</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="guidType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="docProjectStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Тип: Ответ на запрос о статусе размещения проектов документов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestId" type="guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор запроса о статусе размещения проектов документов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docProjectsStatusInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о статусе размещения проекта документа в ЕИС</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="docProjectId" type="guidType">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор  информационного пакета, содержащего проект документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="docProjectConfirmId" type="guidType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор  информационного пакета, содержащего результат обработки проекта документа.
+Заполняется при наличии в ЕИС сформированного подтверждения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="notPublished" type="xs:boolean" fixed="true">
+								<xs:annotation>
+									<xs:documentation>Документ не размещен в ЕИС</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="publishedDocId" type="guidType">
+								<xs:annotation>
+									<xs:documentation>Глобальный идентификатор  информационного пакета, содержащий размещенный проект документа</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="schemeVersion">
+		<xs:annotation>
+			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="current" type="text10Type" fixed="11.0"/>
+	</xs:complexType>
+	<xs:complexType name="violationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушение приема</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errCode" type="text10Type">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="level" type="violationLevelType">
+				<xs:annotation>
+					<xs:documentation>Тип:
+error - Ошибка
+warning - Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text200Type">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullErrorLog" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полный текст ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Простые типы-->
+	<xs:simpleType name="confirmationResultType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат приема пакета </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="success"/>
+			<xs:enumeration value="failure"/>
+			<xs:enumeration value="processing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="guidType">
+		<xs:annotation>
+			<xs:documentation>Тип: Глобальный идентификатор</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="indexNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Порядковый номер пакета данных в AS2-пакете</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="messageStatusEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус обработки сообщения:
+processing - В процессе обработки, промежуточный статус;
+error - Ошибка обработки, окончательный статус;
+completed - Обработка завершена, окончательный статус подтверждений;
+wait_confirmation - Ожидает получения подтверждения приема, промежуточный статус бизнес-сообщения;
+confirmation_processing - Получено промежуточное подтверждение приема, промежуточный статус бизнес-сообщения;
+confirmation_ok - Получен положительный результат приема, окончательный статус бизнес-сообщения;
+confirmation_fail - Получен негативный результат приема, окончательный статус бизнес-сообщения;
+resend - Требует переотправки, промежуточный статус сообщения;
+resend_fail - Попытки переотправки не удались, промежуточный статус сообщения, требующий рассмотрения службой сопровождения</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="processing"/>
+			<xs:enumeration value="error"/>
+			<xs:enumeration value="completed"/>
+			<xs:enumeration value="wait_confirmation"/>
+			<xs:enumeration value="confirmation_processing"/>
+			<xs:enumeration value="confirmation_ok"/>
+			<xs:enumeration value="confirmation_fail"/>
+			<xs:enumeration value="resend"/>
+			<xs:enumeration value="resend_fail"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text10Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 10 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text200Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 200 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text2000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 2000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="violationLevelType">
+		<xs:annotation>
+			<xs:documentation>Тип: Тип нарушения в протоколе приема</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="error"/>
+			<xs:enumeration value="warning"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<!-- Версия xsd: 2.0. Дата последнего изменения: 24.04.2019 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://www.roskazna.ru/eb/domain/common" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.roskazna.ru/eb/domain/common">
+	<simpleType name="tFormularTypes">
+		<restriction base="string">
+			<enumeration value="formular"/>
+			<enumeration value="dictionary"/>
+			<enumeration value="service"/>
+		</restriction>
+	</simpleType>
+	<complexType name="tFormular" abstract="true">
+		<attribute name="metaType" type="cmn:tFormularTypes" use="optional"/>
+		<attribute name="Version" use="required" fixed="3.0"/>
+	</complexType>
+	<simpleType name="tGuid">
+		<annotation>
+			<documentation>Глобальный идентификатор. http://tools.ietf.org/html/rfc4122</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</restriction>
+	</simpleType>
+	<complexType name="extraData">
+		<sequence>
+			<any maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</schema>

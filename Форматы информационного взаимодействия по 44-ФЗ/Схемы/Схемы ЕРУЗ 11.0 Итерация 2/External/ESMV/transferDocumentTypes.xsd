@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by MESMERiZE (MSM) -->
+<!--Единый сервис межсистемного взаимодействия (ЕСМВ) ПОИ ГИИС ЭБ, версия альбома ТФО 1.4, дата  начала действия - 27.03.2020-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.roskazna.ru/eb/services/transferDocumentService/types" targetNamespace="http://www.roskazna.ru/eb/services/transferDocumentService/types" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="transferDocumentRequest" type="tns:transferDocumentRequestType">
+		<xsd:annotation>
+			<xsd:documentation>Запрос</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="transferDocumentResponse" type="tns:transferDocumentResponseType">
+		<xsd:annotation>
+			<xsd:documentation>Синхронный ответ, содержащий результат доставки  исходного Запроса (transferDocumentRequest)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="transferDocumentReceipt" type="tns:transferDocumentReceiptType">
+		<xsd:annotation>
+			<xsd:documentation>Документ-квитанция для асинхронного ответа о статусе приема.
+Предлагается использовать как техническую квитанцию по обработке данных в случае асинхронного режима системы-получателя.
+Передается как отдельный вызов transferDocumentRequest в качестве бизнес-документа с documentType=transferDocumentReceipt.
+status/documentGuid должен содержать guid исходного документа.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="transferDocumentPacket" type="tns:transferDocumentPacketType">
+		<xsd:annotation>
+			<xsd:documentation>Блок «Пакет» используется для передачи пакета документов в случае, если каждый документ представлен в виде отдельного XML-файла. Вместе с документом может быть передано вложение любого типа. Блок с Пакетом transferDocumentPacket передается в Запросе transferDocumentRequest в теге document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="transferDocumentEvent" type="tns:transferDocumentEventType">
+		<xsd:annotation>
+			<xsd:documentation>Блок «Событие» используется для передачи событий информационного обмена на АРМ ПОИ. Блок с событием transferDocumentEvent передается в Запросе transferDocumentRequest в теге document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="transferDocumentLink" type="tns:transferDocumentLinkType">
+		<xsd:annotation>
+			<xsd:documentation>Блок «Ссылка» используется для передачи ссылки на расположение файла на информационном ресурсе, который м. б. использован в т. ч. при обмене большими файлами (размер файла более 30 Мбайт). Блок с событием transferDocumentLink передается в Запросе transferDocumentRequest в теге document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="transferDocumentResponseType">
+		<xsd:sequence>
+			<xsd:element name="packageId" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>GUID исходного запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="creationDateTime" type="xsd:dateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дата и время формирования response-сообщения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="transactionId" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор бизнес-процесса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="tns:statusType"/>
+			<xsd:element name="params" type="tns:paramsType" minOccurs="0"/>
+			<xsd:element name="document" type="tns:documentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>XML-файл, например, синхронная квитанция от СМЭВ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="versionId" use="required" fixed="1.0">
+			<xsd:annotation>
+				<xsd:documentation>Номер версии формата обмена</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="transferDocumentRequestType">
+		<xsd:sequence>
+			<xsd:element name="header" type="tns:transferDocumentHeaderType"/>
+			<xsd:element name="document" type="tns:documentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Блок с передаваемым документом или пакетом</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="attachments" type="tns:attachmentsType" minOccurs="0"/>
+			<xsd:element name="monitoringParams" type="tns:monitoringParamsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="versionId" use="required" fixed="1.0">
+			<xsd:annotation>
+				<xsd:documentation>Номер версии формата обмена</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="transferDocumentHeaderType">
+		<xsd:sequence>
+			<xsd:element name="packageId" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>GUID запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="senderSystemId" type="xsd:string" nillable="false">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор отправителя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="targetSystemId" type="xsd:string" nillable="false">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор получателя</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentType" type="xsd:string" nillable="false">
+				<xsd:annotation>
+					<xsd:documentation>Тип передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentGuid" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentOrgCode" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Код организаци получателя по сводному реестру</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="creationDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Дата и время создания пакета</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="transactionId" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор бизнес-процесса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="params" type="tns:paramsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="paramsType">
+		<xsd:annotation>
+			<xsd:documentation>Дополнительные параметры вида ассоциативного массива.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="param" type="tns:paramType" maxOccurs="10"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="paramType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>Наименование параметра</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="value" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>Значение параметра</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="documentType">
+		<xsd:annotation>
+			<xsd:documentation>
+xml-представление документа.
+     Формат xml определяется для каждого типа документа и регламентируется отдельно.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:any processContents="skip"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="attachmentsType">
+		<xsd:sequence>
+			<xsd:element name="attachment" type="tns:attachmentType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="attachmentType">
+		<xsd:annotation>
+			<xsd:documentation>
+Бинарные данные.
+fileName – имя файла,
+contentType – тип вложения (xml, zip, binary...)
+content - вложение
+signature - cades подписьвложения
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="fileName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Имя файла вложения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="contentType" type="tns:contentTypeType">
+				<xsd:annotation>
+					<xsd:documentation>Тип вложения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element name="content" type="xsd:base64Binary">
+					<xsd:annotation>
+						<xsd:documentation>Содержимое файла вложения в кодировке BASE64</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="link" type="xsd:anyURI">
+					<xsd:annotation>
+						<xsd:documentation>Ссылка на файл, размещенный на внешнем ресурсе</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="signature" type="xsd:base64Binary" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Подпись вложения</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="attachmentContentType">
+		<xsd:annotation>
+			<xsd:documentation>
+бинарныеданные.
+fileName - имяфайла,
+contentType - типвложения (xml, zip, binary...)
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:base64Binary">
+				<xsd:attribute name="fileName" type="xsd:string" use="optional"/>
+				<xsd:attribute name="contentType" type="tns:contentTypeType" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="contentTypeType">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:complexType name="monitoringParamType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="value" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="monitoringParamsType">
+		<xsd:sequence>
+			<xsd:element name="monitoringParam" type="tns:monitoringParamType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="statusType">
+		<xsd:annotation>
+			<xsd:documentation>
+Статусобработки.
+statusCode - код события,
+statusMessage - краткое описание статуса
+statusDetail - подробное описание статуса
+documentGuid - guidсозданногодокумента
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="statusCode" type="tns:statusCodeType">
+				<xsd:annotation>
+					<xsd:documentation>Код статуса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="statusMessage" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Сообщение об ошибке</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="statusDetail" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Дополнительная информация о статусе</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentGuid" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID исходного документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="statusCodeType">
+		<xsd:annotation>
+			<xsd:documentation>
+Примеры значений: 
+				0   - успешное выполнение
+				1   - ошибка валидации Запроса
+                2   - ошибка проверки подписи
+                3   - ошибка определения организации
+                4   - ошибка обработки документа
+                5   - ошибка обработки вложения
+                6 – ошибка определения транспортной информации
+                7 – ошибка формирования подписи
+                9   - системная ошибка
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:complexType name="transferDocumentReceiptType">
+		<xsd:annotation>
+			<xsd:documentation>Тип документа-квитанции для асинхронного ответа о статусе приема.
+                Предлагается использовать как техническую квитанцию по обработке данных в случае асинхронного режима системы-приемника.
+                Передается как отдельный вызов transferDocumentRequest в качестве бизнес-документа с documentType=transferDocumentReceipt.
+packageId, documentType, documentGuid - значения соответствующих параметров заголовка исходного      сообщения transferDocumentRequest, для которого возвращается асинхронный ответ status - статус обработки
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="packageId" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID исходного запроса</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentType" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Тип передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentGuid" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID исходного документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="creationDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Дата и время создания квитанции</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="tns:statusType"/>
+			<xsd:element name="params" type="tns:paramsType" minOccurs="0"/>
+			<xsd:element name="document" type="tns:documentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>XML-файл, например, асинхронная квитанция от СМЭВ</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="versionId" use="required" fixed="1.0">
+			<xsd:annotation>
+				<xsd:documentation>Номер версии формата обмена</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="transferDocumentPacketType">
+		<xsd:annotation>
+			<xsd:documentation>Пакет документов</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence maxOccurs="unbounded">
+			<xsd:element name="documentSet" type="tns:documentSetType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="documentSetType">
+		<xsd:sequence>
+			<xsd:element name="documentInfo" type="tns:documentInfoType"/>
+			<xsd:element name="attachment" type="tns:attachmentType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="transferDocumentEventType">
+		<xsd:annotation>
+			<xsd:documentation>Событие для Архива</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="event" type="tns:eventType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="documentPacketType">
+		<xsd:sequence>
+			<xsd:element name="documentSet" type="tns:documentSetType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eventType">
+		<xsd:sequence>
+			<xsd:element name="packageId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID Запроса, содержащего документ, к которому относится передаваемое событие.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentGuid" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID документа, к которому относится передаваемое событие. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="eventCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Код события в соответствии со справочником «Виды событий» АРМ ПОИ.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="eventDescription" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Описание события. Указывается значение поля Description, соответствующее значению тега eventCode, в справочнике «Виды событий» АРМ ПОИ.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="serviceID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Идентификатор сервиса, к которому относится событие, в соответствии со справочником маршрутов ПОИ.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="documentInfoType">
+		<xsd:sequence>
+			<xsd:element name="documentType" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Тип (маркер) передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentVersionId" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Версия ТФО передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentGuid" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID передаваемого документа.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="document" type="tns:documentType">
+				<xsd:annotation>
+					<xsd:documentation>XML передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="choiceType">
+		<xsd:annotation>
+			<xsd:documentation>0- включить, 1 -выключить</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:complexType name="transferDocumentLinkType">
+		<xsd:sequence maxOccurs="unbounded">
+			<xsd:element name="linkInfo" type="tns:linkInfoType">
+				<xsd:annotation>
+					<xsd:documentation>Блок информации о расположении файла</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="linkInfoType">
+		<xsd:sequence>
+			<xsd:element name="documentType" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Тип (маркер, зафиксированный в ТФО для бизнес-данных) передаваемого документа.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentVersionId" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Версия ТФО бизнес-документа, тип которого указан в поле documentType.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="documentGuid" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GUID передаваемого документа</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="link" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Ссылка на ресурс, на котором расположен файл</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

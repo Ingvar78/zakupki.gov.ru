@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EIS FILESTORE API Integration Scheme, version 11.0, create date 16.10.2020 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/filestore/ws/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" targetNamespace="http://zakupki.gov.ru/oos/filestore/ws/data" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:element name="inFileStorage" type="inFileStorageType">
+		<xs:annotation>
+			<xs:documentation>Запрос передачи в файловое хранилище файла или части файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="inFileStorageResult" type="inFileStorageResultType">
+		<xs:annotation>
+			<xs:documentation>Результат загрузки файла или его части в файловое хранилище</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="inFileStorageType">
+		<xs:annotation>
+			<xs:documentation>Тип: Файл или часть файла для передачи в файловое хранилище</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subsystem" type="text200Type">
+				<xs:annotation>
+					<xs:documentation>Код подсистемы, принимающей файл</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonInfo">
+				<xs:annotation>
+					<xs:documentation>Общая информация.
+
+При приёме 1 части файла необходимо заполнение блока "Информация о файле, необходимая для начала загрузки" (startFileInfo)
+
+При приёме 2 и последующийх частей файла необходимо обязательное заполненеие блока "Уникальный идентификатор контента прикрепленного документа" (fileContentId)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="startFileInfo">
+							<xs:annotation>
+								<xs:documentation>Информация о файле, необходимая для начала загрузки</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="fileNameType">
+										<xs:annotation>
+											<xs:documentation>Наименование файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="size" type="fileSizeType">
+										<xs:annotation>
+											<xs:documentation>Размер файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="digest" type="hexHashSha256Type">
+										<xs:annotation>
+											<xs:documentation>Хеш-сумма содержимого файла, рассчитанная по алгоритму SHA-256</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="fileContentId" type="guidType">
+							<xs:annotation>
+								<xs:documentation>Уникальный идентификатор контента прикрепленного документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="range">
+				<xs:annotation>
+					<xs:documentation>Диапазон</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="start" type="fileSizeType">
+							<xs:annotation>
+								<xs:documentation>Начало передаваемого диапазона </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="size" type="fileSizeType">
+							<xs:annotation>
+								<xs:documentation>Размер передаваемой части файла</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="content">
+				<xs:annotation>
+					<xs:documentation>Содержимое файла / части контента файла</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:base64Binary">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="inFileStorageResultType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат загрузки файла или его части в файловое хранилище</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="refPacketUid" type="guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор обработанного пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loadId" type="guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор загруженных данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="result" type="confirmationResultType">
+				<xs:annotation>
+					<xs:documentation>Результат обработки данных
+
+success - обработано успешно;
+failure - ошибки при обработке;
+processing - обрабатывается.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="violations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Выявленные в процессе обработки нарушения и ошибки</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="violation" type="violationType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="text10Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="violationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушение приема</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errCode" type="text10Type">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="level" type="violationLevelType">
+				<xs:annotation>
+					<xs:documentation>Тип:
+error - Ошибка
+warning - Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text200Type">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullErrorLog" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полный текст ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="confirmationResultType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат приема пакета </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="success"/>
+			<xs:enumeration value="failure"/>
+			<xs:enumeration value="processing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fileSizeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Размер файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fileNameType">
+		<xs:annotation>
+			<xs:documentation>Тип: Имя файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="hexHashSha256Type">
+		<xs:annotation>
+			<xs:documentation>Тип: HEX представление хеша, рассчитанного по алгоритму SHA256</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="guidType">
+		<xs:annotation>
+			<xs:documentation>Тип: Глобальный идентификатор</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="partnerType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление контрагентов:
+			OOS - Единая информационная система;
+			GIIS_EB - Государственная интегрированная информационная система Электронный бюджет (ГИИС ЭБ);
+			RMIS - Региональная (муниципальная) информационная система (РМИС);
+			OVK - Информационная система органа внутреннего контроля (ИС ОВК);
+			OA - Информационная система органа аудита (ИС ОА);
+			KO - Информационная система контрольного органа (ИС КО);
+			FAS - Информационная система Федеральной антимонопольной службы (ИС ФАС).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OOS"/>
+			<xs:enumeration value="GIIS_EB"/>
+			<xs:enumeration value="RMIS"/>
+			<xs:enumeration value="OVK"/>
+			<xs:enumeration value="OA"/>
+			<xs:enumeration value="KO"/>
+			<xs:enumeration value="FAS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text10Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 10 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text200Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 200 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text2000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 2000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="violationLevelType">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушения в протоколе приема</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="error"/>
+			<xs:enumeration value="warning"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

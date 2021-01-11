@@ -1,0 +1,1772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ ESMV INTEGRATION TYPES Integration Scheme, version 11.0, create date 03.11.2020 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/esmv/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/eruz/esmv/types/base/1" targetNamespace="http://zakupki.gov.ru/eruz/esmv/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/esmv/types/base/1" schemaLocation="eruzEsmvBaseTypes.xsd"/>
+	<!--Основные документы-->
+	<!--Технические типы-->
+	<xs:complexType name="tConfirmSinc">
+		<xs:annotation>
+			<xs:documentation>Тип: Предварительное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tConfirm"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tConfirmASinc">
+		<xs:annotation>
+			<xs:documentation>Тип: Окончательное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tConfirm"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Лицевые счета-->
+	<xs:complexType name="tRequestPA">
+		<xs:annotation>
+			<xs:documentation>Тип: Заявление на резервирование/открытие лицевого счёта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="base:tGUID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа ЕИС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonInfo">
+				<xs:annotation>
+					<xs:documentation>Общая информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="requestType" type="base:tRequestPAEnum">
+							<xs:annotation>
+								<xs:documentation>Тип заявления:
+0 - Резервироование;
+1 - Открытие</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="generationDate" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Дата формирования заявления</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="budget" type="tBudgetFunds" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Бюджет</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="budgetLevel" type="base:tBudgetLevel" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Уровень бюджета. Могут быть указаны значения:
+1 - федеральный бюджет;
+2 - бюджет субъекта Российской Федерации;
+3 - местный бюджет</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="personalAccount" type="base:tAccountNumber" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счёта</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contractorInfo">
+				<xs:annotation>
+					<xs:documentation>Информация о поставщике</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="legalEntityInfo" type="tLegalEntity">
+							<xs:annotation>
+								<xs:documentation>Юридическое лицо</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="individualPersonInfo" type="tIndividualPerson">
+							<xs:annotation>
+								<xs:documentation>Индивидуальный предприниматеть</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="foundationInfo">
+				<xs:annotation>
+					<xs:documentation>Основание</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="organizationInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Организация, с которой клиент заключил  государственный (муниципальный) контракт (контракт, договор, соглашение)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:choice minOccurs="0">
+										<xs:element name="consRegistryNum" type="base:tSvRCode">
+											<xs:annotation>
+												<xs:documentation> Код по Сводному Реестру</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="IPandKFHCode" type="base:tIPandKFHCode">
+											<xs:annotation>
+												<xs:documentation>Код по реестру ИП и КФХ</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:choice>
+									<xs:element name="INN" type="base:tINN" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>ИНН заказчика</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="fullName" type="base:tText2000" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Полное наименование заказчика</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="contractInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация о контракте</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="baseDocInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Информация о документе-основании</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="name" type="base:tText100" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Наименование</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="number" type="base:tText50" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Номер</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="date" type="xs:date" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Дата</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="regNum" type="base:tContractRegNum" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Номер реестровой записи контракта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="IGKs" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификационные номера государственных контрактов</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="IGK" type="base:tIGK" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Идентификационный номер государственного контракта</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="link" type="base:tText2000" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Ссылка на карточку контракта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="signatoriesInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о подписантах и подписании</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="headSignatureInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Подпись руководителя</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="tSignatureInfo">
+										<xs:sequence>
+											<xs:element name="phone" type="base:tPhone" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Телефон</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="accountantSignatureInfo" type="tSignatureInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Подпись бухгалтера</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="printFormInfo" type="tSignedData">
+				<xs:annotation>
+					<xs:documentation>Печатная форма документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="printFormFieldsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация для печатной формы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0">
+						<xs:element name="TOFKInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация о ТОФК</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:element name="code" type="base:tTOFKCode" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Код ТОФК</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="name" type="base:tText2000" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Наименование ТОФК</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="foundation" type="base:tText2000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Основание для открытия лицевого счета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:tSchemeVersion" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tRequestResultPA">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат рассмотрения заявления на резервирование/открытие лицевого счёта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="refId" type="base:tGUID">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор заявления на резервирование (открытие) лицевого счёта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TOFK" type="base:tTOFKCode">
+				<xs:annotation>
+					<xs:documentation>Код ТОФК</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TOFKName" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование ТОФК</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="violations">
+					<xs:annotation>
+						<xs:documentation>В процессе обработки выявлены ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="violation" type="tViolation" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Ошибка</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="successRegister">
+					<xs:annotation>
+						<xs:documentation>ЛС успешно зарезервирован (открыт)</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Id" type="base:tGUID">
+								<xs:annotation>
+									<xs:documentation>Уникальный идентификатор извещения</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="receiptNumber" type="base:tProtocolNumber">
+								<xs:annotation>
+									<xs:documentation>Номер квитанции</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="registrationDT" type="xs:dateTime">
+								<xs:annotation>
+									<xs:documentation>Дата резервирования (открытия) ЛС</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="statementEDoc" type="tSignedData">
+								<xs:annotation>
+									<xs:documentation>Печатная форма квитанции в формате НСИ ЭБ (Формуляр)</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="clientInfo" type="tClient">
+								<xs:annotation>
+									<xs:documentation>Сведения о клиенте</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="bankDetailsInfo" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Банковские реквизиты РЦ</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TOFKCode" type="base:tTOFKCode">
+											<xs:annotation>
+												<xs:documentation>Код ТОФК РЦ</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="TOFKName" type="base:tText2000">
+											<xs:annotation>
+												<xs:documentation>Наименование ТОФК РЦ</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="TOFKAddress" type="base:tText2000" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Место нахождения ТОФК</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="TOFKBIK" type="base:tBIK" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>БИК ТОФК</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="accountNumber" type="base:tBankAccountNumber">
+											<xs:annotation>
+												<xs:documentation>Номер банковского счета</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="BIK" type="base:tBIK" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>БИК банка.
+Устарело, оставлено для обратной совместимости</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="name" type="base:tText1000">
+											<xs:annotation>
+												<xs:documentation>Наименование банка</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="KSNumber" type="base:tKSNumber" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Номер казначейского счета</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="notMatchOrder">
+					<xs:annotation>
+						<xs:documentation>ЛС не открыт</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Id" type="base:tGUID">
+								<xs:annotation>
+									<xs:documentation>Уникальный идентификатор протокола</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="protocolNumber" type="base:tProtocolNumber">
+								<xs:annotation>
+									<xs:documentation>Номер протокола о несоответствии</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="createDT" type="xs:dateTime">
+								<xs:annotation>
+									<xs:documentation>Дата формирования сведений</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="rejectionReason" type="base:tText2000">
+								<xs:annotation>
+									<xs:documentation>Причина отказа</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="executorInfo" type="tExecutor">
+								<xs:annotation>
+									<xs:documentation>Сведения об ответственном исполнителе</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="notMatchEDoc" type="tSignedData">
+								<xs:annotation>
+									<xs:documentation>Печатная форма протокола о несоответствии в формате НСИ ЭБ (Формуляр)</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="clientInfo" type="tClient">
+								<xs:annotation>
+									<xs:documentation>Сведения о клиенте</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="printFormFieldsInfo" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Дополнительная информация для печатной формы</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<xs:element name="budgetName" type="base:tText2000" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Наименование бюджета</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="requestNum" type="base:tApplicationNum" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Номер заявления</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="generationDate" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Дата формирования заявления</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="requestAcceptDate" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Дата принятия заявления для обработки</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Казначейское сопровождение-->
+	<xs:complexType name="contractInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип элемента: Сведения о субподрядном договоре для формирования заявки на внесение сведений в реестр документов-оснований</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="docGUID" type="base:tGUID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор данных для передачи в КС ПУР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versionNumber" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Номер изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="changeDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentContractStage" type="base:tContractStage">
+				<xs:annotation>
+					<xs:documentation>Статус контракта:
+E 	Исполнение;
+ET	Исполнение прекращено;
+EC	Исполнение завершено;
+IN	Aннулировано.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suppliers">
+				<xs:annotation>
+					<xs:documentation>Поставщики</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="supplier" type="tSupplier" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="number" type="base:tText100" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hRefs">
+				<xs:annotation>
+					<xs:documentation>Ссылки</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="hRef" type="base:tText2000" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Ссылка</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="signDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата заключения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата начала исполнения контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата окончания исполнения контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="price" type="base:tSum">
+				<xs:annotation>
+					<xs:documentation>Значение цены контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="priceVAT" type="base:tSum">
+				<xs:annotation>
+					<xs:documentation>Значение НДС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addDoc" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительное соглашение</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="number" type="base:tText100" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="date" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="advancePaymentSum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Предусмотрена выплата аванса</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="priceValue" type="base:tSum" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Размер аванса</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="sumInPercents" type="base:tPercent" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Размер аванса в процентах</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SumYears" type="tSumYears" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма по годам</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IGKsInfo">
+				<xs:annotation>
+					<xs:documentation>Информация по Идентификационным номерам государственных контрактов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IGKInfo" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="IGK" type="base:tIGK">
+										<xs:annotation>
+											<xs:documentation>Идентификационный номер государственного контракта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="price" type="base:tSum" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Сумма</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IKZ" type="base:tIKZ" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификационный код закупки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="product" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Объект закупки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customer">
+				<xs:annotation>
+					<xs:documentation>Заказчик</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="INN" type="base:tINN">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="KPP" type="base:tKPP" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>КПП</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="fullName" type="base:tText2000">
+							<xs:annotation>
+								<xs:documentation>Полное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="shortName" type="base:tText2000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сокращенное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="accountNumber" type="base:tAccountNumber" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Лицевой счет. Не заполняется. Добавлен на развитие</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="regNum" type="base:tContractRegNum">
+				<xs:annotation>
+					<xs:documentation>Номер реестровой записи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="treasurySupportContractRequired" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Требуется казначейское сопровождение контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="contractInfoResultType">
+		<xs:annotation>
+			<xs:documentation>Тип элемента: Результат включения сведений о субподрядном договоре в перечень документов-оснований</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resultGUID" type="base:tGUID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор результата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="createDT" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время формирования результата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refDocGUID" type="base:tGUID">
+				<xs:annotation>
+					<xs:documentation>Идентификатор данных, переданных в КС ПУР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusInfo">
+				<xs:annotation>
+					<xs:documentation>Информация о результате включения сведений о контракте в перечень документов-оснований</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="resultCode" type="base:tStatusResultCode">
+							<xs:annotation>
+								<xs:documentation>Код результата включения сведений о субподрядном договоре в перечень документов-оснований.
+Допустимые значения:
+- 3 - Исполнен (документ включен в перечень документов-оснований)
+- 29 - Отменен (отказ включения документа в перечень документов оснований).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="statusReason" type="base:tText2000">
+							<xs:annotation>
+								<xs:documentation>Причина нахождения документа на данном статусе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Вспомогательные типы-->
+	<xs:complexType name="tAdressRF">
+		<xs:annotation>
+			<xs:documentation>Тип: Адрес РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="kladrCode" type="base:tKLADRCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код КЛАДР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zip" type="base:tZip" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Почтовый индекс</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regionCode" type="base:tRegionCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код региона</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regionInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Субъект РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:tText1000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:tKLADRObjCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="areaInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Район</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:tText1000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:tKLADRObjCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cityInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Город</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:tText1000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:tKLADRObjCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="settlementInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Населенный пункт</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:tText1000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:tKLADRObjCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="shortStreetInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Улица</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:tText1000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="type" type="base:tKLADRObjCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="building" type="base:tKLADRObjName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дом</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="housing" type="base:tKLADRObjName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Корпус (строение)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="flat" type="base:tKLADRObjName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Квартира</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tClient">
+		<xs:annotation>
+			<xs:documentation>Тип: Клиент в протоколе об отказе в открытии ЛС и квитанции</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="consRegistryNum" type="base:tSvRCode">
+					<xs:annotation>
+						<xs:documentation>Код по Сводному Реестру/Код по реестру ИП и КФХ</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="IPandKFHCode" type="base:tIPandKFHCode" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Код по реестру ИП и КФХ.
+Устарело. Не используется</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="fullName" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="personalAccountNumber" type="base:tAccountNumber">
+				<xs:annotation>
+					<xs:documentation>Номер лицевого счёта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tConfirm">
+		<xs:annotation>
+			<xs:documentation>Тип: Окончательное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="refPacketUid" type="base:tGUID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор обработанного информационного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время создания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="result" type="base:tConfirmationResult">
+				<xs:annotation>
+					<xs:documentation>Результат обработки данных
+
+success - обработано успешно;
+failure - ошибки при обработке;
+processing - обрабатывается.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="params" type="tParams" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные параметры</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="tStatus">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:tSchemeVersion" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tBudgetFunds">
+		<xs:annotation>
+			<xs:documentation>Тип: Код и наименование бюджета в контракте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:tBudgetCode">
+				<xs:annotation>
+					<xs:documentation>Код бюджета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование бюджета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKTMOCode" type="base:tOKTMOCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код бюджета по ОКТМО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tIndividualPerson">
+		<xs:annotation>
+			<xs:documentation>Тип: Индивидуальный предприниматеть</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IPandKFHCode" type="base:tIPandKFHCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код по реестру ИП и КФХ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nameInfo" type="tPerson">
+				<xs:annotation>
+					<xs:documentation>ФИО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="INN" type="base:tINNIndividual">
+				<xs:annotation>
+					<xs:documentation>ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OGRNIP" type="base:tOGRNIPCode">
+				<xs:annotation>
+					<xs:documentation>ОГРНИП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKPO" type="tOKPORef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ОКПО организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKTMO" type="tOKTMORef">
+				<xs:annotation>
+					<xs:documentation>ОКТМО организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKOPF" type="tOKOPFRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Организационно-правовая форма организации по ОКОПФ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKFS" type="tOKFSRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Форма собственности организации по ОКФС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKVEDs" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о видах деятельности</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OKVED" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о виде деятелньости</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="tOKVEDRef">
+										<xs:sequence>
+											<xs:element name="main" type="xs:boolean">
+												<xs:annotation>
+													<xs:documentation>Признак основного вида деятельности</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="adressInfo">
+				<xs:annotation>
+					<xs:documentation>Адрес</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="adressRFInfo" type="tAdressRF">
+							<xs:annotation>
+								<xs:documentation>Адрес РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="adressFSInfo">
+							<xs:annotation>
+								<xs:documentation>Адрес на территории иностранного государства</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="countryInfo" type="tOKSMRef">
+										<xs:annotation>
+											<xs:documentation>Страна или территория регистрации.
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAdress" type="base:tText2000">
+										<xs:annotation>
+											<xs:documentation>Адрес в пределах места нахождения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="email" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес электронной почты</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="headsInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения о руководителях</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="headInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о руководителе</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="nameInfo" type="tPerson">
+										<xs:annotation>
+											<xs:documentation>ФИО</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="position" type="base:tPosition" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Должность</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="firstPerson" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Первое лицо</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="INN" type="base:tINNIndividual" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="SNILS" type="base:tSNILS" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Страховой номер индивидуального лицевого счета (СНИЛС)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="chiefAccountantInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о главном бухгалтере</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="tPerson">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="position" type="base:tPosition" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Должность</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:tINNIndividual" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="SNILS" type="base:tSNILS" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Страховой номер индивидуального лицевого счета (СНИЛС)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="isKFH" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Является крестьянским (фермерским) хозяйством</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tLegalEntity">
+		<xs:annotation>
+			<xs:documentation>Тип: Юридическое лицо</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="consRegistryNum" type="base:tSvRCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation> Код по Сводному Реестру</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullName" type="base:tText2000" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortName" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="altName" type="base:tAltName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Краткое наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="INN" type="base:tINNOrganization">
+				<xs:annotation>
+					<xs:documentation>ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KPP" type="base:tKPP">
+				<xs:annotation>
+					<xs:documentation>КПП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OGRN" type="base:tOGRNCode">
+				<xs:annotation>
+					<xs:documentation>ОГРН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKPO" type="tOKPORef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ОКПО организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKTMO" type="tOKTMORef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ОКТМО организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKOPF" type="tOKOPFRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Организационно-правовая форма организации по ОКОПФ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKFS" type="tOKFSRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Форма собственности организации по ОКФС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKVEDs" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о видах деятельности</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OKVED" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о виде деятелньости</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="tOKVEDRef">
+										<xs:sequence>
+											<xs:element name="main" type="xs:boolean">
+												<xs:annotation>
+													<xs:documentation>Признак основного вида деятельности</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="adressInfo">
+				<xs:annotation>
+					<xs:documentation>Адрес</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="adressRFInfo" type="tAdressRF">
+							<xs:annotation>
+								<xs:documentation>Адрес РФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="adressFSInfo">
+							<xs:annotation>
+								<xs:documentation>Адрес на территории иностранного государства</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="countryInfo" type="tOKSMRef">
+										<xs:annotation>
+											<xs:documentation>Страна или территория регистрации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAdress" type="base:tText2000">
+										<xs:annotation>
+											<xs:documentation>Адрес в пределах места нахождения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="email" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес электронной почты</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="headsInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения о руководителях</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="headInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения о руководителе</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="nameInfo" type="tPerson">
+										<xs:annotation>
+											<xs:documentation>ФИО</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="position" type="base:tPosition" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation>Должность</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="firstPerson" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Первое лицо</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="INN" type="base:tINNIndividual" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="SNILS" type="base:tSNILS" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation>Страховой номер индивидуального лицевого счета (СНИЛС)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="chiefAccountantInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о главном бухгалтере</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="tPerson">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="position" type="base:tPosition" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Должность</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:tINNIndividual" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="SNILS" type="base:tSNILS" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Страховой номер индивидуального лицевого счета (СНИЛС)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="isOP" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Является обособленным подразделением</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="petitions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ходатайства ЮЛ об открытии ЛС обособленному подразделению</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="petition" type="tSignedData" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Ходатайство ЮЛ об открытии ЛС обособленному подразделению</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOKFSRef">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на ОКФС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:tOKFSCode">
+				<xs:annotation>
+					<xs:documentation>Код формы собственности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование. 
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор форм собственности (ОКФС)" (nsiOKFS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOKOPFRef">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на ОКОПФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:tOKOPFCode">
+				<xs:annotation>
+					<xs:documentation>Код организационно-правовой формы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="singularName" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование в единственном числе.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOKPORef">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на ОКПО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:tOKPOCode">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOKSMRef">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на страну</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="countryCode" type="base:tOKSMCode">
+				<xs:annotation>
+					<xs:documentation>Цифровой код страны</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="countryFullName" type="base:tCountryName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование страны. Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOKTMORef">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:tOKTMOCode">
+				<xs:annotation>
+					<xs:documentation>Код по ОКТМО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:tText1000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование. 
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор территорий муниципальных образований (ОКТМО)" (nsiOKTMO)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tOKVEDRef">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник ОКВЭД</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:tOKVEDCode">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:tOKVEDName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование.
+Значение игнорируется при приеме, автоматически заполняется при передаче из справочника "Общероссийского классификатора видов экономической деятельности" (nsiOKVED)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tParam">
+		<xs:annotation>
+			<xs:documentation>Тип: Дополнительный параметр</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="base:tText1000">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" type="base:tText2000">
+				<xs:annotation>
+					<xs:documentation>Значение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tParams">
+		<xs:annotation>
+			<xs:documentation>Тип: Дополнительные параметры</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="param" type="tParam" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Дополнительный параметр</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tPerson">
+		<xs:annotation>
+			<xs:documentation>Тип: ФИО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lastName" type="base:tName">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="base:tName">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="base:tName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSignedData">
+		<xs:annotation>
+			<xs:documentation>Тип: Подписанный документ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="url" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ссылка для скачивания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="content" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кoнтент вложения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileName" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование и формат файла вложения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileType" type="base:tFileType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileSize" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Размер файла вложения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание вложения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронная подпись в формате CAdES</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:base64Binary">
+							<xs:attribute name="type" type="base:tSignature">
+								<xs:annotation>
+									<xs:documentation>Тип ЭП:
+CAdES-BES;
+CAdES-A</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSignatureInfo">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о подписи</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FIO" type="base:tFIO">
+				<xs:annotation>
+					<xs:documentation>ФИО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" type="base:tPosition" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата подписания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tStatus">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="statusCode" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код статуса. Допустимые значения:
+0 - успешное вы-полнение;
+1 - ошибка валидации конверта;
+2 - ошибка проверки подписи;
+3 - ошибка определения организа-ции;
+4 - ошибка обработки документа;
+5 - ошибка обработки вложения;
+9 - системная ошибка.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusMessage" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сообщение об ошибке. Обязатель-но, если statusCode равно «1»</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusDetail" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная ин-формация о статусе</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentGuid" type="base:tGUID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>GUID документа, на который получено подтверждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSupplier">
+		<xs:annotation>
+			<xs:documentation>Тип: Поставщик</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="INN" type="base:tINN">
+				<xs:annotation>
+					<xs:documentation>ИНН</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KPP" type="base:tKPP" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>КПП</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullName" type="base:tText2000">
+				<xs:annotation>
+					<xs:documentation>Полное наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortName" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сокращенное наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountNumber" type="base:tAccountNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Лицевой счет</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OKOPF" type="tOKOPFRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Организационно-правовая форма</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSumYears">
+		<xs:annotation>
+			<xs:documentation>Тип: Сумма по годам</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SumYear" type="tSumYear" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сумма в год</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSumYear">
+		<xs:annotation>
+			<xs:documentation>Тип: Сумма в год</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="year" type="base:tYear">
+				<xs:annotation>
+					<xs:documentation>Год</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sum" type="base:tSum">
+				<xs:annotation>
+					<xs:documentation>Сумма</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tViolation">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушение</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errCode">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="level" type="base:tErrorLevel">
+				<xs:annotation>
+					<xs:documentation>Тип:
+ERROR - Ошибка
+WARNING - Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Название</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" type="base:tText2000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tExecutor">
+		<xs:annotation>
+			<xs:documentation>Тип: Ответственный исполнитель в протоколе об отказе в открытии ЛС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>ФИО ответственного исполнителя</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="180"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="position">
+				<xs:annotation>
+					<xs:documentation>Должность ответственного исполнителя</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="signDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата подписания ответственным исполнителем</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

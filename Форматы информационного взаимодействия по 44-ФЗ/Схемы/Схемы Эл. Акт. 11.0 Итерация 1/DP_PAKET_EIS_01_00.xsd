@@ -1,0 +1,3716 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!-- DP_PACKET_EIS_01_00 10.12.2020 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Элемент транспортного пакета</xs:documentation>
+	</xs:annotation>
+	<xs:element name="ФайлПакет">
+		<xs:annotation>
+			<xs:documentation>Транспортный пакет для передачи приложения к документу и вложений</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Документ" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Документ.
+Контролируется заполнение блока при приеме из внешней системы. Не заполняется при передаче между подсистемами</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Контент" type="КонтентТип">
+								<xs:annotation>
+									<xs:documentation>Контент</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ПодписьДокумент" type="ПодписьТип" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Подпись и сведения о лице, подписывающем контент</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Прилож" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Приложение к документу</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Контент" type="КонтентТип">
+								<xs:annotation>
+									<xs:documentation>Контент</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ПодписьПрилож" type="ПодписьТип" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Подпись и сведения о лице, подписывающем контент</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Вложен" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Прикрепленные документы</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Ссылк" type="СсылкаТип">
+									<xs:annotation>
+										<xs:documentation>Ссылка для скачивания прикрепленного документа</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="ОтносСсылка">
+									<xs:annotation>
+										<xs:documentation>Относительная ссылка</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:attribute name="КонтентИд" type="ГУИД32Тип" use="required">
+											<xs:annotation>
+												<xs:documentation>Уникальный идентификатор контента прикрепленного документа в ЕИС</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+										<xs:attribute name="ТипФХ" use="required">
+											<xs:annotation>
+												<xs:documentation>Тип файлового хранилища</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="ЛКП"/>
+													<xs:enumeration value="РК"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Контент" type="КонтентТип">
+									<xs:annotation>
+										<xs:documentation>Содержимое файла</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:choice>
+							<xs:sequence>
+								<xs:element name="ПодписьВлож" type="ПодписьТип" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Подпись и сведения о лице, подписывающем вложение</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:sequence>
+						<xs:attribute name="КонтентИд" type="ГУИД32Тип">
+							<xs:annotation>
+								<xs:documentation>Уникальный идентификатор контента прикрепленного документа в ЕИС</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВнешКонтентИд" type="ВнешИдТип">
+							<xs:annotation>
+								<xs:documentation>Внешний уникальный идентификатор контента прикрепленного документа </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИмяФайл" type="Строка1024Тип" use="required">
+							<xs:annotation>
+								<xs:documentation>Имя файла</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="РазмерФайл" type="РазмерФайлТип">
+							<xs:annotation>
+								<xs:documentation>Размер файла</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдТрПакет" type="ГУИД36Тип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор транспортного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="СистОтпр" type="Строка5Тип">
+				<xs:annotation>
+					<xs:documentation>Код системы отправителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="СистПол" type="Строка5Тип">
+				<xs:annotation>
+					<xs:documentation>Код системы получателя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдОбъект" type="ГУИД36Тип">
+				<xs:annotation>
+					<xs:documentation>Идентификатор цепочки документов.
+При приеме в ЛКП игнорируется при приеме, заполняется идентификатором цепочки документов, присвоенным в ЕИС.
+При приеме в ЛКЗ:
+- если заполнен, то контролируется на соответствие идентификатору цепочки документов, который указан в связанном приложении к документу "УПД/УКД (титул продавца)",
+- если не заполнен, то заполняется при передаче идентификатором цепочки документов, который указан в связанном приложении к документу "УПД/УКД (титул продавца)"</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВнешИд" type="ВнешИдТип">
+				<xs:annotation>
+					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла, к которому сформировано приложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдПрилож" type="ИдФайлТип">
+				<xs:annotation>
+					<xs:documentation>Идентификатор приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ДатаВрФормир" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата-время формирования транспортного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ТипПрилож" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип приложенного документа:
+- УПДПрод - УПД (титул продавца);
+- УКДПрод - УКД (титул продавца);
+- УПДПок - УПД (титул покупателя);
+- УКДПок - УКД (титул покупателя);
+- УвУточ - Уведомлние об уточнении;
+- ИзвУч - Извещение о принятии к учёту;
+- ПодтвОтпр - Подтверждение даты отправки документа;
+- ПодтвПолуч - Подтверждение даты получения документа;
+- ИзвПол - Извещение о получении электронного документа;
+- ПрОтз - Запрос об отзыве электронного документа;
+- УвОбж - Уведомление о намерении обжаловать мотивированный отказ</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="УПДПрод"/>
+						<xs:enumeration value="УКДПрод"/>
+						<xs:enumeration value="УПДПок"/>
+						<xs:enumeration value="УКДПок"/>
+						<xs:enumeration value="УвУточ"/>
+						<xs:enumeration value="ИзвУч"/>
+						<xs:enumeration value="ПодтвОтпр"/>
+						<xs:enumeration value="ПодтвПолуч"/>
+						<xs:enumeration value="ИзвПол"/>
+						<xs:enumeration value="ПрОтз"/>
+						<xs:enumeration value="УвОбж"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.00"/>
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ИдОтпр" type="ИдУчТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор участника документооборота, - отправителя файла обмена</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдПол" type="ИдУчТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор участника документооборота, получателя файла обмена</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ФайлЗапросРезул">
+		<xs:annotation>
+			<xs:documentation>Запрос результата обработки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Документ">
+					<xs:annotation>
+						<xs:documentation>Состав и структура документа</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="ИдТрПакет" type="ГУИД36Тип" use="required">
+							<xs:annotation>
+								<xs:documentation>Идентификатор переданного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор транспортного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="СистОтпр" type="Строка5Тип">
+				<xs:annotation>
+					<xs:documentation>Код системы отправителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="СистПол" type="Строка5Тип">
+				<xs:annotation>
+					<xs:documentation>Код системы получателя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ДатаВрФормир" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата-время формирования транспортного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсПрог" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия программы, с помощью которой сформирован файл</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ФайлРезул">
+		<xs:annotation>
+			<xs:documentation>Результат обработки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Документ">
+					<xs:annotation>
+						<xs:documentation>Состав и структура документа</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="СведФайл">
+								<xs:annotation>
+									<xs:documentation>Сведения по обработанному пакету</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="ИдТрПакет" type="ГУИД36Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Идентификатор обработанного пакета данных</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ИдФайл" use="required">
+										<xs:annotation>
+											<xs:documentation>Имя файла</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="150"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ИдОбъект" type="ГУИД36Тип">
+										<xs:annotation>
+											<xs:documentation>Идентификатор объекта</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:choice>
+								<xs:element name="УспешОбр">
+									<xs:annotation>
+										<xs:documentation>Успешная обработка</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence minOccurs="0">
+											<xs:element name="ПредупрежденияПр" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Предупреждения, возникшие при проверке файла</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ПредупреждениеПр" type="ОшибкаТип" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Предупреждение</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+										<xs:attribute name="ИдОбъект" type="ГУИД36Тип" use="required">
+											<xs:annotation>
+												<xs:documentation>Идентификатор сохраненного объекта</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ОшибкиПр">
+									<xs:annotation>
+										<xs:documentation>Ошибки, возникшие при проверке файла</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ОшибкаПр" type="ОшибкаТип" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Ошибка</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Процесс" type="xs:boolean" default="true">
+									<xs:annotation>
+										<xs:documentation>Данные обрабатываются</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:choice>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор транспортного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="СистОтпр" type="Строка5Тип">
+				<xs:annotation>
+					<xs:documentation>Код системы отправителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="СистПол" type="Строка5Тип">
+				<xs:annotation>
+					<xs:documentation>Код системы получателя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ДатаВрФормир" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата-время формирования транспортного пакета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсПрог" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия программы, с помощью которой сформирован файл</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation>Элементы приложений к документам</xs:documentation>
+	</xs:annotation>
+	<xs:element name="ФайлУПДПрод">
+		<xs:annotation>
+			<xs:documentation>Приложение к титулу продавца УПД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="СведКонт">
+					<xs:annotation>
+						<xs:documentation>Сведения о контракте</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="РеестрНомКонт" type="РеестрНомКонтТип" use="required">
+							<xs:annotation>
+								<xs:documentation>Реестровый номер контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИдВерсКонт" type="xs:long" use="required">
+							<xs:annotation>
+								<xs:documentation>Идентификатор версии контракта, на основании которой сформирован УПД</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИдЭтапКонт" type="ГУИД32Тип">
+							<xs:annotation>
+								<xs:documentation>GIUD этапа контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ТехИдЭтапКонт" type="xs:long">
+							<xs:annotation>
+								<xs:documentation>Технический идентификатор этапа контракта.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВнешТехИдЭтапКонт" type="ВнешИдТип">
+							<xs:annotation>
+								<xs:documentation>Внешний технический идентификатор этапа контракта.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИКЗ" type="ИКЗТип">
+							<xs:annotation>
+								<xs:documentation>Идентификационный код закупки из контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="СведПоставщик" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Сведения о поставщике</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ЮЛ">
+								<xs:annotation>
+									<xs:documentation>Сведения о юридическом лице</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="ФирмНаимОрг" type="Строка1000Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Фирменное наименование</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="СведТов" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Сведения об отгруженных товарах (о выполненных работах, оказанных услугах), переданных имущественных правах</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="СведТРУ" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Сведения о товарах, работах, услугах (ТРУ)</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="НедеталТРУ">
+											<xs:annotation>
+												<xs:documentation>Сведения о позиции ТРУ.
+В блоке указываются недетализированные позиции ТРУ</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:choice>
+													<xs:element name="НеЛПСвед">
+														<xs:annotation>
+															<xs:documentation>Сведения об объекте закупки в том случае, когда объектом закупки является не лекарственный препарат</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="СтранаПроисх" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране происхождения товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СтранаПроизв" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране регистрации производителя товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="ОтрСпец" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения ТРУ, относящиеся к отраслевой специализации</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="СтройДетал" type="СтройДеталУПДПродТип">
+																				<xs:annotation>
+																					<xs:documentation>Детализация полей ТРУ, относящихся к отраслевой специализации "Строительство".
+Блок может быть задан только в том случае, если задан атрибут «Отраслевая специализация» (ФайлУПДПрод/СведТов/@ОтрСпец) заполнен значением 1 - "Строительство".
+В составе блока должен быть заполнен как минимум один блок "Раздел видов работ" (Раздел) и/или как минимум один блок "Конструктивное решение (вид работ) (УПД)" (ВидРаб)</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="НомСтр" type="Число6Тип">
+																<xs:annotation>
+																	<xs:documentation>Номер строки таблицы. Требуется обязательное заполнение</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ОбРабУсл" type="Строка500Тип">
+																<xs:annotation>
+																	<xs:documentation>Объем работы, услуги в текстовом выражении</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ЦенаИзКонтСНДС" type="ЧислоМакс15ДоТочкТип">
+																<xs:annotation>
+																	<xs:documentation>Цена за единицу с НДС (из сведений контракта)</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПозСмет" type="Строка100Тип">
+																<xs:annotation>
+																	<xs:documentation>Номер позиции по смете. Если значение атрибута "Отраслевая специализация" (ФайлУПДПрод/СведТов/@ОтрСпец) не равно 1 - "Строительство", то атрибут игнорируется при приеме</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ЛПСвед" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Сведения об объекте закупки в том случае, когда объектом закупки является лекарственный препарат</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ПозицПоМНН">
+																	<xs:annotation>
+																		<xs:documentation>Позиция по торговому наименованию лекарственного средства</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:attribute name="МНН" type="Строка500Тип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Международное непатентованное или химическое или группировочное наименование</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="ТН" type="Строка500Тип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Торговое наименование</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="ЛекФорм" type="Строка500Тип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Лекарственная форма</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="Доз" type="Строка500Тип">
+																			<xs:annotation>
+																				<xs:documentation>Дозировка.
+Устарело, оставлено для обратной совместимости</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="ДозСвед" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о дозировке.
+Контролируется обязательность заполнения при приеме</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:attribute name="Наим" type="Строка500Тип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Наименование</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="Знач" type="ЧислоМакс10ДоТочкТип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Значение</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="ПотребЕдИзмСвед" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о потребительской единице измерения.
+Игнорируется при приеме для авансовых СЧФ, в других случаях контролируется обязательность заполнения при приеме</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence minOccurs="0">
+																			<xs:element name="ОКЕИ" type="ОКЕИТип" minOccurs="0">
+																				<xs:annotation>
+																					<xs:documentation>Единица измерения по ОКЕИ</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="Наим" type="Строка500Тип">
+																			<xs:annotation>
+																				<xs:documentation>Наименование потребительской единицы измерения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="Колич" type="ЧислоМакс15ДоТочкТип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Количество в потребительских единицах измерения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="УпакСвед">
+																	<xs:annotation>
+																		<xs:documentation>Сведения об упаковке</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:attribute name="ВидПервУпак" type="Строка500Тип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Вид первичной упаковки</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="КоличЛекФормВПервУпак" type="ЧислоМакс11ДоТочкТип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Количество лекарственных форм в первичной упаковке</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="КоличПервУпакВПотребУпак" type="Число11Тип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>Количество первичных упаковок в потребительской упаковке</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="КоличЛекФормВПотребУпак" type="ЧислоМакс22ДоТочкТип">
+																			<xs:annotation>
+																				<xs:documentation>Количество лекарственных форм в потребительской упаковке</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="КоличПотребЕдВПотребУпак" type="ЧислоМакс21ДоТочкТип">
+																			<xs:annotation>
+																				<xs:documentation>Количество потребительских единиц в потребительской упаковке. С версии 10.3 требуется обязательное заполнение атрибута</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="СтранаПроисх" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране происхождения товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СтранаПроизв" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Страна производителя</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="ЖНВЛП" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Признак включения в реестр жизненно необходимых и важнейших лекарственных препаратов.
+Указание блока означает, что установлен признак включения в реестр ЖНВЛП. При этом содержимое блока может быть не заполнено для авансовых СЧФ</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:attribute name="ФактОтпЦена" type="ЧислоМакс18ДоТочкТип">
+																			<xs:annotation>
+																				<xs:documentation>Фактическая отпускная цена ЛП, руб.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="ЗарегПредОтпЦена" type="ЧислоМакс18ДоТочкТип">
+																			<xs:annotation>
+																				<xs:documentation>Зарегистрированная предельная отпускная цена ЛП, руб.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="СуммРазмФактОптНадбРуб" type="ЧислоМакс18ДоТочкТип">
+																			<xs:annotation>
+																				<xs:documentation>Суммарный размер фактических оптовых надбавок ЛП, руб.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="СуммРазмФактОптНадбПроц" type="ЧислоМакс18ДоТочкТип">
+																			<xs:annotation>
+																				<xs:documentation>Суммарный размер фактических оптовых надбавок (процент) ЛП, %.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="НомСтр" type="Число6Тип">
+																<xs:annotation>
+																	<xs:documentation>Номер строки таблицы. Требуется обязательное заполнение</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ИдЛП" type="ГУИД32Тип">
+																<xs:annotation>
+																	<xs:documentation>Идентификатор лекарственного препарата. Требуется обязательное заполнение</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ЦенаЗаУпакСНДС" type="ЧислоМакс15ДоТочкТип">
+																<xs:annotation>
+																	<xs:documentation>Цена за потребительскую упаковку (с НДС).
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="СерияЛекПреп" type="Строка50Тип">
+																<xs:annotation>
+																	<xs:documentation>Серия ЛП.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="СрокГодн" type="ДатаТип">
+																<xs:annotation>
+																	<xs:documentation>Срок годности ЛП.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:choice>
+												<xs:attribute name="НомСтр" type="Число2Тип">
+													<xs:annotation>
+														<xs:documentation>Номер строки таблицы. Устрарело не применяется. Игнорируется при приёме.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ИдТРУ" type="ГУИД32Тип">
+													<xs:annotation>
+														<xs:documentation>GUID товара, работы, услуги (в случае закупки лекарственных препаратов – GUID ЛП)</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ТехИдТРУ" type="xs:long">
+													<xs:annotation>
+														<xs:documentation>Технический идентификатор позиции ТРУ.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ВнешТехИдТРУ" type="ВнешИдТип">
+													<xs:annotation>
+														<xs:documentation>Внешний технический идентификатор позиции ТРУ.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="НаимТовИсх" type="Строка2000Тип" use="required">
+													<xs:annotation>
+														<xs:documentation>Исходное наименование ТРУ</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ДеталТРУ">
+											<xs:annotation>
+												<xs:documentation>Сведения о детализированных позициях ТРУ.
+В блоке указываются сведения о родительской позиции ТРУ и его детализациях</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="СведРод">
+														<xs:annotation>
+															<xs:documentation>Сведения о родительской позиции ТРУ</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="СумНал" type="СумНДСТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сумма налога, предъявляемая покупателю</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Акциз" type="СумАкцизТип">
+																	<xs:annotation>
+																		<xs:documentation>Сумма акциза</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СтранаПроисх" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране происхождения товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СтранаПроизв" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране регистрации производителя товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="ИдТРУ" type="ГУИД32Тип">
+																<xs:annotation>
+																	<xs:documentation>GUID товара, работы, услуги</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ТехИдТРУ" type="xs:long">
+																<xs:annotation>
+																	<xs:documentation>Технический идентификатор позиции ТРУ.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ВнешТехИдТРУ" type="ВнешИдТип">
+																<xs:annotation>
+																	<xs:documentation>Внешний технический идентификатор позиции ТРУ.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="КодТов" type="Строка100Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Код товара</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="НаимТов" type="Строка1000Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Наименование товара (работы, услуги)</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПрТовРаб" use="required">
+																<xs:annotation>
+																	<xs:documentation>Признак Товар/Работа/Услуга</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:length value="1"/>
+																		<xs:enumeration value="1"/>
+																		<xs:enumeration value="2"/>
+																		<xs:enumeration value="3"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="КодЕдИзм" type="КодОКЕИТип" use="optional">
+																<xs:annotation>
+																	<xs:documentation>Код единицы измерения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="НаимЕдИзм" type="Строка255Тип" use="optional">
+																<xs:annotation>
+																	<xs:documentation>Наименование единицы измерения.
+Игнорируется при приеме, заполняется при передаче из справочника ОКЕИ</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ЦенаЕдИзм" type="ЧислоМакс15ДоТочкТип" use="optional">
+																<xs:annotation>
+																	<xs:documentation>Цена за единицу измерения без НДС</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="КолТов" type="ЧислоМакс15ДоТочкТип" use="optional">
+																<xs:annotation>
+																	<xs:documentation>Количество (объем)</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ОбРабУсл" type="Строка500Тип">
+																<xs:annotation>
+																	<xs:documentation>Объем работы, услуги в текстовом выражении</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="СтТовБезНДС" type="ЧислоМакс17ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Стоимость товаров (работ, услуг) без налога - всего</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="НалСт" use="required">
+																<xs:annotation>
+																	<xs:documentation>Налоговая ставка</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="0%"/>
+																		<xs:enumeration value="10%"/>
+																		<xs:enumeration value="18%"/>
+																		<xs:enumeration value="20%"/>
+																		<xs:enumeration value="10/110"/>
+																		<xs:enumeration value="18/118"/>
+																		<xs:enumeration value="20/120"/>
+																		<xs:enumeration value="без НДС"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="СтТовУчНал" type="ЧислоМакс17ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Стоимость товаров (работ, услуг) с налогом - всего</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПозСмет" type="Строка100Тип">
+																<xs:annotation>
+																	<xs:documentation>Номер позиции по смете.
+Игнорируется для счет-фактур.
+Если атрибут "Отраслевая специализация" (ОтрСпец) заполнен значением 1 - "Строительство", то принимается и сохраняется, иначе игнорируется при приеме</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="СведДетал" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Сведения о детализированной (дочерней) позиции ТРУ</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="СтранаПроисх" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране происхождения товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СтранаПроизв" type="СтранаТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о стране регистрации производителя товара</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="НомСтр" type="Число6Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Номер строки таблицы</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ИдТРУ" type="ГУИД32Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>GUID товара, работы, услуги</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ОбРабУсл" type="Строка500Тип">
+																<xs:annotation>
+																	<xs:documentation>Объем работы, услуги в текстовом выражении</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ЦенаСНДС" type="ЧислоМакс15ДоТочкТип">
+																<xs:annotation>
+																	<xs:documentation>Цена за единицу с НДС</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПозСмет" type="Строка100Тип">
+																<xs:annotation>
+																	<xs:documentation>Номер позиции по смете.
+Игнорируется для счет-фактур.
+Если атрибут "Отраслевая специализация" (ОтрСпец) заполнен значением 1 - "Строительство", то принимается и сохраняется, иначе игнорируется при приеме</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="ОтрСпец">
+							<xs:annotation>
+								<xs:documentation>Отраслевая специализация:
+1 - Строительство;
+2 - Лекарственные препараты.
+Игнорируется для счет-фактур</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="НаимОбСтр" type="Строка2000Тип">
+							<xs:annotation>
+								<xs:documentation>Наименование объекта строительства.
+Игнорируется для счет-фактур.
+Если атрибут "Отраслевая специализация" (ОтрСпец) заполнен значением 1 - "Строительство", то контролируется обязательность заполнения, иначе игнорируется при приеме</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВсегоОплСтТовУчНалВсего" type="ЧислоМакс17ДоТочкТип">
+							<xs:annotation>
+								<xs:documentation>Всего к оплате, Стоимость товаров (работ, услуг) с налогом - всего (строка «Всего к оплате»/графа 9 счета-фактуры) в валюте контракта.
+Заполняется, если валюта УПД не совпадает с валютой контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВсегоОплСумНал" type="ЧислоМакс17ДоТочкТип">
+							<xs:annotation>
+								<xs:documentation>Всего к оплате, Сумма налога, предъявляемая покупателю (строка «Всего к оплате»/графа 8 счета-фактуры) в валюте контракта.
+Заполняется, если:
+значение (НДС) СумНал больше 0 и валюта УПД не совпадает с валютой контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="НоминалКурсВал" type="Число6Тип">
+							<xs:annotation>
+								<xs:documentation>Номинал курса валюты по справочнику курсов валют на дату составления УПД</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="СведМестаПоставки" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Сведения о местах поставки товаров</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="СведМестоПоставки" type="МестоПоставкиТип" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Сведения о месте поставки товаров</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Вложен" type="ВложенТип" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Прикрепленные документы</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдПрилож" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла, к которому сформировано приложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.00"/>
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="РукОрг" type="Число2Тип">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер подписанта (указанный в элементе ИныеСвед), являющегося руководителем организации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайлИсх" type="ИдФайлТип">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла с исходным УПД, для которого сформировано текущее Исправление.
+Заполняется только для Исправлений УПД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ХэшФайл" type="ХэшФайлТип">
+				<xs:annotation>
+					<xs:documentation>Хэш файла, к которому сформировано приложение, в hex представлении, рассчитанный по алгоритму ГОСТ Р 34.11-2012</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ФайлУПДПокуп">
+		<xs:annotation>
+			<xs:documentation>Приложение к титулу покупателя УПД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="СвПрин" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Сведения о принятии ТРУ</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="НедеталТРУ">
+								<xs:annotation>
+									<xs:documentation>Сведения о позиции ТРУ.
+В блоке указываются сведения о приемке недетализированных позиций ТРУ</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ОтрСпец" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Поля ТРУ, относящиеся к отраслевой специализации.
+Блок может быть заполнен только в том случае, если в приложении к УПД (титул продавца) в атрибуте "Отраслевая специализация" (ФайлУПДПрод/СведТов/@ОтрСпец) указана отраслевая специализация "Строительство".
+Контролируется, что в составе блока указаны разделы видов работ и (или) конструктивные решения, которые были указаны в приложении к УПД (титул продавца) </xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="СтройДетал" type="СтройДеталУПДПокупТип">
+														<xs:annotation>
+															<xs:documentation>Детализация полей ТРУ, относящихся к отраслевой специализации "Строительство".
+В составе блока должен быть заполнен как минимум один блок "Раздел видов работ" (Раздел) и/или как минимум один блок "Конструктивное решение (вид работ) (УПД)" (ВидРаб)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="ИдТРУпринЗак" type="ГУИД32Тип">
+										<xs:annotation>
+											<xs:documentation>GUID ТРУ, для которого заказчик указывает информацию о принятом количестве товара</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ТехИдТРУпринЗак" type="xs:long">
+										<xs:annotation>
+											<xs:documentation>Технический идентификатор позиции ТРУ, для которого заказчик указывает информацию о принятом количестве товара.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ВнешТехИдТРУпринЗак" type="ВнешИдТип">
+										<xs:annotation>
+											<xs:documentation>Внешний технический идентификатор позиции ТРУ, для которого заказчик указывает информацию о принятом количестве товара.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ИдЛПпринЗак" type="ГУИД32Тип">
+										<xs:annotation>
+											<xs:documentation>Идентификатор лекарственного препарата, для которого заказчик указывает информацию о принятом количестве товара. Обязательно указание для лекарственных препаратов</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ПризПринТРУ" type="xs:boolean" use="required">
+										<xs:annotation>
+											<xs:documentation>Признак принятия ТРУ</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="КолТовПринЗак" type="ЧислоМакс15ДоТочкТип">
+										<xs:annotation>
+											<xs:documentation>Количество ТРУ, фактически принятое заказчиком</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="КолТовПринЗакПотребЕд" type="ЧислоМакс15ДоТочкТип">
+										<xs:annotation>
+											<xs:documentation>Количество в потребительских единицах измерения, фактически принятое заказчиком.
+Может быть заполнено только для позиции ТРУ, являющейся лекарственным препаратом</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ОбРабУслПринЗак" type="Строка500Тип">
+										<xs:annotation>
+											<xs:documentation>Объем работы, услуги, фактически принятый заказчиком, в текстовом выражении</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="СтТовУчНалПринЗак" type="ЧислоМакс17ДоТочкТип" use="required">
+										<xs:annotation>
+											<xs:documentation>Стоимость с налогом, всего, фактически принято заказчиком</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ПричОтказПрием" type="Строка2000Тип">
+										<xs:annotation>
+											<xs:documentation>Причина отказа от приемки</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ДеталТРУ">
+								<xs:annotation>
+									<xs:documentation>Сведения о детализированных позициях ТРУ.
+В блоке указываются сведения о приемке детализированных позиций ТРУ</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="СведРод">
+											<xs:annotation>
+												<xs:documentation>Сведения о родительской позиции ТРУ</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="ИдТРУ" type="ГУИД32Тип">
+													<xs:annotation>
+														<xs:documentation>GUID товара, работы, услуги</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ТехИдТРУ" type="xs:long">
+													<xs:annotation>
+														<xs:documentation>Технический идентификатор позиции ТРУ.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ВнешТехИдТРУ" type="ВнешИдТип">
+													<xs:annotation>
+														<xs:documentation>Внешний технический идентификатор позиции ТРУ.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="КолТовПринЗак" type="ЧислоМакс15ДоТочкТип" use="optional">
+													<xs:annotation>
+														<xs:documentation>Количество ТРУ, фактически принятое заказчиком.
+Значение рассчитывается как сумма количества принятых заказчиком товаров по всем дочерним позициям (ФайлУПДПокуп/СвПрин/ДеталТРУ/СведДетал/@КолТовПринЗак)</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ОбРабУслПринЗак" type="Строка500Тип">
+													<xs:annotation>
+														<xs:documentation>Объем работы, услуги, фактически принятый заказчиком, в текстовом выражении</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="СтТовУчНалПринЗак" type="ЧислоМакс17ДоТочкТип" use="required">
+													<xs:annotation>
+														<xs:documentation>Стоимость с налогом, всего, фактически принято заказчиком.
+Значение рассчитывается как сумма стоимости с налогом по всем дочерним позициям (ФайлУПДПокуп/СвПрин/ДеталТРУ/СведДетал/@СтТовУчНалПринЗак)</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="СведДетал" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Сведения о детализированной (дочерней) позиции ТРУ</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="ИдТРУпринЗак" type="ГУИД32Тип" use="required">
+													<xs:annotation>
+														<xs:documentation>GUID ТРУ, для которого заказчик указывает информацию о принятом количестве товара</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ПризПринТРУ" type="xs:boolean" use="required">
+													<xs:annotation>
+														<xs:documentation>Признак принятия ТРУ</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="КолТовПринЗак" type="ЧислоМакс15ДоТочкТип">
+													<xs:annotation>
+														<xs:documentation>Количество ТРУ, фактически принятое заказчиком</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ОбРабУслПринЗак" type="Строка500Тип">
+													<xs:annotation>
+														<xs:documentation>Объем работы, услуги, фактически принятый заказчиком, в текстовом выражении</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="СтТовУчНалПринЗак" type="ЧислоМакс17ДоТочкТип" use="required">
+													<xs:annotation>
+														<xs:documentation>Стоимость с налогом, всего, фактически принято заказчиком</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ПричОтказПрием" type="Строка2000Тип">
+													<xs:annotation>
+														<xs:documentation>Причина отказа от приемки</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="СвПриемКом" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Информация о решении приемочной комиссии.
+Если блок заполнен, то означает, что установлен признак "Для определения результатов приемки товаров, работ, услуг создана приемочная комиссия"</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ЧленПриемКом" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Сведения о члене приемочной комиссии.
+Если блок заполнен, то означает, что установлен признак "Члены приемочной комиссии подписывают документ о приемке".
+Если блок не заполнен, то означает, что установлен признак "Решение приемочной комиссии прилагается к документу о приемке"</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="СвРеш" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Информация о решении члена приемочной комиссии.
+Контролируется обязательность заполнения блока при приеме</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="КодРеш" use="required">
+													<xs:annotation>
+														<xs:documentation>Код решения члена приемочной комиссии.
+Допустимые значения:
+
+- 1 – замечания отсутствуют;
+
+- 2 – выявлены замечания</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="2"/>
+															<xs:enumeration value="1"/>
+															<xs:enumeration value="2"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="Реш" type="Строка2000Тип">
+													<xs:annotation>
+														<xs:documentation>Решение члена приемочной комиссии</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="НомерПодпис" type="Число2Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Номер подписанта.
+Контролируется, что в УПД (титул покупателя) присутствует подписант с указанным номером</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="Роль" use="required">
+										<xs:annotation>
+											<xs:documentation>Роль в приемочной комиссии:
+1 - Председатель приемочной комиссии;
+2 - Член приемочной комиссии</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="2"/>
+												<xs:enumeration value="1"/>
+												<xs:enumeration value="2"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ОснПолн" type="Строка255Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Основание полномочий члена приемочной комиссии</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="Осн" type="Строка255Тип" use="required">
+							<xs:annotation>
+								<xs:documentation>Основание создания приемочной комиссии</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="КодРеш">
+							<xs:annotation>
+								<xs:documentation>Код решения приемочной комиссии.
+Контролируется обязательность заполнения атрибута при приеме.
+
+Допустимые значения:
+
+- 1 – товары поставлены (работы выполнены, услуги оказаны) полностью в соответствии с условиями контракта и подлежат приемке;
+
+- 2 – по итогам приемки выявлены недостатки поставленных товаров (выполненных работ, оказанных услуг), которые поставщику (подрядчику, исполнителю) следует устранить в согласованные с Заказчиком сроки;
+
+- 3 – товары не поставлены (работы не выполнены, услуги не оказаны), либо товары поставлены (работы выполнены, услуги оказаны) с нарушениями условий контракта и не подлежат приемке</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="2"/>
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+									<xs:enumeration value="3"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="Реш" type="Строка2000Тип">
+							<xs:annotation>
+								<xs:documentation>Решение приемочной комиссии</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Вложен" type="ВложенТип" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Прикрепленные документы</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдПрилож" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла, к которому сформировано приложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.00"/>
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="СтТовУчНалВсегоПринЗак" type="ЧислоМакс18ДоТочкТип">
+				<xs:annotation>
+					<xs:documentation>Итого, фактически принято заказчиком</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИнфРасхОтказПрием" type="Строка2000Тип">
+				<xs:annotation>
+					<xs:documentation>Информация о расхождениях / причинах отказа в приемке</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ДатаНачПрин" type="ДатаТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата начала приемки товаров</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ХэшФайл" type="ХэшФайлТип">
+				<xs:annotation>
+					<xs:documentation>Хэш файла, к которому сформировано приложение, в hex представлении, рассчитанный по алгоритму ГОСТ Р 34.11-2012</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ФайлУКДПрод">
+		<xs:annotation>
+			<xs:documentation>Приложение к титулу продавца УКД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="СведКонт">
+					<xs:annotation>
+						<xs:documentation>Сведения о контракте</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="РеестрНомКонт" type="РеестрНомКонтТип" use="required">
+							<xs:annotation>
+								<xs:documentation>Реестровый номер контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИдВерсКонт" type="xs:long" use="required">
+							<xs:annotation>
+								<xs:documentation>Идентификатор версии контракта, на основании которой сформирован УПД</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИдЭтапКонт" type="ГУИД32Тип">
+							<xs:annotation>
+								<xs:documentation>GIUD этапа контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ТехИдЭтапКонт" type="xs:long">
+							<xs:annotation>
+								<xs:documentation>Технический идентификатор этапа контракта.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВнешТехИдЭтапКонт" type="ВнешИдТип">
+							<xs:annotation>
+								<xs:documentation>Внешний технический идентификатор этапа контракта.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="НомерГосКонт" type="Строка100Тип" use="required">
+							<xs:annotation>
+								<xs:documentation>Номер государственного контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ДатаГосКонт" type="ДатаТип" use="required">
+							<xs:annotation>
+								<xs:documentation>Дата заключения контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИКЗ" type="ИКЗТип">
+							<xs:annotation>
+								<xs:documentation>Идентификационный код закупки из контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="СведПоставщик" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Сведения о поставщике</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ЮЛ">
+								<xs:annotation>
+									<xs:documentation>Сведения о юридическом лице</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name="ФирмНаимОрг" type="Строка1000Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Фирменное наименование</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="СведТов" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Сведения о товаре (работе, услуге), имущественном праве</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ТРУ" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Сведения о товаре, работе, услуге.
+В случае если передаются сведения о детализированной позиции ТРУ, то необходимо указать идентификкатор родительской позиции в одном из атрибутов ИдРодТРУ, ТехИдРодТРУ, ВнешТехИдРодТРУ. В другом случае данные атрибуты не заполняются</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="НеЛПСвед">
+											<xs:annotation>
+												<xs:documentation>Сведения об объекте закупки в том случае, когда объектом закупки является не лекарственный препарат</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ОбРабУсл" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Объем работы, услуги в текстовом выражении</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="ДоИзм" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>До изменения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПослеИзм" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>После изменения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="НаимЕдИзм" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Наименование единицы измерения до и после изменения</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="ДоИзм" type="Строка255Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>До изменения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПослеИзм" type="Строка255Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>После изменения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ЦенаСНДС" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Цена за единицу с НДС до и после изменения</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="ДоИзм" type="ЧислоМакс15ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>До изменения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ПослеИзм" type="ЧислоМакс15ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>После изменения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ОтрСпец" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Поля ТРУ, относящиеся к отраслевой специализации.
+Игнорируется для корректировочных счет фактур.
+В других случаях блок может и должен быть задан только в том случае, если в исходном УПД для данной позиции ТРУ задан блок "Сведения ТРУ, относящиеся к отраслевой специализации" (ФайлУПДПрод/СведТов/СведТРУ/НедеталТРУ/НеЛПСвед/ОтрСпец)</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="СтройДетал" type="СтройДеталУКДПродТип">
+																	<xs:annotation>
+																		<xs:documentation>Детализация полей ТРУ, относящихся к отраслевой специализации "Строительство".
+В составе блока должен быть заполнен как минимум один блок "Раздел видов работ" (Раздел) и/или как минимум один блок "Конструктивное решение (вид работ) (УПД)" (ВидРаб)</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="НомСтр" type="Число6Тип">
+													<xs:annotation>
+														<xs:documentation>Номер строки таблицы. Требуется обязательное заполнение</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ПозСмет" type="Строка100Тип">
+													<xs:annotation>
+														<xs:documentation>Номер позиции по смете. Игнорируется для корректировочных счет фактур.
+Если для позиции ТРУ в исходном УПД заполнен одноименный атрибут, то значение принимается и сохраняется, иначе игнорируется при приеме</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ЛПСвед" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Сведения об объекте закупки в том случае, когда объектом закупки является лекарственный препарат</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ПозицПоМНН">
+														<xs:annotation>
+															<xs:documentation>Позиция по торговому наименованию лекарственного средства</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="МНН" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Международное непатентованное или химическое или группировочное наименование</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ТН" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Торговое наименование</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="ЛекФорм" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Лекарственная форма</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="Доз" type="Строка500Тип">
+																<xs:annotation>
+																	<xs:documentation>Дозировка.
+Устарело, оставлено для обратной совместимости</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ДозСвед" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Сведения о дозировке.
+Контролируется обязательность заполнения при приеме</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="Наим" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Наименование</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="Знач" type="ЧислоМакс10ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Значение</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ПотребЕдИзмСвед" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Сведения о потребительской единице измерения.
+Игнорируется при приеме для авансовых КСЧФ, в других случаях контролируется обязательность заполнения при приеме</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence minOccurs="0">
+																<xs:element name="ОКЕИ" type="ОКЕИТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Единица измерения по ОКЕИ</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="Наим" type="Строка500Тип">
+																<xs:annotation>
+																	<xs:documentation>Наименование потребительской единицы измерения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="Колич" type="ЧислоМакс15ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Количество в потребительских единицах измерения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="УпакСвед">
+														<xs:annotation>
+															<xs:documentation>Сведения об упаковке</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ЦенаЗаУпакСНДС" type="ДоИПослеИзмТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Цена за потребительскую упаковку с НДС до и после изменения.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="ВидПервУпак" type="Строка500Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Вид первичной упаковки</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="КоличЛекФормВПервУпак" type="ЧислоМакс11ДоТочкТип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Количество лекарственных форм в первичной упаковке</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="КоличПервУпакВПотребУпак" type="Число11Тип" use="required">
+																<xs:annotation>
+																	<xs:documentation>Количество первичных упаковок в потребительской упаковке</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="КоличЛекФормВПотребУпак" type="ЧислоМакс22ДоТочкТип">
+																<xs:annotation>
+																	<xs:documentation>Количество лекарственных форм в потребительской упаковке</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="КоличПотребЕдВПотребУпак" type="ЧислоМакс21ДоТочкТип">
+																<xs:annotation>
+																	<xs:documentation>Количество потребительских единиц в потребительской упаковке. С версии 10.3 требуется обязательное заполнение атрибута</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="СтранаПроизв" type="СтранаТип" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Страна производителя</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="ЖНВЛП" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Признак включения в реестр жизненно необходимых и важнейших лекарственных препаратов.
+Указание блока означает, что установлен признак включения в реестр ЖНВЛП. При этом содержимое блока может быть не заполнено для авансовых СЧФ</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ФактОтпЦена" type="ДоИПослеИзмТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Фактическая отпускная цена ЛП, руб до и после изменения.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СуммРазмФактОптНадбРуб" type="ДоИПослеИзмТип" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Суммарный размер фактических оптовых надбавок ЛП, руб до и после изменений.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="СуммРазмФактОптНадбПроц" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Суммарный размер фактических оптовых надбавок (процент) ЛП, % до и после изменений.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:attribute name="ДоИзм" type="ЧислоМакс18ДоТочкТип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>До изменения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute name="ПослеИзм" type="ЧислоМакс18ДоТочкТип" use="required">
+																			<xs:annotation>
+																				<xs:documentation>После изменения</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="ЗарегПредОтпЦена" type="ЧислоМакс18ДоТочкТип">
+																<xs:annotation>
+																	<xs:documentation>Зарегистрированная предельная отпускная цена ЛП, руб.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="НомСтр" type="Число6Тип">
+													<xs:annotation>
+														<xs:documentation>Номер строки таблицы. Требуется обязательное заполнение</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="ИдЛП" type="ГУИД32Тип">
+													<xs:annotation>
+														<xs:documentation>Идентификатор лекарственного препарата. Требуется обязательное заполнение</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="СерияЛекПреп" type="Строка50Тип">
+													<xs:annotation>
+														<xs:documentation>Серия ЛП.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="СрокГодн" type="ДатаТип">
+													<xs:annotation>
+														<xs:documentation>Срок годности ЛП.
+Не заполняется для авансовых СЧФ, в других случаях обязателен для заполнения</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+									<xs:attribute name="НомСтр" type="Число2Тип">
+										<xs:annotation>
+											<xs:documentation>Номер строки таблицы. Устрарело не применяется. Игнорируется при приёме.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ИдТРУ" type="ГУИД32Тип">
+										<xs:annotation>
+											<xs:documentation>GUID товара, работы, услуги (в случае закупки лекарственных препаратов – GUID ЛП)</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ТехИдТРУ" type="xs:long">
+										<xs:annotation>
+											<xs:documentation>Технический идентификатор позиции ТРУ.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ВнешТехИдТРУ" type="ВнешИдТип">
+										<xs:annotation>
+											<xs:documentation>Внешний технический идентификатор позиции ТРУ.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ИдРодТРУ" type="ГУИД32Тип">
+										<xs:annotation>
+											<xs:documentation>GUID родительской позиции ТРУ</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ТехИдРодТРУ" type="xs:long">
+										<xs:annotation>
+											<xs:documentation>Технический идентификатор родительской позиции ТРУ.
+Соответствует значению поля sid из сведений о контракте</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="ВнешТехИдРодТРУ" type="ВнешИдТип">
+										<xs:annotation>
+											<xs:documentation>Внешний технический идентификатор родительской позиции ТРУ.
+Соответствует значению поля externalSid из сведений о контракте</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="НаимТовИсх" type="Строка2000Тип">
+										<xs:annotation>
+											<xs:documentation>Исходное наименование ТРУ</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="КодТов" type="Строка100Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Код товара</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="ВсегоУмОплСтТовУчНалВсего" type="ЧислоМакс17ДоТочкТип">
+							<xs:annotation>
+								<xs:documentation>Всего к оплате, Стоимость товаров (работ, услуг) с налогом - всего - уменьшение (в валюте контракта).
+Заполняется, если значение не равно 0 и валюта УКД не совпадает с валютой контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВсегоУвелОплСтТовУчНалВсего" type="ЧислоМакс17ДоТочкТип">
+							<xs:annotation>
+								<xs:documentation>Всего к оплате, Стоимость товаров (работ, услуг) с налогом - всего - увеличение (в валюте контракта).
+Заполняется, если значение не равно 0 и валюта УКД не совпадает с валютой контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВсегоУмОплСумНал" type="ЧислоМакс17ДоТочкТип">
+							<xs:annotation>
+								<xs:documentation>Всего к оплате, Сумма налога, предъявляемая покупателю - уменьшение (в валюте контракта).
+ Заполняется, если значение не равно 0 и валюта УКД не совпадает с валютой контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ВсегоУвелОплСумНал" type="ЧислоМакс17ДоТочкТип">
+							<xs:annotation>
+								<xs:documentation>Всего к оплате, Сумма налога, предъявляемая покупателю - увеличение (в валюте контракта).
+Заполняется, если значение не равно 0 и валюта УКД не совпадает с валютой контракта</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="НоминалКурсВал" type="Число6Тип">
+							<xs:annotation>
+								<xs:documentation>Номинал курса валюты по справочнику курсов валют на дату составления УПД</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Вложен" type="ВложенТип" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Прикрепленные документы</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдПрилож" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла, к которому сформировано приложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.00"/>
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="РукОрг" type="Число2Тип">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер подписанта (указанный в элементе ИныеСвед), являющегося руководителем организации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ПредлИзмСтоим" type="Число2Тип">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер подписанта (указанный в элементе ИныеСвед), у которого установлен признак «Предлагаю изменить стоимость».
+Заполняется, если не заполнено УведИзмСтоим</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="УведИзмСтоим" type="Число2Тип">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер подписанта (указанный в элементе ИныеСвед), у которого установлен признак «Предлагаю изменить стоимость».
+Заполняется, если не заполнено ПредлИзмСтоим
+</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайлИсх" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Для УКД – идентификатор файла с исходным УПД, для которого сформирован текущий УКД. 
+Для Исправлений УКД - идентификатор файла с исходным УКД, для которого сформировано текущее Исправление</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ХэшФайл" type="ХэшФайлТип">
+				<xs:annotation>
+					<xs:documentation>Хэш файла, к которому сформировано приложение, в hex представлении, рассчитанный по алгоритму ГОСТ Р 34.11-2012</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ФайлУКДПокуп">
+		<xs:annotation>
+			<xs:documentation>Приложение к титулу покупателя УКД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="СвПриемКом" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Информация о решении приемочной комиссии.
+Если блок заполнен, то означает, что установлен признак "Для определения результатов приемки товаров, работ, услуг создана приемочная комиссия"</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ЧленПриемКом" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Сведения о члене приемочной комиссии.
+Если блок заполнен, то означает, что установлен признак "Члены приемочной комиссии подписывают документ о приемке".
+Если блок не заполнен, то означает, что установлен признак "Решение приемочной комиссии прилагается к документу о приемке"</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="СвРеш" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Информация о решении члена приемочной комиссии.
+Контролируется обязательность заполнения блока при приеме</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="КодРеш" use="required">
+													<xs:annotation>
+														<xs:documentation>Код решения члена приемочной комиссии.
+Допустимые значения:
+
+- 1 – с изменением стоимости согласен;
+
+- 2 – с изменением стоимости не согласен</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="2"/>
+															<xs:enumeration value="1"/>
+															<xs:enumeration value="2"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="Реш" type="Строка2000Тип">
+													<xs:annotation>
+														<xs:documentation>Решение члена приемочной комиссии</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="НомерПодпис" type="Число2Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Номер подписанта.
+Контролируется, что в УКД (титул покупателя) присутствует подписант с указанным номером</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="Роль" use="required">
+										<xs:annotation>
+											<xs:documentation>Роль в приемочной комиссии:
+1 - Председатель приемочной комиссии;
+2 - Член приемочной комиссии</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="2"/>
+												<xs:enumeration value="1"/>
+												<xs:enumeration value="2"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="ОснПолн" type="Строка255Тип" use="required">
+										<xs:annotation>
+											<xs:documentation>Основание полномочий члена приемочной комиссии</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="Осн" type="Строка255Тип" use="required">
+							<xs:annotation>
+								<xs:documentation>Основание создания приемочной комиссии</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="КодРеш">
+							<xs:annotation>
+								<xs:documentation>Код решения приемочной комиссии.
+Контролируется обязательность заполнения атрибута при приеме.
+
+Допустимые значения:
+
+- 1 – с изменением стоимости согласны;
+
+- 2 – с изменением стоимости не согласны</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="2"/>
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="Реш" type="Строка2000Тип">
+							<xs:annotation>
+								<xs:documentation>Решение приемочной комиссии</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Вложен" type="ВложенТип" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Прикрепленные документы</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдПрилож" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла, к которому сформировано приложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.00"/>
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="СоглИзмСтоим" type="Число2Тип">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер подписанта, согласившегося изменить стоимость</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ХэшФайл" type="ХэшФайлТип">
+				<xs:annotation>
+					<xs:documentation>Хэш файла, к которому сформировано приложение, в hex представлении, рассчитанный по алгоритму ГОСТ Р 34.11-2012</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ФайлУведУточ">
+		<xs:annotation>
+			<xs:documentation>Приложение к уведомлению об уточнении</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Вложен" type="ВложенТип" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Прикрепленные документы</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ИдПрилож" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор приложения к документу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ИдФайл" type="ИдФайлТип" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор файла, к которому сформировано приложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ВерсФорм" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия формата</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="Строка5Тип">
+						<xs:enumeration value="1.00"/>
+						<xs:enumeration value="1.01"/>
+						<xs:enumeration value="1.02"/>
+						<xs:enumeration value="1.03"/>
+						<xs:enumeration value="1.04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ХэшФайл" type="ХэшФайлТип">
+				<xs:annotation>
+					<xs:documentation>Хэш файла, к которому сформировано приложение, в hex представлении, рассчитанный по алгоритму ГОСТ Р 34.11-2012</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--Текущая версия форматов-->
+	<xs:complexType name="ВерсФорм">
+		<xs:annotation>
+			<xs:documentation>Версия формата</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ТекущВерсФорм" fixed="1.04">
+			<xs:annotation>
+				<xs:documentation>Текущая версия формата</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+					<xs:maxLength value="5"/>
+					<xs:enumeration value="1.0"/>
+					<xs:enumeration value="1.01"/>
+					<xs:enumeration value="1.02"/>
+					<xs:enumeration value="1.03"/>
+					<xs:enumeration value="1.04"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Составные типы</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="АдресКЛАДРТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Адрес по КЛАДР</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="КЛАДР">
+				<xs:annotation>
+					<xs:documentation>Код КЛАДР - если поставка в РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="КладрТип">
+							<xs:sequence>
+								<xs:element name="НеКЛАДР" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>КЛАДР не используется для задания района/города и населенного пункта</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:attribute name="РайонГород" type="Строка100Тип">
+											<xs:annotation>
+												<xs:documentation>Район/город</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+										<xs:attribute name="НаселенПункт" type="Строка100Тип">
+											<xs:annotation>
+												<xs:documentation>Населенный пункт</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="Адрес" type="Строка2000Тип">
+								<xs:annotation>
+									<xs:documentation>Адрес по КЛАДР.
+Игноририуется при приеме.
+Заполняется для ПФ адресом в соответствии со справочником КЛАДР</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Страна" type="СтранаТип">
+				<xs:annotation>
+					<xs:documentation>Код страны в ОКСМ - если поставка не в РФ. При приеме содержимое контролируется на  присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="АдресОКТМОТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Адрес по ОКТМО</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="ВидДокСправТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник видов документов</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="Число2Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка255Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Наименование</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ВидРабУПДПродТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Конструктивное решение (вид работ) УПД титул продавца</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="КодТов" type="ОКПД2Тип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код товара. Ссылка на справочник ОКПД2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ЕдИзм">
+				<xs:annotation>
+					<xs:documentation>Инфорамция о единицах измерения.
+При приеме контролируется обязательность заполнения блока "Единица измерения по ОКЕИ" (ОКЕИ)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ОКЕИ" type="ОКЕИТип" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Единица измерения по ОКЕИ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ОЕИ" type="ОЕИТип" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Общепринятые единицы измерения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="СтрПроисх" type="СтранаТип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Страна происхождения товара</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="СтрРегПроизв" type="СтранаТип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Страна регистрации производителя товара</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="СумНал" type="СумНДСТип">
+				<xs:annotation>
+					<xs:documentation>Сумма налога, предъявляемая покупателю</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="СвТД" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о таможенной декларации</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="КодПроисх" type="КодСтраныТип" use="optional">
+						<xs:annotation>
+							<xs:documentation>Цифровой код страны происхождения товара (Графа 10 счета-фактуры)</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="Наим" type="Строка255Тип">
+						<xs:annotation>
+							<xs:documentation>Краткое наименование страны происхождения.
+Игнорируется при приеме, заполняется при передаче значением из справочника ОКСМ</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ДефКодПроисх" use="optional">
+						<xs:annotation>
+							<xs:documentation>Цифровой код страны происхождения товара (Графа 10 счета-фактуры; для документа с Функция=СЧФ, выставляемом при получении оплаты, частичной оплаты в счет предстоящих поставок товаров (выполнения работ, оказания услуг), передачи имущественных прав</xs:documentation>
+							<xs:documentation/>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length value="1"/>
+								<xs:enumeration value="-"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="НомерТД" use="optional">
+						<xs:annotation>
+							<xs:documentation>Регистрационный номер таможенной декларации (номер декларации на товары; графа 11 счета-фактуры)</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="29"/>
+								<xs:minLength value="1"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ИдВидРаб" type="ГУИД32Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Идентификатор (GUID) конструктивного решения (вида работ)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="НомВидРаб" type="Число2Тип">
+			<xs:annotation>
+				<xs:documentation>Порядковый номер конструктивного решения (вида работ).
+Игнорируется при приеме,
+заполняется при передаче присвоенным в ЕИС порядковым номером</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="НаимВидРаб" type="Строка500Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Наименование конструктивного решения (вида работ)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПозСмет" type="Строка100Тип">
+			<xs:annotation>
+				<xs:documentation>Номер позиции по смете</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПрТовРаб" use="required">
+			<xs:annotation>
+				<xs:documentation>Признак Товар/Работа</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="КолВидРаб" type="ЧислоМакс15ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Количество (объем)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ЦенаБезНДС" type="ЧислоМакс15ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Цена на единицу измерения без НДС</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ЦенаСНДС" type="ЧислоМакс15ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Цена на единицу измерения с НДС</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="СтоимБезНДС" type="ЧислоМакс17ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Стоимость без налога - всего</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="СтоимСНДС" type="ЧислоМакс17ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Стоимость с налогом - всего</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ВидРабУПДПокупТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Конструктивное решение (вид работ) УПД титул покупателя</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ИдВидРаб" type="ГУИД32Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Идентификатор (GUID) конструктивного решения (вида работ)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПризПринВидРаб" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>Признак принятия ТРУ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="КолВидРабПринЗак" type="ЧислоМакс15ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Количество ТРУ, фактически принятое заказчиком</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="СтоимУчНалПринЗак" type="ЧислоМакс17ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Стоимость с налогом, всего, фактически принято заказчиком</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПричОтказПрием" type="Строка2000Тип">
+			<xs:annotation>
+				<xs:documentation>Причина отказа от приемки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ВидРабУКДПродТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Конструктивное решение (вид работ) УКД титул продавца</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="КодТов" type="ОКПД2Тип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код товара. Ссылка на справочник ОКПД2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ЕдИзм">
+				<xs:annotation>
+					<xs:documentation>Инфорамция о единицах измерения до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ЕдИзмДо" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Инфорамция о единицах измерения до изменения.
+Если исходный УПД сформирован после выхода версии ЕИС 11.0, то при приеме контролируется обязательность заполнение данного блока, а также дочернего блока "Единица измерения по ОКЕИ" (ОКЕИ)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ОКЕИ" type="ОКЕИТип" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Единица измерения по ОКЕИ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ОЕИ" type="ОЕИТип" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Общепринятые единицы измерения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ЕдИзмПосле">
+							<xs:annotation>
+								<xs:documentation>Инфорамция о единицах измерения после изменения.
+При приеме контролируется обязательность заполнения блока "Единица измерения по ОКЕИ" (ОКЕИ)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ОКЕИ" type="ОКЕИТип" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Единица измерения по ОКЕИ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ОЕИ" type="ОЕИТип" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Общепринятые единицы измерения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="КолВидРаб">
+				<xs:annotation>
+					<xs:documentation>Количество (объем) до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="КолВидРабДо" type="ЧислоМакс15ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Количество (объем) до изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="КолВидРабПосле" type="ЧислоМакс15ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Количество (объем) после изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЦенаБезНДС">
+				<xs:annotation>
+					<xs:documentation>Цена на единицу измерения без НДС до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="ЦенаБезНДСДо" type="ЧислоМакс15ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Цена на единицу измерения без НДС до изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ЦенаБезНДСПосле" type="ЧислоМакс15ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Цена на единицу измерения без НДС после изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЦенаСНДС">
+				<xs:annotation>
+					<xs:documentation>Цена на единицу измерения с НДС до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="ЦенаСНДСДо" type="ЧислоМакс15ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Цена на единицу измерения с НДС до изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="ЦенаСНДСПосле" type="ЧислоМакс15ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Цена на единицу измерения с НДС полсе изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="СумНал">
+				<xs:annotation>
+					<xs:documentation>Сумма налога, предъявляемая покупателю до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="СумНалДо" type="СумНДСТип">
+							<xs:annotation>
+								<xs:documentation>Сумма налога, предъявляемая покупателю до изменения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="СумНалПосле" type="СумНДСТип">
+							<xs:annotation>
+								<xs:documentation>Сумма налога, предъявляемая покупателю после изменения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="СтоимБезНДС">
+				<xs:annotation>
+					<xs:documentation>Стоимость без налога - всего до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="СтоимБезНДСДо" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость без налога - всего до изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="СтоимБезНДСПосле" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость без налога - всего после изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="СтоимСНДС">
+				<xs:annotation>
+					<xs:documentation>Стоимость с налогом - всего до и после изменения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="СтоимСНДСДо" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость с налогом - всего до изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="СтоимСНДСПосле" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость с налогом - всего после изменения</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ИдВидРаб" type="ГУИД32Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Идентификатор (GUID) конструктивного решения (вида работ).
+Контролируется наличие конструктивного решения с указанным идентификатором в исходном УПД</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="НомВидРаб" type="Число2Тип">
+			<xs:annotation>
+				<xs:documentation>Порядковый номер конструктивного решения (вида работ).
+Игнорируется при приеме,
+заполняется при передаче присвоенным в ЕИС порядковым номером</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="НаимВидРаб" type="Строка500Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Наименование конструктивного решения (вида работ)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПозСмет" type="Строка100Тип">
+			<xs:annotation>
+				<xs:documentation>Номер позиции по смете</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПрТовРаб" use="required">
+			<xs:annotation>
+				<xs:documentation>Признак Товар/Работа</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ВложенТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Вложенный документ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ВидДок" type="ВидДокСправТип">
+				<xs:annotation>
+					<xs:documentation>Ссылка на справочник видов документов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="КонтентИд" type="ГУИД32Тип">
+			<xs:annotation>
+				<xs:documentation>Уникальный идентификатор контента прикрепленного документа на ЕИС</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ВнешКонтентИд" type="ВнешИдТип">
+			<xs:annotation>
+				<xs:documentation>Внешний уникальный идентификатор контента прикрепленного документа </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ИмяФайл" type="Строка255Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Имя файла</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ХэшФайл" type="ХэшФайлТип">
+			<xs:annotation>
+				<xs:documentation>Хэш файла в hex представлении, рассчитанный по алгоритму ГОСТ Р 34.11-2012</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="РасширенФайл" use="required">
+			<xs:annotation>
+				<xs:documentation>Расширение файла</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="pdf"/>
+					<xs:enumeration value="docx"/>
+					<xs:enumeration value="doc"/>
+					<xs:enumeration value="rtf"/>
+					<xs:enumeration value="xls"/>
+					<xs:enumeration value="xlsx"/>
+					<xs:enumeration value="jpeg"/>
+					<xs:enumeration value="jpg"/>
+					<xs:enumeration value="bmp"/>
+					<xs:enumeration value="tif"/>
+					<xs:enumeration value="tiff"/>
+					<xs:enumeration value="txt"/>
+					<xs:enumeration value="gif"/>
+					<xs:enumeration value="csv"/>
+					<xs:enumeration value="odp"/>
+					<xs:enumeration value="odf"/>
+					<xs:enumeration value="ods"/>
+					<xs:enumeration value="odt"/>
+					<xs:enumeration value="sxc"/>
+					<xs:enumeration value="sxw"/>
+					<xs:enumeration value="xml"/>
+					<xs:enumeration value="html"/>
+					<xs:enumeration value="htm"/>
+					<xs:enumeration value="sig"/>
+					<xs:enumeration value="svg"/>
+					<xs:enumeration value="sgn"/>
+					<xs:enumeration value="zip"/>
+					<xs:enumeration value="rar"/>
+					<xs:enumeration value="svg"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ОписаниеФайл" type="Строка255Тип">
+			<xs:annotation>
+				<xs:documentation>Описание прикрепляемого документа</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ДатаПрикреплен" type="xs:dateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Дата/время прикрепления документа</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Ссылк" type="СсылкаТип">
+			<xs:annotation>
+				<xs:documentation>Ссылка для скачивания прикрепленного документа</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ДоИПослеИзмТип">
+		<xs:annotation>
+			<xs:documentation>Тип: До и после изменения</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ДоИзм" type="ЧислоМакс18ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>До изменения</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ПослеИзм" type="ЧислоМакс18ДоТочкТип" use="required">
+			<xs:annotation>
+				<xs:documentation>После изменения</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="КладрТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник КЛАДР</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="КодКЛАДРТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка200Тип">
+			<xs:annotation>
+				<xs:documentation>Полное наименование.
+Игнорируется при приеме, заполняется при передаче из справочника КЛАДР</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="МестоПоставкиТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Место поставки</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="ПоКЛАДР" type="АдресКЛАДРТип">
+				<xs:annotation>
+					<xs:documentation>Место поставки по КЛАДР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ПоОКТМО">
+				<xs:annotation>
+					<xs:documentation>Место поставки по ОКТМО</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ОКТМОТип">
+							<xs:attribute name="Адрес" type="Строка2000Тип">
+								<xs:annotation>
+									<xs:documentation>Адрес по ОКТМО.
+Игноририуется при приеме.
+Заполняется для ПФ адресом в соответствии со справочником ОКТМО</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="Место" type="Строка2000Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Место</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ОКТМОТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="КодОКТМОТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка1000Тип">
+			<xs:annotation>
+				<xs:documentation>Полное наименование.
+Игнорируется при приеме, заполняется при передаче из справочника ОКТМО</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ОКЕИТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник ОКЕИ</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="КодОКЕИТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код единицы измерения</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="НацУслОбоз" type="Строка50Тип">
+			<xs:annotation>
+				<xs:documentation>Национальное условное обозначение (поле localSymbol в справочнике ОКЕИ (nsiOKEI)).
+Игнорируется при приеме, заполняется при передаче из справочника ОКЕИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка1000Тип">
+			<xs:annotation>
+				<xs:documentation>Полное наименование единицы измерения.
+Игнорируется при приеме, заполняется при передаче из справочника ОКЕИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ОЕИТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник общепринятых единиц измерения (ОЕИ)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="Строка10Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка255Тип">
+			<xs:annotation>
+				<xs:documentation>Полное наименование.
+Игнорируется при приеме, заполняется при передаче значением из справочника ОЕИ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ОКПД2Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Ссылка на справочник ОКПД2</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="КодОКПД2Тип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код товара, работы или услуги</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка2000Тип">
+			<xs:annotation>
+				<xs:documentation>Наименование товара, работы или услуги.
+Игнорируется при приеме, заполняется при передаче значением из справочника ОКПД2</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ОшибкаТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация об ошибке</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Код" type="Строка10Тип">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Уров" type="УровОшТип">
+				<xs:annotation>
+					<xs:documentation>Уровень:
+- Ошибка
+- Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Наим" type="Строка200Тип">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Опис" type="Строка2000Тип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Контент" type="КонтентТип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полный текст ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ПодписьТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Подпись</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Подпись" type="КонтентТип">
+				<xs:annotation>
+					<xs:documentation>Подпись</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="ФЛ" type="СвФЛТип">
+					<xs:annotation>
+						<xs:documentation>Физическое лицо</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ИП" type="СвИПТип">
+					<xs:annotation>
+						<xs:documentation>Индивидуальный предприниматель</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ЮЛ">
+					<xs:annotation>
+						<xs:documentation>Представитель юридического лица</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ФИО" type="ФИОТип">
+								<xs:annotation>
+									<xs:documentation>Фамилия, имя, отчество</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="ИННЮЛ" type="ИННЮЛТип" use="required">
+							<xs:annotation>
+								<xs:documentation>ИНН организации</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="НаимОрг" type="Строка1000Тип" use="optional">
+							<xs:annotation>
+								<xs:documentation>Наименование</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="Должн" type="Строка128Тип" use="required">
+							<xs:annotation>
+								<xs:documentation>Должность</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="ИныеСвед" type="Строка255Тип" use="optional">
+							<xs:annotation>
+								<xs:documentation>Иные сведения, идентифицирующие физическое лицо</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="ОблПолн">
+			<xs:annotation>
+				<xs:documentation>Область полномочий</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+					<xs:enumeration value="3"/>
+					<xs:enumeration value="4"/>
+					<xs:enumeration value="5"/>
+					<xs:enumeration value="6"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Статус">
+			<xs:annotation>
+				<xs:documentation>Статус</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+					<xs:enumeration value="3"/>
+					<xs:enumeration value="4"/>
+					<xs:enumeration value="5"/>
+					<xs:enumeration value="6"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ОснПолн" type="Строка255Тип">
+			<xs:annotation>
+				<xs:documentation>Основание полномочий (доверия)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ОснПолнОрг" type="Строка255Тип" use="optional">
+			<xs:annotation>
+				<xs:documentation>Основание полномочий (доверия) организации</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="СвИПТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о индивидуальном предпринимателе</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ФИО" type="ФИОТип">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ИННФЛ" type="ИННФЛТип" use="required">
+			<xs:annotation>
+				<xs:documentation>ИНН</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="СвГосРегИП" type="Строка100Тип" use="optional">
+			<xs:annotation>
+				<xs:documentation>Реквизиты свидетельства о государственной регистрации индивидуального предпринимателя</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ИныеСвед" type="Строка255Тип" use="optional">
+			<xs:annotation>
+				<xs:documentation>Иные сведения, идентифицирующие физическое лицо</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="СвФЛТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о физическом лице</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ФИО" type="ФИОТип">
+				<xs:annotation>
+					<xs:documentation>Фамилия, имя, отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ИННФЛ" type="ИННФЛТип" use="optional">
+			<xs:annotation>
+				<xs:documentation>ИНН</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ИныеСвед" type="Строка255Тип" use="optional">
+			<xs:annotation>
+				<xs:documentation>Иные сведения, идентифицирующие физическое лицо</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="СтранаТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Страна</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Код" type="КодСтраныТип" use="required">
+			<xs:annotation>
+				<xs:documentation>Код</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Наим" type="Строка255Тип">
+			<xs:annotation>
+				<xs:documentation>Краткое наименование.
+Игнорируется при приеме, заполняется при передаче значением из справочника ОКСМ</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="СтройДеталУПДПродТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация полей ТРУ, относящихся к отраслевой специализации "Строительство" для УПД титул продавца</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="1">
+			<xs:element name="Раздел" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Раздел видов работ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ВидРаб" type="ВидРабУПДПродТип" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Конструктивное решение (вид работ) (УПД)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="СумНалРаздел" type="СумНДСТип">
+							<xs:annotation>
+								<xs:documentation>Итоговая сумма налога для раздела</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="ИдРаздел" type="ГУИД32Тип" use="required">
+						<xs:annotation>
+							<xs:documentation>Идентификатор (GUID) раздела</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="НомРаздел" type="Число2Тип">
+						<xs:annotation>
+							<xs:documentation>Порядковый номер раздела.
+Устрарело, не применяется. Игнорируется при приёме</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="НаимРаздел" type="Строка500Тип" use="required">
+						<xs:annotation>
+							<xs:documentation>Наименование раздела</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="СтоимБезНДСРаздел" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость без налога - всего для раздела</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="СтоимСНДСРаздел" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость с налогом - всего для раздела</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ВидРаб" type="ВидРабУПДПродТип" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Конструктивное решение (вид работ) (УПД)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="СтройДеталУПДПокупТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация полей ТРУ, относящихся к отраслевой специализации "Строительство" для УПД титул покупателя</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="1">
+			<xs:element name="Раздел" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Раздел видов работ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ВидРаб" type="ВидРабУПДПокупТип" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Конструктивное решение (вид работ) (УПД)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="ИдРаздел" type="ГУИД32Тип" use="required">
+						<xs:annotation>
+							<xs:documentation>Идентификатор (GUID) раздела</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="СтоимУчНалПринЗакРаздел" type="ЧислоМакс17ДоТочкТип" use="required">
+						<xs:annotation>
+							<xs:documentation>Стоимость с налогом, всего, фактически принято заказчиком</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ВидРаб" type="ВидРабУПДПокупТип" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Конструктивное решение (вид работ) (УПД)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="СтройДеталУКДПродТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация полей ТРУ, относящихся к отраслевой специализации "Строительство" для УКД титул продавца</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="1">
+			<xs:element name="Раздел" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Раздел видов работ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ВидРаб" type="ВидРабУКДПродТип" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Конструктивное решение (вид работ) (УКД)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="СумНалРаздел">
+							<xs:annotation>
+								<xs:documentation>Итоговая сумма налога для раздела до и после изменений</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="СумНалРазделДо" type="СумНДСТип">
+										<xs:annotation>
+											<xs:documentation>Итоговая сумма налога для раздела до изменений</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="СумНалРазделПосле" type="СумНДСТип">
+										<xs:annotation>
+											<xs:documentation>Итоговая сумма налога для раздела после изменений</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="СтоимБезНДС">
+							<xs:annotation>
+								<xs:documentation>Стоимость без налога - всего для раздела до и после изменения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="СтоимБезНДСДо" type="ЧислоМакс17ДоТочкТип" use="required">
+									<xs:annotation>
+										<xs:documentation>Стоимость без налога - всего для раздела до изменения</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="СтоимБезНДСПосле" type="ЧислоМакс17ДоТочкТип" use="required">
+									<xs:annotation>
+										<xs:documentation>Стоимость без налога - всего для раздела  после изменения</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="СтоимСНДС">
+							<xs:annotation>
+								<xs:documentation>Стоимость с налогом - всего для раздела до и после изменения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="СтоимСНДСДо" type="ЧислоМакс17ДоТочкТип" use="required">
+									<xs:annotation>
+										<xs:documentation>Стоимость с налогом - всего для раздела до изменения</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="СтоимСНДСПосле" type="ЧислоМакс17ДоТочкТип" use="required">
+									<xs:annotation>
+										<xs:documentation>Стоимость с налогом - всего для раздела после изменения</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="ИдРаздел" type="ГУИД32Тип" use="required">
+						<xs:annotation>
+							<xs:documentation>Идентификатор (GUID) раздела.
+Контролируется наличие раздела с указанным идентификатором в исходном УПД</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="НомРаздел" type="Число2Тип">
+						<xs:annotation>
+							<xs:documentation>Порядковый номер раздела.
+Устрарело, не применяется. Игнорируется при приёме</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="НаимРаздел" type="Строка500Тип" use="required">
+						<xs:annotation>
+							<xs:documentation>Наименование раздела</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ВидРаб" type="ВидРабУКДПродТип" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Конструктивное решение (вид работ) (УКД)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="СумНДСТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Сумма НДС</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="СумНал" type="ЧислоМакс17ДоТочкТип">
+				<xs:annotation>
+					<xs:documentation>Значение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="БезНДС">
+				<xs:annotation>
+					<xs:documentation>Без НДС</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="без НДС"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ДефНДС">
+				<xs:annotation>
+					<xs:documentation>Знак прочерка</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="1"/>
+						<xs:enumeration value="-"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="СумАкцизТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Сумма акциза</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="СумАкциз" type="ЧислоМакс17ДоТочкТип">
+				<xs:annotation>
+					<xs:documentation>Сумма акциза</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="БезАкциз">
+				<xs:annotation>
+					<xs:documentation>Без акциза</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="10"/>
+						<xs:enumeration value="без акциза"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ФИОТип">
+		<xs:annotation>
+			<xs:documentation>Тип: ФИО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Фамилия" type="ФамилияТип">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Имя" type="ФамилияТип">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Отчество" type="ФамилияТип" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Простые типы</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="ВремяТип">
+		<xs:annotation>
+			<xs:documentation>Время в формате ЧЧ.ММ.СС</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+			<xs:pattern value="([0-1]{1}[0-9]{1}|2[0-3]{1})\.([0-5]{1}[0-9]{1})\.([0-5]{1}[0-9]{1})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ВнешИдТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Внешний идентификатор</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ГУИД32Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: GIUD 32 символа</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ГУИД36Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: GIUD 36 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="36"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ДатаТип">
+		<xs:annotation>
+			<xs:documentation>Дата в формате ДД.ММ.ГГГГ (01.01.1900 - 31.12.2099)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+			<xs:pattern value="((((0[1-9]{1}|1[0-9]{1}|2[0-8]{1})\.(0[1-9]{1}|1[0-2]{1}))|((29|30)\.(01|0[3-9]{1}|1[0-2]{1}))|(31\.(01|03|05|07|08|10|12)))\.((19|20)[0-9]{2}))|(29\.02\.((19|20)(((0|2|4|6|8)(0|4|8))|((1|3|5|7|9)(2|6)))))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ИдФайлТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификатор файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ИдУчТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификатор участника документооброта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="46"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ИКЗТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификационный код закупки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{36}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ИННФЛТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификационный номер налогоплательщика - физического лица</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="12"/>
+			<xs:pattern value="([0-9]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ИННЮЛТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификационный номер налогоплательщика - организации</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+			<xs:pattern value="([0-9]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КодКЛАДРТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Код КЛАДР</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КодОКЕИТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Код единицы измерения в соответствии со справочником ОКЕИ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КодОКПД2Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКПД2</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КодОКТМОТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КодСтраныТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Код страны</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КонтентТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Контент</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="КППТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Код причины постановки на учет (КПП) - 5 и 6 знаки от 0-9 и A-Z</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="9"/>
+			<xs:pattern value="([0-9]{1}[1-9]{1}|[1-9]{1}[0-9]{1})([0-9]{2})([0-9A-Z]{2})([0-9]{3})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="РазмерФайлТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Размер файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="РеестрНомКонтТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Реестровый номер контракта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="19"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="СсылкаТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Гиперссылка</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2048"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка5Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 5 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка10Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 10 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка50Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 50 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка100Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 100 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка128Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 128 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка200Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 200 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка255Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 255 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка500Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 500 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка1000Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 1000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка1024Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 1024 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка2000Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 2000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Строка4000Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 4000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="УровОшТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 10 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Ошибка"/>
+			<xs:enumeration value="Предупреждение"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ФамилияТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Фамилия</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ХэшФайлТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Hash файла</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Число2Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число 2</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Число6Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число 6</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Число11Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число 11</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Число36Тип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число 36</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="36"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс3ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 3 символов и 2 символа после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,3}(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс10ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 10 символов и 10 символов после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="21"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,10}(\.\d{1,10})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс17ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 17 символов и 2 символа после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,17}(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс18ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 18 символов и 2 символа после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="21"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,18}(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс11ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 11 символов и 10 символов после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="22"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,11}(\.\d{1,10})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс15ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 15 символов и 11 символов после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="27"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,15}(\.\d{1,11})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс21ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 21 символ и 11 символов после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="33"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,21}(\.\d{1,11})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ЧислоМакс22ДоТочкТип">
+		<xs:annotation>
+			<xs:documentation>Тип: Число c максимальной длиной до точки 22 символов и 10 символов после точки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="33"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="\d{1,22}(\.\d{1,10})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
