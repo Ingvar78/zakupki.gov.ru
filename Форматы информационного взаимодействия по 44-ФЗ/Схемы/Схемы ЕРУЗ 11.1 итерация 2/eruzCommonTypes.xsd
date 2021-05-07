@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERUZ COMMON TYPES Integration Scheme, version 11.1, create date 08.02.2021 -->
+<xs:schema xmlns="http://zakupki.gov.ru/eruz/common/1" xmlns:cmn="http://zakupki.gov.ru/eruz/common/1" xmlns:base="http://zakupki.gov.ru/eruz/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/eruz/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/eruz/base/1" schemaLocation="eruzBaseTypes.xsd"/>
+	<!--Ссылки-->
+	<xs:complexType name="authorityAreaEDORef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Области полномочий (ЭДО)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:authorityAreaEDOCodeType">
+				<xs:annotation>
+					<xs:documentation>Код области полномочий</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование области полномочий</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ETPRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Электронные площадки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:etpCodeType">
+				<xs:annotation>
+					<xs:documentation>Кодовое наименование электронной площадки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text200Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование электронной площадки. 
+Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Электронные площадки" (nsiETP)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url" type="base:hrefType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Адрес электронной площадки. 
+Игнорируется при приеме.     При передаче заполняется значением из справочника "Справочник: Электронные площадки" (nsiETP)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKEIRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКЕИ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:OKEICodeType">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nationalCode" type="base:text50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Национальное условное обозначение (поле localSymbol в справочнике ОКЕИ (nsiOKEI)). Игнорируется при приеме. автоматически заполняется значением из справочника и выгружается </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text1000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование единицы измерения (поле fullName  в справочнике ОКЕИ (nsiOKEI)).
+Игнорируется при приеме. автоматически заполняется значением из справочника и выгружается </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKOPFRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКОПФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:OKOPFCodeType">
+				<xs:annotation>
+					<xs:documentation>Код организационно-правовой формы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="singularName" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование в единственном числе.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF) (при наличии)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKSMRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на страну</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="countryCode" type="base:countryCodeType">
+				<xs:annotation>
+					<xs:documentation>Цифровой код страны</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="countryFullName" type="base:text200Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование страны. Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKVEDRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник ОКВЭД</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:OKVEDCodeType">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text500Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование.
+Значение игнорируется при приеме, автоматически заполняется при передаче из справочника "Общероссийского классификатора видов экономической деятельности" (nsiOKVED)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKTMORef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:OKTMOCodeType">
+				<xs:annotation>
+					<xs:documentation>Код по ОКТМО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text1000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование. 
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор территорий муниципальных образований (ОКТМО)" (nsiOKTMO)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKPDRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКПД</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:OKPDCodeType">
+				<xs:annotation>
+					<xs:documentation>Код товара, работы или услуги</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text500Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование товара, работы или услуги</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="organizationRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на организацию</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="regNum" type="base:spzNumType">
+				<xs:annotation>
+					<xs:documentation>Код по СПЗ.  В случае если организация идентифицируется по коду СвР, а код СПЗ неизвестен, необходимо заполнить данное поле значением 00000000000, и обязательно указать код СвР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="consRegistryNum" type="base:consRegistryNumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation> Код по Сводному Реестру. Должен быть заполнен в случае, если в поле regNum указано значение 00000000000</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullName" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Сводный перечень заказчиков (СПЗ)" (nsiOrganizationList)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contractBudgetFundsRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на Код и наименование бюджета в контракте</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:budgetCodeType">
+				<xs:annotation>
+					<xs:documentation>Код бюджета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование бюджета</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contractorUserRightRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник прав доступа пользователей</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код права доступа пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование права доступа пользователя.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник прав доступа пользователей" (nsiContractorUserRight)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contractorExcludeReasonRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Основания исключений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код основания исключения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование основания исключения. 
+Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Основания исключений" (nsiContractorExcludeReason)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contractorRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на реестровую запись ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="regNum" type="base:eruzRegistryNumType">
+				<xs:annotation>
+					<xs:documentation>Номер реестровой записи в ЕРУЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="fullName" type="base:text1000Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Полное наименование участника закупок</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="nameInfo" type="personType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>ФИО.
+Устарело, не используется</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="subContractModificationReasonRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник Причины изменения договора</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:subContractModificationReasonCodeType">
+				<xs:annotation>
+					<xs:documentation>Код элемента справочника</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование причины изменения договора</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="subContractModificationReasonDocRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на Виды документов, подтверждающих изменение договора справочника "Причины изменения договора"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:subContractModificationReasonDocCodeType">
+				<xs:annotation>
+					<xs:documentation>Код вида документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименования вида документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="timeZoneRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Часовые зоны мира</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="base:timeZoneNameType">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="differenceTime" type="base:timeZoneDifferenceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Разница во времени.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Часовые зоны мира" (nsiWorldTimeZone)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Общие системные типы-->
+	<xs:complexType name="attachmentListType">
+		<xs:annotation>
+			<xs:documentation>Тип: Прикрепленные документы</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attachmentInfo" type="attachmentType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Вложенный файл</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="attachmentType">
+		<xs:annotation>
+			<xs:documentation>Тип: Прикрепленный документ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="publishedContentId" type="base:guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор контента прикрепленного документа в ЕРУЗ. Игнорируется при приеме, автоматически заполняется при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileName" type="base:fileNameType">
+				<xs:annotation>
+					<xs:documentation>Имя файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileSize" type="base:fileSizeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Размер файла</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docDescription" type="base:text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание прикрепляемого документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата/время прикрепления документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="url" type="base:hrefType">
+					<xs:annotation>
+						<xs:documentation>Ссылка для скачивания прикрепленного документа. Контролируется недопустимость указания значения поля при приёме в ЕРУЗ, автоматически заполняется при передач</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="contentId" type="base:guidType">
+					<xs:annotation>
+						<xs:documentation>Уникальный идентификатор контента прикрепленного документа в ЕРУЗ.
+При приеме в ЕРУЗ контролируется обязательность заполнения</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="content">
+					<xs:annotation>
+						<xs:documentation>Содержимое файла.
+Контролируется недопустимость указания поля при приеме в ЕРУЗ</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:base64Binary">
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="cryptoSigns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронная подпись документа</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="signature" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Электронная подпись</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:base64Binary">
+										<xs:attribute name="type" type="base:signatureType">
+											<xs:annotation>
+												<xs:documentation>Тип электронной подписи:
+CAdES-BES;
+CAdES-A</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="extPrintFormType">
+		<xs:annotation>
+			<xs:documentation>Тип: Электронный документ, полученный из внешней системы</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="content" type="xs:base64Binary">
+					<xs:annotation>
+						<xs:documentation>Содержимое файла электронного документа. Контролируется заполнение поля content или contentID при приёме. Поле не заполняется при передаче</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="contentId" type="base:guidType">
+					<xs:annotation>
+						<xs:documentation>Уникальный идентификатор контента прикрепленного документа в ЕРУЗ. Поле не заполняется при передаче</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="url" type="base:hrefType">
+					<xs:annotation>
+						<xs:documentation>Ссылка для скачивания электронного документа. При приеме в ЕРУЗ контролируется недопустимость заполнения данного поля. Поле заполняется при передаче</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="signature">
+				<xs:annotation>
+					<xs:documentation>Электронная подпись электронного документа</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:base64Binary">
+							<xs:attribute name="type" type="base:signatureType">
+								<xs:annotation>
+									<xs:documentation>Тип электронной подписи:
+CAdES-BES;
+CAdES-A</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fileType" type="base:printFormFileType">
+				<xs:annotation>
+					<xs:documentation>Тип файла электронного документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="printFormType">
+		<xs:annotation>
+			<xs:documentation>Тип: Печатная форма</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="url" type="base:hrefType">
+				<xs:annotation>
+					<xs:documentation>Ссылка на карточку документа в ОЧ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Электронная подпись печатной формы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:base64Binary">
+							<xs:attribute name="type" type="base:signatureType">
+								<xs:annotation>
+									<xs:documentation>Тип электронной подписи:
+CAdES-BES;
+CAdES-A</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="schemeVersion">
+		<xs:annotation>
+			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="11.1"/>
+	</xs:complexType>
+	<xs:complexType name="violationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушение</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errCode" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="level" type="base:errorLevelType">
+				<xs:annotation>
+					<xs:documentation>Тип:
+ERROR - Ошибка
+WARNING - Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text200Type">
+				<xs:annotation>
+					<xs:documentation>Название</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Ощие бизнес-типы-->
+	<xs:complexType name="contactsType">
+		<xs:annotation>
+			<xs:documentation>Тип: Контактная информация</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="email" type="base:eMailType">
+				<xs:annotation>
+					<xs:documentation>Адрес электронной почты</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="notificationEmail" type="base:eMailType">
+				<xs:annotation>
+					<xs:documentation>Адрес электронной почты для получения системных уведомлений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phone" type="base:phoneType">
+				<xs:annotation>
+					<xs:documentation>Телефон</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="personType">
+		<xs:annotation>
+			<xs:documentation>Тип: ФИО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lastName" type="base:nameType">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="base:nameType">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="base:nameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--ЕРУЗ. Типы-->
+	<xs:complexType name="passportRFType">
+		<xs:annotation>
+			<xs:documentation>Тип: Паспорт гражданина РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="series" type="base:passportRFSeriesType">
+				<xs:annotation>
+					<xs:documentation>Серия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="number" type="base:passportRFNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issuedBy" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Кем выдан</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="divCode" type="base:passportRFDivCodeType">
+				<xs:annotation>
+					<xs:documentation>Код подразделения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthPlace" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Место рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="internationalPassportRFType">
+		<xs:annotation>
+			<xs:documentation>Тип: Заграничный паспорт гражданина РФ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="number" type="base:internationalPassportRFNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issuedBy" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Кем выдан</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthPlace" type="base:text300Type">
+				<xs:annotation>
+					<xs:documentation>Место рождения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validityDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Срок действия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
